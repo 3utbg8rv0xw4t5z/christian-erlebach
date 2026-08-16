@@ -544,24 +544,38 @@ if (document.readyState === "loading") {
 // MODAL DEEP-LINKING (Öffnet Modal automatisch bei #impressum, #datenschutz etc.)
 // ==========================================================================
 function checkModalHash() {
-  const hash = window.location.hash.replace("#", "").toLowerCase();
+  const hash = window.location.hash.replace("#", "").toLowerCase().trim();
+  if (!hash) return;
+
   const modalMapping = {
     impressum: "modal-impressum",
-    datenschutz: "modal-privacy",
-    agb: "modal-terms",
-    widerruf: "modal-cancellation",
+    datenschutz: "modal-datenschutz",
+    privacy: "modal-datenschutz",
+    agb: "modal-agb",
+    terms: "modal-agb",
+    widerruf: "modal-widerruf",
+    cancellation: "modal-widerruf",
     kontakt: "modal-contact",
     contact: "modal-contact",
     glossar: "modal-glossar",
   };
 
-  if (modalMapping[hash]) {
+  const targetId = modalMapping[hash];
+  if (targetId) {
+    // 50ms Puffer, damit das DOM und CSS sicher gerendert sind
     setTimeout(() => {
-      openModal(modalMapping[hash]);
-    }, 150);
+      openModal(targetId);
+    }, 50);
   }
 }
 
-// Beim Laden & bei URL-Änderung prüfen
-document.addEventListener("DOMContentLoaded", checkModalHash);
+// 1. Sofort ausführen, falls das DOM schon bereit ist
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", checkModalHash);
+} else {
+  checkModalHash();
+}
+
+// 2. Fallback beim vollständigen Laden & bei URL-/Hash-Wechseln
+window.addEventListener("load", checkModalHash);
 window.addEventListener("hashchange", checkModalHash);

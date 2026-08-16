@@ -30,6 +30,7 @@ christian-erlebach/
 ├── impressum.html          # Rechtliche Unterseiten (Redirect / Modal)
 ├── datenschutz.html
 ├── agb.html
+├── widerruf.html
 ├── kontakt.html
 ├── manifest.json           # PWA-Konfiguration
 ├── robots.txt              # Crawler-Direktiven

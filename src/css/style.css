@@ -1,0 +1,6889 @@
+/* ==================================================
+   01. DESIGN TOKENS & VARIABLEN (ZENTRAL)
+================================================== */
+:root {
+  /* Brand Colors */
+  --brand-violet: #6b4ea2;
+  --brand-purple: #6b4ea2;
+  --brand-teal: #006a6a;
+  --brand-teal-light: #4cdada;
+  --brand-gradient: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%);
+
+  /* UI Base Colors (Light Mode) */
+  --m3-primary: #0f172a;
+  --m3-on-primary: #ffffff;
+  --m3-accent: #49a09d;
+  --m3-accent-hover: #3d8885;
+  --m3-accent-container: rgba(73, 160, 157, 0.12);
+  --m3-on-accent-container: #1e4f4d;
+  --m3-surface: rgba(255, 255, 255, 0.92);
+  --m3-surface-low: rgba(248, 250, 252, 0.7);
+  --m3-on-surface: #0f172a;
+  --m3-on-surface-variant: #475569;
+
+  /* Light-Mode Background Mesh */
+  --body-bg:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(226, 232, 240, 0.6) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(241, 245, 249, 0.7) 0%,
+      transparent 45%
+    ),
+    linear-gradient(180deg, #e2e8f0 0%, #ffffff 45%, #f1f5f9 100%);
+
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.06);
+  --glass-blur: blur(12px);
+
+  /* Border Radii */
+  --radius-full: 9999px;
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+}
+
+[data-theme="dark"] {
+  --m3-primary: #f8fafc;
+  --m3-on-primary: #0f172a;
+  --m3-accent: #5eead4;
+  --m3-accent-hover: #2dd4bf;
+  --m3-accent-container: rgba(94, 234, 212, 0.15);
+  --m3-on-accent-container: #9cf1f1;
+  --m3-surface: rgba(15, 23, 42, 0.92);
+  --m3-surface-low: rgba(30, 41, 59, 0.6);
+  --m3-on-surface: #f8fafc;
+  --m3-on-surface-variant: #cbd5e1;
+
+  /* Dark-Mode Background Deep Slate */
+  --body-bg:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(15, 23, 42, 0.6) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(30, 41, 59, 0.5) 0%,
+      transparent 45%
+    ),
+    linear-gradient(180deg, #0b1120 0%, #0f172a 50%, #1e293b 100%);
+
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* ==================================================
+   02. BASE RESET & CANVAS
+================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0b1120;
+}
+
+html[data-theme="light"] {
+  background-color: #ffffff;
+}
+
+body {
+  background: var(--body-bg);
+  background-attachment: fixed;
+  color: var(--m3-on-surface);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   CROSS-PLATFORM PERFORMANCE & RENDERING (WINDOWS, MAC, LINUX, IOS, ANDROID)
+   ========================================================================== */
+
+/* 1. Globales Box-Sizing & iOS Tap-Schutz */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 2. Typografie & Schriftglättung für alle Betriebssysteme */
+html,
+body,
+input,
+textarea,
+select,
+button {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1 !important;
+}
+
+/* 3. Bild- & Medien-Optimierung (Kein Verwaschen beim Skalieren) */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* 4. Plattformübergreifendes Scrollbar-Handling (Unsichtbar & flüssig) */
+html,
+body,
+section,
+.container,
+.modal-body,
+.legal-modal-body {
+  scrollbar-width: none !important; /* Firefox & Linux */
+  -ms-overflow-style: none !important; /* IE & Edge */
+}
+
+/* Chromium (Chrome, Edge, Brave, Opera, ChromeOS) & WebKit (Safari iOS/macOS) */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.8rem;
+}
+
+.section-subtitle,
+.hero p {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: var(--m3-on-surface-variant);
+}
+
+.card h3,
+.pricing-card h3 {
+  font-size: clamp(1.15rem, 2vw, 1.25rem);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.card p,
+.card-desc,
+.about-body,
+.accordion-content p {
+  font-size: clamp(0.875rem, 1.4vw, 1rem);
+  color: var(--m3-on-surface-variant);
+}
+
+.badge,
+.banner-tag,
+.hero-badge {
+  font-size: clamp(0.725rem, 1.2vw, 0.825rem);
+  font-weight: 700;
+}
+
+.highlight-text,
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  display: inline-block;
+}
+
+svg.lucide,
+.footer-socials i svg,
+.footer-socials a svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  stroke-width: 2px;
+}
+
+/* ==================================================
+   03. BUTTONS & CTAs
+================================================== */
+.btn-primary,
+.btn-secondary,
+.btn-banner,
+.btn-pill-primary {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  padding: clamp(0.7rem, 1.5vw, 0.85rem) clamp(1.4rem, 2.5vw, 2rem);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  line-height: 1;
+}
+
+.btn-primary span,
+.btn-secondary span,
+.btn-banner span,
+.btn-pill-primary span {
+  display: inline-block;
+  line-height: 1;
+}
+
+.btn-primary svg,
+.btn-secondary svg,
+.btn-pill-primary svg,
+.btn-banner svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: block;
+  margin: 0;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary,
+.btn-pill-primary,
+.btn-banner,
+.nav-modal-cta {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 20px -4px rgba(107, 78, 162, 0.35);
+}
+
+[data-theme="dark"] .btn-primary,
+[data-theme="dark"] .btn-pill-primary,
+[data-theme="dark"] .btn-banner,
+[data-theme="dark"] .nav-modal-cta {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary:hover,
+.btn-pill-primary:hover,
+.btn-banner:hover,
+.nav-modal-cta:hover {
+  background: linear-gradient(135deg, #006a6a 0%, #6b4ea2 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px -4px rgba(0, 106, 106, 0.45);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="dark"] .btn-primary:hover,
+[data-theme="dark"] .btn-pill-primary:hover,
+[data-theme="dark"] .btn-banner:hover,
+[data-theme="dark"] .nav-modal-cta:hover {
+  border-color: rgba(76, 218, 218, 0.4);
+}
+
+.btn-primary:hover svg,
+.btn-pill-primary:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.btn-secondary {
+  background: rgba(246, 254, 239, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(107, 78, 162, 0.15);
+  color: #6b4ea2;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: rgba(23, 29, 24, 0.7);
+  border: 1px solid rgba(76, 218, 218, 0.25);
+  color: #4cdada;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 78, 162, 0.08) 0%,
+    rgba(0, 106, 106, 0.12) 100%
+  );
+  border-color: #006a6a;
+  color: #006a6a;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:hover svg {
+  transform: translateY(3px);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  border-color: #25d366;
+  color: white;
+}
+
+.btn-whatsapp:hover {
+  background: #128c7e;
+  border-color: #128c7e;
+}
+
+/* Spezifische Button Anpassungen */
+a.btn-secondary.btn-qualifications {
+  margin-top: 1rem;
+  vertical-align: middle;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+  height: 48px;
+  padding: 0 1.5rem;
+}
+
+/* ==================================================
+   04. NAVIGATION & HEADER
+================================================== */
+.nav-container {
+  position: sticky;
+  top: 20px;
+  z-index: 1000;
+  padding: 0 5%;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+.nav-container.nav-hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar,
+header.navbar,
+nav {
+  background: rgba(246, 254, 239, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] header.navbar,
+[data-theme="dark"] nav {
+  background: rgba(15, 21, 17, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo,
+.footer-logo,
+a.logo,
+a.footer-logo {
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-weight: 800;
+  color: var(--m3-on-surface);
+  text-decoration: none;
+  border-bottom: none;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo span,
+.footer-logo span {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.logo:hover,
+.footer-logo:hover {
+  opacity: 0.85;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--m3-on-surface-variant);
+  font-weight: 600;
+  font-size: clamp(0.825rem, 1.1vw, 0.9rem);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
+  transition: all 0.25s ease;
+}
+
+.nav-links a:hover {
+  background-color: var(--m3-accent-container);
+  color: var(--brand-teal);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.theme-toggle-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--m3-on-surface);
+  width: clamp(38px, 4vw, 42px);
+  height: clamp(38px, 4vw, 42px);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .icon-moon {
+  display: inline-block;
+}
+
+[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .icon-sun {
+  display: inline-block;
+}
+
+/* ==================================================
+   05. HERO SECTION
+================================================== */
+.hero {
+  padding: 6rem 8% 4rem 8%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.hero-badge {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  color: var(--brand-teal);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-badge .badge-icon {
+  color: var(--brand-teal);
+  display: inline-block;
+  flex-shrink: 0;
+  margin-right: 1px;
+}
+
+[data-theme="dark"] .hero-badge .badge-icon {
+  color: var(--brand-teal-light);
+}
+
+.hero p {
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==================================================
+   06. SEKTIONEN & LEISTUNGEN (SERVICES)
+================================================== */
+.section {
+  padding: 5rem 8%;
+}
+
+.bg-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  margin: 2rem 3%;
+}
+
+[data-theme="dark"] .bg-light,
+[data-theme="dark"] #services.bg-light,
+[data-theme="dark"] #kurse.bg-light {
+  background: linear-gradient(135deg, #0f1511 0%, #171d18 50%, #003737 100%);
+  border: 1px solid rgba(76, 218, 218, 0.2);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .bg-light .card,
+[data-theme="dark"] .bg-light .accordion-item {
+  background: rgba(15, 21, 17, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 850px !important; /* Zentriert & verhindert, dass es zu breit gezogen wird */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 24px !important;
+  }
+}
+
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem 2rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.01);
+}
+
+.card .card-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--m3-accent-container);
+  color: var(--brand-teal);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 106, 106, 0.2);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.3s ease;
+}
+
+.card:hover .card-icon {
+  transform: translateY(-3px) rotate(8deg) scale(1.08);
+}
+
+.card-intro {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  color: var(--m3-on-surface-variant);
+}
+
+.card-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.card-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--m3-on-surface);
+}
+
+.card-feature-list li svg {
+  width: 18px;
+  height: 18px;
+  color: var(--brand-teal);
+  flex-shrink: 0;
+}
+
+/* ==================================================
+   07. ÜBER MICH & QUALIFIKATIONEN
+================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+  box-shadow: 0 10px 30px rgba(23, 29, 24, 0.12);
+}
+
+.about-image-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(23, 29, 24, 0.22);
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+}
+
+.experience-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(23, 29, 24, 0.92) 0%,
+    rgba(63, 35, 107, 0.85) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(107, 78, 162, 0.25);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.experience-badge .exp-number {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.experience-badge .exp-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #006a6a 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.about-lead {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--brand-teal);
+}
+
+.about-content p,
+.about-body {
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+.about-content p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+/* Akkordeon (Qualifikationen) */
+[data-theme="dark"] #qualifications.bg-light {
+  background: linear-gradient(135deg, #0f1511 0%, #171d18 50%, #3b1554 100%);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.accordion-container {
+  max-width: 850px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.accordion-item {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1.2rem;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--m3-on-surface);
+}
+
+.accordion-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cert-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--brand-teal);
+  flex-shrink: 0;
+}
+
+.chevron-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.35s ease;
+  flex-shrink: 0;
+}
+
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    padding 0.3s ease;
+  padding: 0 1.2rem;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 500px;
+  padding: 1rem 1.2rem 1.5rem 1.2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sub-cert-list {
+  list-style: none;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.sub-cert-list li {
+  font-size: clamp(0.8rem, 1.3vw, 0.88rem);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(
+    135deg,
+    rgba(246, 254, 239, 0.95) 0%,
+    rgba(226, 235, 217, 0.85) 100%
+  );
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--m3-on-surface);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] .sub-cert-list li {
+  background: linear-gradient(135deg, #171d18 0%, #0f1511 60%, #3b1554 100%);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #e0e4db;
+}
+
+.sub-cert-list li:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+[data-theme="dark"] .sub-cert-list li:hover {
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
+}
+
+/* ==================================================
+   08. KUNDENSTIMMEN (TESTIMONIALS)
+================================================== */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 1.2rem;
+  position: relative;
+  border: 1px solid var(--glass-border);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.testimonial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+}
+
+.testimonial-quote-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: var(--brand-teal);
+  opacity: 0.3;
+  font-weight: 800;
+}
+
+.testimonial-text {
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: var(--m3-on-surface);
+  font-weight: 400;
+  margin: 0.2rem 0 0.8rem 0;
+}
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  border-top: 1px solid rgba(150, 150, 150, 0.12);
+  padding-top: 1.2rem;
+  margin-top: auto;
+  width: 100%;
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0, 106, 106, 0.3);
+  flex-shrink: 0;
+}
+
+.testimonial-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.1rem;
+}
+
+.testimonial-name {
+  color: var(--m3-on-surface);
+  font-size: 0.925rem;
+  font-weight: 700;
+}
+
+.testimonial-job {
+  color: var(--brand-teal);
+  font-size: 0.775rem;
+  font-weight: 600;
+}
+
+/* ==================================================
+   09. PREISE & BANNER CTA
+================================================== */
+.pricing-card {
+  text-align: center;
+  position: relative;
+  justify-content: space-between;
+}
+
+.pricing-card.featured {
+  background: var(--glass-bg);
+  border: 2px solid var(--brand-teal);
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%);
+  color: white;
+  padding: 0.3rem 1.2rem;
+  border-radius: var(--radius-full);
+}
+
+.price {
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  font-weight: 800;
+  margin: 1rem 0;
+}
+
+.price span {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.pricing-card ul {
+  list-style: none;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.pricing-card li {
+  padding: 0.4rem 0;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  color: var(--m3-on-surface-variant);
+}
+
+.banner-section {
+  padding: 4rem 8%;
+}
+
+.banner-card {
+  background: linear-gradient(135deg, #003737 0%, #090e0b 50%, #3b1554 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(0, 106, 106, 0.15);
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  padding: 4rem 2rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+[data-theme="dark"] .banner-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 55, 55, 0.65) 0%,
+    rgba(15, 21, 17, 0.75) 50%,
+    rgba(59, 21, 84, 0.65) 100%
+  );
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(76, 218, 218, 0.1);
+}
+
+[data-theme="dark"] .banner-card:hover {
+  border-color: rgba(76, 218, 218, 0.35);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 35px rgba(76, 218, 218, 0.18);
+}
+
+.banner-tag {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 1rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.banner-card h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  margin-bottom: 1rem;
+}
+
+.banner-card p {
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  opacity: 0.85;
+}
+
+.banner-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ==================================================
+   10. FOOTER
+================================================== */
+.footer {
+  padding: 4rem 8% 2rem 8%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+}
+
+.footer-desc {
+  font-size: 0.875rem;
+  color: var(--m3-on-surface-variant);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.footer-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--m3-on-surface);
+}
+
+.footer-contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--m3-on-surface-variant);
+}
+
+.footer-contact-list a {
+  color: var(--m3-on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-list a:hover {
+  color: var(--brand-teal);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--m3-accent-container);
+  color: var(--brand-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover,
+.footer-socials a.hevy-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: var(--brand-teal);
+  color: #ffffff;
+  border-color: var(--brand-teal);
+  box-shadow: 0 8px 20px rgba(0, 106, 106, 0.3);
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.footer-legal-links a {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  opacity: 0.8;
+}
+
+.footer-legal-links .dot {
+  color: var(--m3-on-surface-variant);
+  opacity: 0.4;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(150, 150, 150, 0.15);
+  padding-top: 2rem;
+}
+
+.footer-bottom p {
+  font-size: 0.825rem;
+  color: var(--m3-on-surface-variant);
+}
+
+/* ==================================================
+   11. MODALS & FORMULARE
+================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(23, 29, 24, 0.5) 0%,
+    rgba(23, 29, 24, 0.8) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: rgba(246, 254, 239, 0.95);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.92);
+  transition: transform 0.35s ease;
+}
+
+[data-theme="dark"] .modal-card {
+  background: rgba(15, 21, 17, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--m3-on-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+  transform: rotate(90deg);
+}
+
+[data-theme="dark"] .modal-close {
+  background: rgba(23, 29, 24, 0.8);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .modal-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.modal-header {
+  padding: 1.8rem 2.2rem 1.2rem 2.2rem;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.1);
+}
+
+.modal-body {
+  padding: 1.8rem 2.2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Modals Legal Content */
+.modal-body .legal-section {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-body .legal-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.modal-body .legal-section h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--brand-violet);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-theme="dark"] .modal-body .legal-section h3 {
+  color: var(--brand-teal);
+}
+
+.modal-body .legal-section p {
+  font-size: 0.935rem;
+  line-height: 1.6;
+  color: var(--m3-on-surface-variant);
+  margin-bottom: 0.5rem;
+}
+
+.modal-body .legal-section strong {
+  color: var(--m3-on-surface);
+  font-weight: 600;
+}
+
+.modal-body .legal-link {
+  color: var(--brand-teal);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.modal-body .legal-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.legal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.legal-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--m3-on-surface-variant);
+  background: var(--m3-accent-container);
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 106, 106, 0.15);
+}
+
+.legal-list li svg {
+  width: 18px;
+  height: 18px;
+  color: var(--brand-teal);
+  flex-shrink: 0;
+}
+
+/* Mobile Nav Modal */
+.modal-card-nav {
+  max-width: 400px;
+}
+
+.modal-body-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.2rem 1.8rem 2rem 1.8rem;
+}
+
+.nav-modal-link {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: var(--radius-full);
+  color: var(--m3-on-surface);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-modal-link:hover {
+  background: var(--m3-accent-container);
+  color: var(--brand-teal);
+}
+
+.nav-modal-link svg {
+  transition: transform 0.25s ease;
+}
+
+.nav-modal-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* Kontakt Formular */
+.contact-modal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-method-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--m3-accent-container);
+  border: 1px solid rgba(0, 106, 106, 0.2);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--m3-on-surface);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.contact-method-full {
+  grid-column: 1 / -1;
+}
+
+.contact-method-card:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 106, 106, 0.25);
+  border-color: var(--brand-teal);
+}
+
+.contact-method-card:hover svg {
+  transform: translateY(-2px) scale(1.1);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 106, 106, 0.15);
+  color: var(--brand-teal);
+  flex-shrink: 0;
+}
+
+.contact-method-card strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--m3-on-surface);
+}
+
+.contact-method-card span {
+  font-size: 0.775rem;
+  color: var(--brand-teal);
+  font-weight: 600;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--m3-on-surface);
+}
+
+.form-group label small {
+  font-weight: normal;
+  opacity: 0.7;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(246, 254, 239, 0.7);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--m3-on-surface);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background: rgba(23, 29, 24, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 3px rgba(0, 106, 106, 0.25);
+}
+
+select,
+.form-group select,
+.contact-form select,
+.custom-select {
+  width: 100%;
+  padding: 0.75rem 2.8rem 0.75rem 1rem;
+  background-color: rgba(246, 254, 239, 0.7);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--m3-on-surface);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23171d18' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.1rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] select,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .contact-form select {
+  background-color: rgba(23, 29, 24, 0.85);
+  color: #e0e4db;
+  border-color: rgba(255, 255, 255, 0.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.form-group select option {
+  background-color: #f6feef;
+  color: #171d18;
+  padding: 0.75rem;
+}
+
+[data-theme="dark"] .form-group select option {
+  background-color: #0f1511;
+  color: #e0e4db;
+}
+
+.error-text {
+  display: none;
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.form-group.invalid input,
+.form-group.invalid select,
+.form-group.invalid textarea {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.form-group.invalid .error-text {
+  display: block;
+}
+
+.form-group.valid input,
+.form-group.valid select,
+.form-group.valid textarea {
+  border-color: #10b981;
+  background-color: rgba(16, 185, 129, 0.04);
+}
+
+/* ==================================================
+   12. KEYFRAMES & RESPONSIVE DESIGN
+================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(23, 29, 24, 0.05);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    color: var(--m3-on-surface);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-img {
+    height: 320px;
+  }
+
+  .sub-cert-list {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .footer-desc {
+    margin: 0 auto;
+  }
+
+  .footer-contact-list li,
+  .footer-socials,
+  .footer-legal-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .about-content {
+    text-align: center;
+  }
+
+  .about-content .section-title {
+    text-align: center;
+  }
+
+  .about-content .btn-secondary,
+  .about-content a {
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-modal-info,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-secondary {
+    font-size: 0.875rem;
+    padding: 0.65rem 1rem;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  /* Oder 1280px / 1440px – je nachdem, wie breit es wirken soll */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  /* Verhindert, dass Text auf Mobilgeräten am Rand klebt */
+  padding-right: 20px;
+}
+
+/* Die hervorgehobene (mittlere) Preiskarte */
+.pricing-card.featured {
+  background: var(--glass-bg);
+  border: 2px solid var(--brand-teal);
+
+  /* 1. Etwas mehr Innenabstand statt nur Skalierung */
+  padding: 3rem 2rem;
+
+  /* 2. Eine sehr dezent sichtbare Vergrößerung */
+  transform: scale(1.06);
+
+  /* 3. Wichtig: Schatten nach außen erzeugen, damit sie mehr Tiefe bekommt */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.pricing-card .card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; /* Sorgt für genug Platz zwischen den 3 Karten */
+  align-items: center; /* Zentriert die beiden äußeren Karten vertikal zur mittleren */
+}
+
+@media (max-width: 992px) {
+  .pricing-card.featured {
+    transform: none; /* Kein Scale auf Mobilgeräten */
+    margin: 0;
+  }
+}
+
+/* ==================================================
+   ERWEITERTE FORMULAR-STILE & VALIDIERUNG
+================================================== */
+.textarea-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.char-counter {
+  font-size: 0.75rem;
+  color: var(--m3-on-surface-variant);
+  opacity: 0.8;
+}
+
+.char-counter.warning {
+  color: #ef4444;
+  font-weight: bold;
+  opacity: 1;
+}
+
+/* Deaktivierter Absende-Button Styling */
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #94a3b8 !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  transform: none !important;
+}
+
+[data-theme="dark"] .btn-primary:disabled {
+  background: #475569 !important;
+  color: #94a3b8;
+}
+
+/* Upgrade für die Icon-Boxen (.card-icon & Socials) */
+.card .card-icon {
+  background: var(--brand-gradient) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 8px 18px -4px rgba(73, 160, 157, 0.35);
+}
+
+.footer-socials a {
+  background: rgba(73, 160, 157, 0.12) !important;
+  color: var(--brand-teal) !important;
+}
+
+.footer-socials a:hover {
+  background: var(--brand-gradient) !important;
+  color: #ffffff !important;
+}
+
+/* Navigationsleiste Links im Light Mode */
+.nav-links a {
+  color: #334155 !important;
+}
+
+.nav-links a:hover {
+  background-color: rgba(73, 160, 157, 0.12) !important;
+  color: #49a09d !important;
+}
+
+/* Navbar Anpassungen für sanften Glaseffekt & Buttons */
+.navbar,
+header.navbar,
+nav {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] header.navbar,
+[data-theme="dark"] nav {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.theme-toggle-btn,
+.mobile-nav-toggle {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  color: var(--m3-on-surface) !important;
+}
+
+[data-theme="dark"] .theme-toggle-btn,
+[data-theme="dark"] .mobile-nav-toggle {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Modals & Navigation-Modal an Body anpassen */
+.modal-card {
+  background: var(--body-bg) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* Sub-Certificats (Freihantel, Schlingentraining) mit edlem Gradienten */
+.sub-cert-list li {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(226, 232, 240, 0.65) 100%
+  ) !important;
+  border: 1px solid rgba(73, 160, 157, 0.3) !important;
+  color: var(--m3-on-surface) !important;
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .sub-cert-list li {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.85) 0%,
+    rgba(15, 23, 42, 0.75) 100%
+  ) !important;
+  border: 1px solid rgba(94, 234, 212, 0.3) !important;
+  color: #f8fafc !important;
+}
+
+.sub-cert-list li:hover {
+  border-color: var(--brand-teal) !important;
+  box-shadow: 0 4px 15px rgba(73, 160, 157, 0.2) !important;
+}
+
+/* ==================================================
+   NAVIGATION LINKS (Aufgehellt im Dark Mode)
+================================================== */
+.nav-links a {
+  color: #334155 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  background-color: rgba(73, 160, 157, 0.12) !important;
+  color: #49a09d !important;
+}
+
+/* Dark Mode Nav-Links deutlich heller & klarer */
+[data-theme="dark"] .nav-links a {
+  color: #f1f5f9 !important; /* Helles, gut lesbares Weiß */
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  background-color: rgba(94, 234, 212, 0.15) !important;
+  color: #5eead4 !important; /* Strahlendes Teal beim Hover */
+}
+
+/* ==================================================
+   1. GLAS-EFFEKT & MODAL-FEINSCHLIFF
+================================================== */
+.navbar,
+header.navbar,
+nav {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] header.navbar,
+[data-theme="dark"] nav {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Upgrade für Icon-Boxen & Socials */
+.card .card-icon {
+  background: var(--brand-gradient) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 8px 18px -4px rgba(73, 160, 157, 0.35);
+}
+
+.footer-socials a {
+  background: rgba(73, 160, 157, 0.12) !important;
+  color: var(--brand-teal) !important;
+}
+
+.footer-socials a:hover {
+  background: var(--brand-gradient) !important;
+  color: #ffffff !important;
+}
+
+/* Modals & Navigation-Modal an Body anpassen */
+.modal-card {
+  background: var(--body-bg) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* Sub-Certificats (Freihantel, Schlingentraining etc.) */
+.sub-cert-list li {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(226, 232, 240, 0.65) 100%
+  ) !important;
+  border: 1px solid rgba(73, 160, 157, 0.3) !important;
+  color: var(--m3-on-surface) !important;
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .sub-cert-list li {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.85) 0%,
+    rgba(15, 23, 42, 0.75) 100%
+  ) !important;
+  border: 1px solid rgba(94, 234, 212, 0.3) !important;
+  color: #f8fafc !important;
+}
+
+.sub-cert-list li:hover {
+  border-color: var(--brand-teal) !important;
+  box-shadow: 0 4px 15px rgba(73, 160, 157, 0.2) !important;
+}
+
+[data-theme="dark"] {
+  --m3-on-surface-variant: #cbd5e1;
+  /* Deep Atmospheric Gradient für den Dark Mode */
+  --body-bg: linear-gradient(180deg, #0b1120 0%, #0f172a 50%, #1e293b 100%);
+}
+
+.nav-links a {
+  color: #334155 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  background-color: rgba(73, 160, 157, 0.12) !important;
+  color: #49a09d !important;
+}
+
+[data-theme="dark"] .nav-links a {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  background-color: rgba(94, 234, 212, 0.15) !important;
+  color: #5eead4 !important;
+}
+
+/* ==================================================
+   3. NAVBAR BUTTONS FIX (Gleiche Größe bis Tablet-Breakpoint)
+================================================== */
+@media (max-width: 992px) {
+  .theme-toggle-btn,
+  .mobile-nav-toggle {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+  }
+
+  .theme-toggle-btn svg,
+  .mobile-nav-toggle svg,
+  .theme-toggle-btn i,
+  .mobile-nav-toggle i {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 20px !important;
+  }
+}
+
+/* ==================================================
+   4. RESPONSIVE FIXES FÜR SCHMALE SCREENS (≤ 375px / 320px)
+================================================== */
+@media (max-width: 375px) {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box !important;
+  }
+
+  .container,
+  section {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    overflow-x: hidden !important;
+  }
+
+  .card,
+  .service-card,
+  .pricing-card,
+  .about-card,
+  .hero-card {
+    padding: 1.25rem 0.85rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .card-grid,
+  .pricing-grid,
+  .services-grid {
+    gap: 1rem !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-content,
+  .about-text,
+  .hero-text {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .accordion-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.6rem !important;
+    padding: 1rem 0.75rem !important;
+  }
+
+  .accordion-header i:first-child,
+  .accordion-header .accordion-icon,
+  .accordion-header [data-lucide] {
+    order: 1;
+    margin: 0 auto !important;
+  }
+
+  .accordion-header span,
+  .accordion-header h3,
+  .accordion-header .accordion-title {
+    order: 2;
+    text-align: center !important;
+    width: 100% !important;
+    font-size: 0.95rem !important;
+  }
+
+  .accordion-header i:last-child,
+  .accordion-header .chevron-icon,
+  .accordion-header .chevron-down {
+    order: 3;
+    margin: 0 auto !important;
+  }
+}
+
+/* ==================================================
+   AKKORDEON MOBIL-FIX (≤ 375px / 320px)
+================================================== */
+@media (max-width: 375px) {
+  /* Akkordeon-Button in vertikale Ausrichtung zwingen */
+  .accordion-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0.6rem !important;
+    padding: 1rem 0.75rem !important;
+  }
+
+  /* 1. Titel-Gruppe flexibel machen */
+  .accordion-title-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  /* 2. Icon (z. B. Fragezeichen, Zertifikat) NACH OBEN setzen */
+  .cert-icon,
+  .accordion-icon,
+  .accordion-header [data-lucide]:not(.chevron-icon),
+  .accordion-header i:not(.chevron-icon) {
+    order: 1 !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  /* 3. Text in die MITTE setzen */
+  .accordion-title-wrapper strong,
+  .accordion-title-wrapper span,
+  .accordion-title {
+    order: 2 !important;
+    text-align: center !important;
+    width: 100% !important;
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* 4. Chevron-Pfeil (Ausklapp-Pfeil) NACH UNTEN setzen */
+  .chevron-icon,
+  .accordion-arrow,
+  .accordion-header i:last-child {
+    order: 3 !important;
+    margin: 0.2rem auto 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* ==================================================
+   EDLES BADGE-GRADIENT DESIGN FÜR SEKUNDÄR-BUTTONS
+================================================== */
+
+/* Light Mode: Genau das Design der Zertifikat-Badges für sekundäre Buttons */
+.btn-secondary,
+.btn-outline,
+a.btn-secondary,
+a.btn-outline {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(226, 232, 240, 0.75) 100%
+  ) !important;
+  border: 1px solid rgba(73, 160, 157, 0.4) !important;
+  color: var(--m3-on-surface) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* Hover-Effekt: Etwas intensiverer Teal-Glow & leichtes Anheben */
+.btn-secondary:hover,
+.btn-outline:hover,
+a.btn-secondary:hover,
+a.btn-outline:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(203, 213, 225, 0.85) 100%
+  ) !important;
+  border-color: var(--brand-teal) !important;
+  color: var(--brand-purple) !important;
+  box-shadow: 0 6px 18px rgba(73, 160, 157, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Dark Mode Ergänzung (damit es im Dark Mode stimmig bleibt) */
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .btn-outline,
+[data-theme="dark"] a.btn-secondary,
+[data-theme="dark"] a.btn-outline {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.85) 0%,
+    rgba(15, 23, 42, 0.75) 100%
+  ) !important;
+  border: 1px solid rgba(94, 234, 212, 0.3) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover,
+[data-theme="dark"] .btn-outline:hover,
+[data-theme="dark"] a.btn-secondary:hover,
+[data-theme="dark"] a.btn-outline:hover {
+  border-color: var(--brand-teal-light) !important;
+  color: var(--brand-teal-light) !important;
+  box-shadow: 0 6px 18px rgba(94, 234, 212, 0.2) !important;
+}
+
+/* ==================================================
+   KONTAKTFORMULAR EINGABE-FELDER (LIGHT MODE FEINSCHLIFF)
+================================================== */
+
+/* Light Mode: Transparente, edle Eingabefelder im Glass-Look */
+.modal-card input,
+.modal-card select,
+.modal-card textarea,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(73, 160, 157, 0.35) !important;
+  color: #0f172a !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.03) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* Placeholder-Text in edlem Schiefergrau */
+.modal-card input::placeholder,
+.modal-card textarea::placeholder,
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #64748b !important;
+  opacity: 0.9 !important;
+}
+
+/* Dropdown-Optionen (Select Box) im Light Mode */
+.modal-card select option,
+.form-group select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Active / Focus Zustand beim Reinfragen */
+.modal-card input:focus,
+.modal-card select:focus,
+.modal-card textarea:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #ffffff !important;
+  border-color: var(--brand-teal) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(73, 160, 157, 0.25) !important;
+}
+
+/* Dark Mode: Eingabefelder sicherstellen */
+[data-theme="dark"] .modal-card input,
+[data-theme="dark"] .modal-card select,
+[data-theme="dark"] .modal-card textarea,
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(94, 234, 212, 0.25) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .modal-card select option,
+[data-theme="dark"] .form-group select option {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .modal-card input::placeholder,
+[data-theme="dark"] .modal-card textarea::placeholder,
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Google Material Symbols Grundkonfiguration & Animationen */
+.material-symbols-rounded {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  transition: transform 0.3s ease;
+}
+
+/* Hover-Animation für Pfeile in Buttons */
+.btn-primary:hover .material-symbols-rounded,
+.btn-secondary:hover .material-symbols-rounded,
+.btn-pill-primary:hover .material-symbols-rounded {
+  transform: translateX(4px);
+}
+
+/* Akkordeon Chevron Drehung bei aktiv */
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* ==================================================
+   GOOGLE MATERIAL SYMBOLS FIXES & ANIMATIONEN
+================================================== */
+
+/* Grund-Style für alle Material Icons */
+.material-symbols-rounded {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Hover-Animation für Buttons (Pfeil schiebt sich nach rechts) */
+.btn-primary:hover .material-symbols-rounded,
+.btn-secondary:hover .material-symbols-rounded,
+.btn-pill-primary:hover .material-symbols-rounded,
+.btn-banner:hover .material-symbols-rounded {
+  transform: translateX(4px);
+}
+
+/* Drehung des Akkordeon-Pfeils bei aktiver Klasse */
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Theme-Toggle Icons Fix */
+.theme-toggle-btn .material-symbols-rounded {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* ==================================================
+   GOOGLE MATERIAL SYMBOLS STYLING & ANIMATIONS
+================================================== */
+.material-symbols-rounded {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Große Icons in Leistungskarten */
+.card-icon .material-symbols-rounded {
+  font-size: 28px;
+}
+
+/* Hover-Pfeile in Buttons schieben sich sanft nach rechts/oben */
+.btn-primary:hover .material-symbols-rounded,
+.btn-secondary:hover .material-symbols-rounded,
+.btn-pill-primary:hover .material-symbols-rounded {
+  transform: translate(3px, -3px);
+}
+
+/* Akkordeon-Pfeile drehen sich beim Ausklappen */
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Hover-Animation: Schiebt den Pfeil waagerecht nach rechts */
+.btn-primary:hover .material-symbols-rounded,
+.btn-secondary:hover .material-symbols-rounded,
+.btn-pill-primary:hover .material-symbols-rounded,
+.btn-banner:hover .material-symbols-rounded {
+  transform: translateX(5px) !important;
+}
+
+/* Unter dem Textfeld: Zeichenzähler rechtsbündig unter der Textarea */
+.textarea-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  gap: 8px;
+}
+
+.textarea-footer .char-counter {
+  margin-left: auto;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* Sauber ausgerichteter Footer unter dem Nachricht-Textfeld */
+.textarea-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Zeichenzähler rechtsbündig ausrichten */
+  margin-top: 6px;
+  gap: 4px;
+  width: 100%;
+}
+
+.textarea-footer .char-counter {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+/* Fehlermeldung unter dem Zähler, linksbündig und gut lesbar */
+.textarea-footer .error-text {
+  align-self: flex-start; /* Fehlermeldung linksbündig unter dem Zähler anzeigen */
+  width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* Custom Material 3 Dropdown-Pfeil für die Select-Box */
+.modal-card select,
+.form-group select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important; /* Blendet den Standard-Browser-Pfeil aus */
+
+  /* Fügt das sanfte Material-3 Chevron-Icon als SVG-Background ein */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23475569'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+  padding-right: 40px !important; /* Platz für das Icon reservieren */
+}
+
+/* Im Dark Mode den Pfeil hell einfärben */
+[data-theme="dark"] .modal-card select,
+[data-theme="dark"] .form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%2394a3b8'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+}
+
+/* Custom Select Dropdown-Pfeil fixieren */
+.modal-card select,
+.form-group select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23475569'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+  padding-right: 40px !important;
+}
+
+/* Dark Mode Icon fixieren */
+[data-theme="dark"] .modal-card select,
+[data-theme="dark"] .form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%2394a3b8'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+}
+
+/* Verhindert, dass das Icon beim Anklicken / Fokussieren verschwindet */
+.modal-card select:focus,
+.form-group select:focus {
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+}
+
+/* Custom Select Dropdown-Pfeil (Light & Dark Mode fixiert) */
+.modal-card select,
+.form-group select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+
+  /* Light Mode Icon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23475569'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+  padding-right: 40px !important;
+}
+
+/* Garantiert, dass das Icon im Light Mode auch beim Klick / Fokus / Auswählen bleibt */
+.modal-card select:focus,
+.modal-card select:active,
+.modal-card select:valid,
+.form-group select:focus,
+.form-group select:active,
+.form-group select:valid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%23475569'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+}
+
+/* Dark Mode Icon (Standard & Focus) */
+[data-theme="dark"] .modal-card select,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .modal-card select:focus,
+[data-theme="dark"] .modal-card select:active,
+[data-theme="dark"] .form-group select:focus,
+[data-theme="dark"] .form-group select:active {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 -960 960 960' width='24' fill='%2394a3b8'%3E%3Cpath d='M480-345 240-585l56-55 184 184 184-184 56 55-240 240Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 20px !important;
+}
+
+/* Hero Badge unter 425px: Icon oben zentrieren */
+@media (max-width: 425px) {
+  .hero-badge,
+  .hero-badge-item,
+  .badge-experience {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 6px !important;
+  }
+}
+
+/* Erfahrungs-Banner am Bild unter 425px mittig ausrichten */
+@media (max-width: 425px) {
+  .about-image-wrapper .badge-experience,
+  .hero-image-wrapper .badge-experience {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 90% !important;
+    bottom: -20px !important;
+  }
+}
+
+/* Preiskarten-Abstand auf mobilen Geräten erhöhen */
+@media (max-width: 425px) {
+  .pricing-grid {
+    gap: 32px !important; /* Genügend Platz für herausragende Badges */
+  }
+
+  .pricing-card.popular,
+  .pricing-card.featured {
+    margin-top: 16px !important;
+  }
+}
+
+/* ==================================================
+   EXAKTER MATCH MIT DEVTOOLS (#6b4ea2 -> #006a6a)
+================================================== */
+
+/* 1. "CHRIS" im Logo (Header & Footer) */
+.nav-logo .highlight-text,
+.nav-logo span,
+.logo .highlight-text,
+.logo span,
+.footer-logo .highlight-text,
+.footer-logo span {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block !important;
+}
+
+/* 2. Text in der Minibox am Bild ("als Fitnesstrainer") */
+.badge-experience .exp-text,
+.about-image-wrapper .badge-experience span,
+.hero-image-wrapper .badge-experience span {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 600 !important;
+  display: inline-block !important;
+}
+
+/* 3. Links im Footer (Kontakt, Impressum, Datenschutz) */
+.footer-legal-links a,
+.footer-contact-list a,
+.legal-link {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+/* 4. Städtename "Gotha" bei den Kundenstimmen */
+.testimonial-meta span,
+.testimonial-location,
+.testimonial-job {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 600 !important;
+  display: inline-block !important;
+}
+
+/* 5. Icons im Akkordeon (Gleicher Gradient für Material Symbols Icons) */
+.accordion-header .material-symbols-rounded,
+.accordion-header .cert-icon,
+.accordion-header .accordion-icon,
+.cert-card-header .material-symbols-rounded {
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block !important;
+}
+
+/* Erlaubt AOS-Transformationen explizit für den Qualifikations-Button */
+.btn-qualifications[data-aos] {
+  transition-property: transform, opacity !important;
+}
+
+/* Wrapper-Fix für den Qualifikations-Button */
+.btn-wrapper {
+  display: inline-block; /* Oder 'block', falls der Button zentriert in einer eigenen Zeile steht */
+  margin-top: 1.5rem; /* Sorgt für den richtigen Abstand nach oben */
+}
+
+/* Stellt sicher, dass das <a>-Tag im Wrapper seine volle Button-Struktur behält */
+.btn-wrapper .btn-qualifications {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================================================
+   100% GRADIENT FIX FÜR DAS MATERIAL ICON
+================================================== */
+
+.link-qualifications {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  text-decoration: none !important;
+  margin-top: 1rem !important;
+  cursor: pointer !important;
+}
+
+/* Zwingt das Material Icon in den exakten Text-Gradienten */
+.link-qualifications .arrow-icon {
+  font-size: 1.25rem !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+
+  /* Der identische Gradient wie bei deinem Text */
+  background: linear-gradient(
+    135deg,
+    var(--md-sys-color-primary, #06b6d4) 0%,
+    #3b82f6 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Der geschmeidige Hover-Effekt */
+.link-qualifications:hover .arrow-icon {
+  transform: translateX(6px) !important;
+}
+
+/* ==================================================
+   UNIVERSAL-KLASSE FÜR GRADIENT-ICONS
+================================================== */
+.icon-gradient {
+  display: inline-block !important;
+  background: linear-gradient(
+    135deg,
+    var(--md-sys-color-primary, #06b6d4) 0%,
+    #3b82f6 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  line-height: 1 !important;
+}
+
+/* ==================================================
+   SCHLANKER TEXT-LINK OHNE ICON
+================================================== */
+.link-qualifications {
+  display: inline-block !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  text-decoration: none !important;
+  margin-top: 1rem !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.link-qualifications:hover {
+  opacity: 0.8; /* Dezentes Feedback beim Drüberfahren */
+}
+
+/* ==================================================
+   PERFEKTE POP-UP / MODAL ANIMATION
+================================================== */
+
+/* Der abgedunkelte Hintergrund (Overlay) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px); /* Milchglas-Effekt */
+
+  /* Zustand Standard: Unsichtbar & Klicks gehen durch */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10000;
+}
+
+/* Das eigentliche Pop-up Fenster */
+.modal-content {
+  /* Start-Zustand: Leicht nach unten versetzt & etwas kleiner */
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ZUSTAND: POP-UP OFFEN (wird per JS hinzugefügt) */
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay.active .modal-content {
+  /* End-Zustand: Volle Größe & perfekte Position */
+  transform: scale(1) translateY(0);
+}
+
+/* ==================================================
+   TYPOGRAFIE: INTER TIGHT FÜR LOGO & ÜBERSCHRIFTEN
+================================================== */
+
+/* 1. Logos in Navbar und Footer */
+.navbar-logo,
+.footer-logo,
+.logo {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important; /* Schön kräftig für das Branding */
+  letter-spacing: -0.02em; /* Macht das Logo extra griffig */
+}
+
+/* 2. Alle Überschriften (H1, H2, H3, H4, H5, H6) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading-font {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em; /* Verhindert zu große Lücken bei großen Texten */
+}
+
+/* Optional: Hauptüberschrift (H1) im Hero-Bereich noch prägnanter */
+h1 {
+  font-weight: 700 !important;
+}
+
+.nav-brand,
+.footer-brand {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 800 !important;
+}
+
+/* ==================================================
+   PREISKARTEN: CARD-INNER DESIGN & THEMING
+================================================== */
+
+/* 1. Äußerer AOS-Container: Vollkommen unsichtbar */
+.price-card,
+.pricing-card {
+  position: relative !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* 2. Card-Inner: Basis-Layout & Abstände */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 24px; /* Abgerundete Ecken wie im Screenshot */
+  padding: 2.5rem 1.75rem 2rem 1.75rem;
+
+  /* Geschmeidiger Übergang für Hover & Dark-Mode Switch */
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease !important;
+  will-change: transform;
+}
+
+/* ==================================================
+   LIGHT MODE (STANDARD)
+================================================== */
+
+.card-inner {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Light Mode Textfarben */
+.card-inner h3,
+.card-inner h4,
+.card-inner .price,
+.card-inner .price-amount {
+  color: #0f172a !important; /* Dunkle Überschriften */
+}
+
+.card-inner p,
+.card-inner li,
+.card-inner span {
+  color: #475569 !important; /* Muted Dunkelgrau für Text */
+}
+
+/* Mittlere Karte im Light Mode (Türkiser Rand) */
+.price-card.featured .card-inner,
+.pricing-card.featured .card-inner {
+  border: 2px solid #0d9488 !important; /* Passt zum "Beliebt"-Badge */
+}
+
+/* ==================================================
+   DARK MODE
+================================================== */
+
+/* Steuerung über HTML/Body Klasse oder data-theme */
+[data-theme="dark"] .card-inner,
+body.dark-mode .card-inner,
+.dark .card-inner {
+  background-color: #0c1319 !important; /* Dunkler Kartenhintergrund */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark Mode Textfarben */
+[data-theme="dark"] .card-inner h3,
+[data-theme="dark"] .card-inner h4,
+[data-theme="dark"] .card-inner .price,
+[data-theme="dark"] .card-inner .price-amount,
+body.dark-mode .card-inner h3,
+body.dark-mode .card-inner .price,
+.dark .card-inner h3,
+.dark .card-inner .price {
+  color: #ffffff !important; /* Strahlend Weiß */
+}
+
+[data-theme="dark"] .card-inner p,
+[data-theme="dark"] .card-inner li,
+[data-theme="dark"] .card-inner span,
+body.dark-mode .card-inner p,
+body.dark-mode .card-inner li,
+.dark .card-inner p,
+.dark .card-inner li {
+  color: rgba(255, 255, 255, 0.75) !important; /* Helles Grau */
+}
+
+/* Mittlere Karte im Dark Mode */
+[data-theme="dark"] .price-card.featured .card-inner,
+body.dark-mode .price-card.featured .card-inner,
+.dark .price-card.featured .card-inner {
+  border: 2px solid #0d9488 !important;
+}
+
+/* ==================================================
+   HOVER & FEATURED SCALING
+================================================== */
+
+/* Mittlere Karte dauerhaft leicht größer */
+.price-card.featured .card-inner,
+.pricing-card.featured .card-inner {
+  transform: scale(1.04);
+}
+
+/* Hover-Effekt äußere Karten */
+.price-card:not(.featured):hover .card-inner,
+.pricing-card:not(.featured):hover .card-inner {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Hover-Effekt mittlere Karte */
+.price-card.featured:hover .card-inner,
+.pricing-card.featured:hover .card-inner {
+  transform: translateY(-8px) scale(1.07);
+  box-shadow: 0 20px 35px rgba(13, 148, 136, 0.15) !important;
+}
+
+/* ==================================================
+   LIGHT MODE: FEATURED BUTTON & ICON FIX
+================================================== */
+
+/* 1. Erzwingt weiße Textfarbe & Icon im Button der mittleren Karte (Light Mode) */
+body:not(.dark-mode) .price-card.featured .card-inner a,
+body:not(.dark-mode) .price-card.featured .card-inner button,
+body:not(.dark-mode) .price-card.featured .card-inner .btn,
+body:not(.dark-mode) .pricing-card.featured .card-inner a,
+body:not(.dark-mode) .pricing-card.featured .card-inner button,
+body:not(.dark-mode) .pricing-card.featured .card-inner .btn {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* 2. Garantiert, dass wirklich alle Kind-Elemente (Span, Icon, Material Symbols) weiß werden */
+body:not(.dark-mode) .price-card.featured .card-inner a *,
+body:not(.dark-mode) .price-card.featured .card-inner button *,
+body:not(.dark-mode) .price-card.featured .card-inner .btn *,
+body:not(.dark-mode) .pricing-card.featured .card-inner a *,
+body:not(.dark-mode) .pricing-card.featured .card-inner button *,
+body:not(.dark-mode) .pricing-card.featured .card-inner .btn * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* 3. HOVER-STOP FÜR MOBIL & TABLET (Kein Skalieren auf Touch-Geräten) */
+@media screen and (max-width: 1023px) {
+  .price-card:hover,
+  .pricing-card:hover,
+  .price-card:hover .card-inner,
+  .pricing-card:hover .card-inner,
+  .price-card.featured:hover .card-inner,
+  .pricing-card.featured:hover .card-inner {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .price-card.featured .card-inner,
+  .pricing-card.featured .card-inner {
+    transform: scale(1) !important;
+  }
+}
+
+/* Greift EXKLUSIV im Light Mode (Dark Mode bleibt unangetastet) */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .btn-secondary:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .btn-outline:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  a.btn-secondary:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  a.btn-outline:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(203, 213, 225, 0.85) 100%
+  ) !important;
+  border-color: var(--brand-purple) !important;
+  color: var(--brand-purple) !important;
+  box-shadow: 0 6px 18px
+    color-mix(in srgb, var(--brand-purple) 25%, transparent) !important;
+  transform: translateY(-2px) !important;
+}
+/* ==================================================
+   ZUSATZLIZENZEN (ACCORDION) - PURPLE DARK MODE
+================================================== */
+
+/* 1. Die 4 Karten im Normalzustand (Dunkler Hintergrund + Purple Border) */
+[data-theme="dark"] .sub-cert-list li,
+body.dark-mode .sub-cert-list li,
+.dark .sub-cert-list li {
+  /* Dunkler Violett/Anthrazit-Hintergrund statt dem alten Blau-Grau */
+  background: linear-gradient(
+    135deg,
+    rgba(23, 15, 38, 0.9) 0%,
+    rgba(15, 23, 42, 0.9) 100%
+  ) !important;
+
+  /* Purple-Border anstelle von Türkis/Grün */
+  border: 1px solid var(--brand-purple, rgba(168, 85, 247, 0.4)) !important;
+  color: #f8fafc !important;
+  border-radius: 12px;
+
+  /* Subtiler lila Schatten */
+  box-shadow: 0 4px 15px
+    color-mix(in srgb, var(--brand-purple, #a855f7) 15%, transparent) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 2. Der HOVER-EFFEKT (Soft-Glow in Purple beim Drüberfahren) */
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="dark"] .sub-cert-list li:hover,
+  body.dark-mode .sub-cert-list li:hover,
+  .dark .sub-cert-list li:hover {
+    /* Kräftigerer Purple-Verlauf beim Hovern */
+    background: linear-gradient(
+      135deg,
+      rgba(88, 28, 135, 0.4) 0%,
+      rgba(30, 27, 75, 0.5) 100%
+    ) !important;
+
+    /* Leuchtender lila Rand & Schatten */
+    border-color: var(--brand-purple, #a855f7) !important;
+    box-shadow: 0 6px 20px
+      color-mix(in srgb, var(--brand-purple, #a855f7) 35%, transparent) !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+/* IMPRESSUM ÜBERSCHRIFTEN (REINES LILA) */
+
+.modal-body h2,
+.modal-body h3,
+.modal-body h4 {
+  color: var(
+    --brand-teal
+  ) !important; /* Stellt sicher, dass kein eigener Background da ist */
+}
+
+[data-theme="dark"] .modal-body h2,
+[data-theme="dark"] .modal-body h3,
+[data-theme="dark"] .modal-body h4 {
+  color: var(
+    --brand-purple,
+    #a855f7
+  ) !important; /* Stellt sicher, dass kein eigener Background da ist */
+}
+
+/* ==================================================
+   1. NAVBAR: MAX-WIDTH BEGRENZUNG (2460px)
+================================================== */
+.navbar,
+header nav,
+.nav-container {
+  max-width: 2460px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* ==================================================
+   2. POPUPS / MODALS: SKALIERUNG AB 1440px
+   (Gilt für Impressum, Datenschutz, Kontakt & Mobile Nav)
+================================================== */
+@media (min-width: 1440px) {
+  /* Box-Größen aller Modals & Mobile Nav anheben */
+  .modal-card,
+  .modal-content,
+  .modal-box,
+  .mobile-nav-content,
+  #modal-impressum .modal-card,
+  #modal-datenschutz .modal-card,
+  #modal-kontakt .modal-card {
+    width: 90% !important;
+    max-width: 800px !important;
+    padding: 2.5rem !important;
+    border-radius: 24px !important;
+  }
+
+  /* Überschriften vergrößern */
+  .modal-header h2,
+  .modal-card h2 {
+    font-size: 2.2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Fließtext & Absätze vergrößern */
+  .modal-body,
+  .modal-body p,
+  .modal-body span,
+  .legal-section p {
+    font-size: 1.15rem !important;
+    line-height: 1.7 !important;
+  }
+
+  /* Schließen-Button proportional anpassen */
+  .modal-close {
+    top: 1.5rem !important;
+    right: 1.5rem !important;
+    transform: scale(1.2);
+  }
+
+  /* Kontaktformular-Felder & Buttons */
+  .modal-body input,
+  .modal-body select,
+  .modal-body textarea,
+  .modal-body button {
+    font-size: 1.05rem !important;
+    padding: 1rem 1.25rem !important;
+  }
+}
+
+/* ==================================================
+   SOCIAL ICONS: BRAND PURPLE TO WHITE HOVER
+================================================== */
+
+/* 1. Normalzustand: Icons & Pfade auf Lila */
+.footer-socials a svg,
+.footer-socials a svg path,
+.footer-socials a svg rect,
+.footer-socials a svg circle {
+  stroke: var(--brand-purple, #7c3aed) !important;
+  color: var(--brand-purple, #7c3aed) !important;
+  transition:
+    stroke 0.3s ease,
+    color 0.3s ease,
+    fill 0.3s ease,
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+/* Falls gefüllte SVGs genutzt werden */
+.footer-socials a.hevy-btn svg path,
+.footer-socials a svg[fill]:not([fill="none"]) {
+  fill: var(--brand-purple, #7c3aed) !important;
+}
+
+/* 2. Hover-Zustand: Wechsel auf WEISS + Lila Glow */
+.footer-socials a:hover svg,
+.footer-socials a:hover svg path,
+.footer-socials a:hover svg rect,
+.footer-socials a:hover svg circle {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+  filter: drop-shadow(
+    0 0 10px rgba(124, 58, 237, 0.8)
+  ) !important; /* Lila Glow lässt das weiße Icon leuchten */
+}
+
+.footer-socials a.hevy-btn:hover svg path,
+.footer-socials a:hover svg[fill]:not([fill="none"]) {
+  fill: #ffffff !important;
+}
+
+/* 3. Sanfte Anhebung des Buttons */
+.footer-socials a {
+  transition: transform 0.3s ease !important;
+}
+
+.footer-socials a:hover {
+  transform: translateY(-3px) scale(1.1) !important;
+}
+
+.footer-socials a:hover {
+  transform: translateY(-3px) scale(1.08) !important;
+}
+
+/* ==================================================
+   SOCIAL ICONS: DARK MODE FIX (BRAND TEAL)
+================================================== */
+
+/* 1. DARK MODE NORMALZUSTAND: Brand-Teal / Türkis */
+[data-theme="dark"] .footer-socials a svg,
+[data-theme="dark"] .footer-socials a svg path,
+[data-theme="dark"] .footer-socials a svg rect,
+[data-theme="dark"] .footer-socials a svg circle,
+body.dark-mode .footer-socials a svg,
+body.dark-mode .footer-socials a svg path,
+body.dark-mode .footer-socials a svg rect,
+body.dark-mode .footer-socials a svg circle,
+.dark .footer-socials a svg,
+.dark .footer-socials a svg path,
+.dark .footer-socials a svg rect,
+.dark .footer-socials a svg circle {
+  stroke: var(--brand-teal, #06b6d4) !important; /* Euer Brand-Teal */
+  color: var(--brand-teal, #06b6d4) !important;
+}
+
+[data-theme="dark"] .footer-socials a.hevy-btn svg path,
+[data-theme="dark"] .footer-socials a svg[fill]:not([fill="none"]),
+body.dark-mode .footer-socials a.hevy-btn svg path,
+body.dark-mode .footer-socials a svg[fill]:not([fill="none"]),
+.dark .footer-socials a.hevy-btn svg path,
+.dark .footer-socials a svg[fill]:not([fill="none"]) {
+  fill: var(--brand-teal, #06b6d4) !important;
+}
+
+/* 2. DARK MODE HOVER: Strahlendes Weiß + Teal Glow */
+[data-theme="dark"] .footer-socials a:hover svg,
+[data-theme="dark"] .footer-socials a:hover svg path,
+[data-theme="dark"] .footer-socials a:hover svg rect,
+[data-theme="dark"] .footer-socials a:hover svg circle,
+body.dark-mode .footer-socials a:hover svg,
+body.dark-mode .footer-socials a:hover svg path,
+.dark .footer-socials a:hover svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+  filter: drop-shadow(
+    0 0 10px rgba(6, 182, 212, 0.8)
+  ) !important; /* Teal Glow */
+}
+
+[data-theme="dark"] .footer-socials a.hevy-btn:hover svg path,
+[data-theme="dark"] .footer-socials a:hover svg[fill]:not([fill="none"]),
+body.dark-mode .footer-socials a.hevy-btn:hover svg path,
+.dark .footer-socials a.hevy-btn:hover svg path {
+  fill: #ffffff !important;
+}
+
+/* ==================================================
+   SCHRITT 1: FOOTER RECHTLICHE LINKS (FARBEN)
+================================================== */
+
+/* Light Mode: Lila */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-col
+  a[onclick*="modal"],
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .legal-link {
+  color: var(--brand-purple, #7c3aed) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Dark Mode: Teal */
+[data-theme="dark"] .footer-col a[onclick*="modal"],
+[data-theme="dark"] .legal-link,
+body.dark-mode .footer-col a[onclick*="modal"],
+body.dark-mode .legal-link,
+.dark .footer-col a[onclick*="modal"],
+.dark .legal-link {
+  color: var(--brand-teal, #06b6d4) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* ==================================================
+   FOOTER GESAMT: FARBKONZEPT (LIGHT: PURPLE | DARK: TEAL)
+================================================== */
+
+/* --------------------------------------------------
+   1. LIGHT MODE (Standard): ALLES AUF BRAND-PURPLE
+-------------------------------------------------- */
+
+/* Rechtliche Links (Kontakt, Impressum, Datenschutz) */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-col
+  a[onclick*="modal"],
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .legal-link {
+  color: var(--brand-purple, #7c3aed) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Kontakt-Liste: Icons & Link-Texte (Maps, Tel, Mail) */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  a,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  span.material-symbols-rounded,
+.footer-contact-list li a,
+.footer-contact-list li span.material-symbols-rounded {
+  color: var(--brand-purple, #7c3aed) !important;
+  stroke: var(--brand-purple, #7c3aed) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  text-decoration: none !important;
+}
+
+/* Social Media SVG Icons */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  svg,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  svg
+  path,
+.footer-socials a svg,
+.footer-socials a svg path {
+  stroke: var(--brand-purple, #7c3aed) !important;
+  color: var(--brand-purple, #7c3aed) !important;
+}
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a.hevy-btn
+  svg
+  path,
+.footer-socials a.hevy-btn svg path {
+  fill: var(--brand-purple, #7c3aed) !important;
+}
+
+/* --------------------------------------------------
+   2. DARK MODE: ALLES AUF BRAND-TEAL
+-------------------------------------------------- */
+
+/* Rechtliche Links (Kontakt, Impressum, Datenschutz) */
+[data-theme="dark"] .footer-col a[onclick*="modal"],
+[data-theme="dark"] .legal-link,
+body.dark-mode .footer-col a[onclick*="modal"],
+body.dark-mode .legal-link,
+.dark .footer-col a[onclick*="modal"],
+.dark .legal-link {
+  color: var(--brand-teal, #06b6d4) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Kontakt-Liste: Icons & Link-Texte (Maps, Tel, Mail) */
+[data-theme="dark"] .footer-contact-list li a,
+[data-theme="dark"] .footer-contact-list li span.material-symbols-rounded,
+body.dark-mode .footer-contact-list li a,
+body.dark-mode .footer-contact-list li span.material-symbols-rounded,
+.dark .footer-contact-list li a,
+.dark .footer-contact-list li span.material-symbols-rounded {
+  color: var(--brand-teal, #06b6d4) !important;
+  stroke: var(--brand-teal, #06b6d4) !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Social Media SVG Icons */
+[data-theme="dark"] .footer-socials a svg,
+[data-theme="dark"] .footer-socials a svg path,
+body.dark-mode .footer-socials a svg,
+body.dark-mode .footer-socials a svg path,
+.dark .footer-socials a svg,
+.dark .footer-socials a svg path {
+  stroke: var(--brand-teal, #06b6d4) !important;
+  color: var(--brand-teal, #06b6d4) !important;
+}
+[data-theme="dark"] .footer-socials a.hevy-btn svg path,
+body.dark-mode .footer-socials a.hevy-btn svg path,
+.dark .footer-socials a.hevy-btn svg path {
+  fill: var(--brand-teal, #06b6d4) !important;
+}
+
+/* --------------------------------------------------
+   3. HOVER-EFFEKTE (WEISS FÜR ALLE ELEMENTE)
+-------------------------------------------------- */
+.footer-contact-list li a:hover,
+.footer-col a[onclick*="modal"]:hover,
+.legal-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.footer-socials a:hover svg,
+.footer-socials a:hover svg path {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 8px #ffffff);
+}
+.footer-socials a.hevy-btn:hover svg path {
+  fill: #ffffff !important;
+}
+
+/* ==================================================
+   FOOTER ICONS (OPTION B: MATERIAL SYMBOLS)
+================================================== */
+
+.footer-socials {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Basis-Kreis für die Icons */
+.footer-socials a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+}
+
+.footer-socials a .material-symbols-rounded {
+  font-size: 1.3rem !important;
+  line-height: 1 !important;
+  transition: color 0.25s ease !important;
+}
+
+/* --- LIGHT MODE: PURPLE --- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a,
+.footer-socials a {
+  color: var(--brand-purple, #7c3aed) !important;
+  background: rgba(124, 58, 237, 0.08) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+}
+
+/* Light Mode Hover: Kreis füllt sich Lila, Icon wird WEISS */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover {
+  background: var(--brand-purple, #7c3aed) !important;
+  color: #ffffff !important;
+  transform: translateY(-3px) scale(1.08) !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35) !important;
+}
+
+/* --- DARK MODE: TEAL --- */
+[data-theme="dark"] .footer-socials a,
+body.dark-mode .footer-socials a,
+.dark .footer-socials a {
+  color: var(--brand-teal, #06b6d4) !important;
+  background: rgba(6, 182, 212, 0.1) !important;
+  border: 1px solid rgba(6, 182, 212, 0.25) !important;
+}
+
+/* Dark Mode Hover: Kreis füllt sich Teal, Icon wird WEISS */
+[data-theme="dark"] .footer-socials a:hover,
+body.dark-mode .footer-socials a:hover,
+.dark .footer-socials a:hover {
+  background: var(--brand-teal, #06b6d4) !important;
+  color: #ffffff !important;
+  transform: translateY(-3px) scale(1.08) !important;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4) !important;
+}
+
+/* ==================================================
+   FOOTER LEGAL LINKS: HOVER-EFFEKTE KOMPLETT ENTFERNEN
+================================================== */
+
+/* Light Mode: Bleibt immer fest bei Purple (kein Farbwechsel, kein Glow) */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-col
+  a[onclick*="modal"]:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .legal-link:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-legal-links
+  a:hover {
+  color: var(--brand-purple, #7c3aed) !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+/* Dark Mode: Bleibt immer fest bei Teal (kein Farbwechsel, kein Glow) */
+[data-theme="dark"] .footer-col a[onclick*="modal"]:hover,
+[data-theme="dark"] .legal-link:hover,
+[data-theme="dark"] .footer-legal-links a:hover,
+body.dark-mode .footer-col a[onclick*="modal"]:hover,
+body.dark-mode .legal-link:hover,
+body.dark-mode .footer-legal-links a:hover,
+.dark .footer-col a[onclick*="modal"]:hover,
+.dark .legal-link:hover,
+.dark .footer-legal-links a:hover {
+  color: var(--brand-teal, #06b6d4) !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+/* ==================================================
+   FOOTER KONTAKTLISTE: HOVER-EFFEKTE KOMPLETT ENTFERNEN
+================================================== */
+
+/* Light Mode: Links & Icons bleiben immer fest bei Purple */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  a:hover,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li:hover
+  span.material-symbols-rounded,
+.footer-contact-list li a:hover,
+.footer-contact-list li:hover span.material-symbols-rounded {
+  color: var(--brand-purple, #7c3aed) !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+/* Dark Mode: Links & Icons bleiben immer fest bei Teal */
+[data-theme="dark"] .footer-contact-list li a:hover,
+[data-theme="dark"] .footer-contact-list li:hover span.material-symbols-rounded,
+body.dark-mode .footer-contact-list li a:hover,
+body.dark-mode .footer-contact-list li:hover span.material-symbols-rounded,
+.dark .footer-contact-list li a:hover,
+.dark .footer-contact-list li:hover span.material-symbols-rounded {
+  color: var(--brand-teal, #06b6d4) !important;
+  text-shadow: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+/* ==================================================
+   LOGOS (NAVBAR & FOOTER): HOVER-EFFEKTE ENTFERNEN
+================================================== */
+
+.logo:hover,
+.nav-logo:hover,
+.footer-logo:hover,
+.footer-brand:hover,
+header .logo:hover,
+footer .logo:hover {
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  cursor: pointer; /* Zeigt normalen Klick-Cursor, aber ohne visuelle Bewegung/Farbänderung */
+}
+
+/* ==================================================
+   DESKTOP NAVBAR LINKS: GRÜNEN HOVER VOLLSTÄNDIG KILLEN
+   (Button wird durch :not() garantiert verschont)
+================================================== */
+
+@media (min-width: 1025px) {
+  /* 1. LIGHT MODE: Nur Text-Links (kein Button) */
+  :root:not(.dark):not([data-theme="dark"])
+    body:not(.dark):not(.dark-mode)
+    header
+    nav
+    a:not(.btn-pill-primary):hover,
+  :root:not(.dark):not([data-theme="dark"])
+    body:not(.dark):not(.dark-mode)
+    .nav-links-desktop-only
+    a:not(.btn-pill-primary):hover,
+  :root:not(.dark):not([data-theme="dark"])
+    body:not(.dark):not(.dark-mode)
+    .navbar-nav
+    a:not(.btn-pill-primary):hover,
+  header nav a:not(.btn-pill-primary):hover,
+  .nav-links-desktop-only a:not(.btn-pill-primary):hover {
+    color: var(--text-primary, #0f172a) !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--text-primary, #0f172a) !important;
+    transform: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+
+  /* 2. DARK MODE: Nur Text-Links (kein Button) */
+  [data-theme="dark"] header nav a:not(.btn-pill-primary):hover,
+  [data-theme="dark"] .nav-links-desktop-only a:not(.btn-pill-primary):hover,
+  [data-theme="dark"] .navbar-nav a:not(.btn-pill-primary):hover,
+  body.dark-mode header nav a:not(.btn-pill-primary):hover,
+  body.dark-mode .nav-links-desktop-only a:not(.btn-pill-primary):hover,
+  .dark header nav a:not(.btn-pill-primary):hover,
+  .dark .nav-links-desktop-only a:not(.btn-pill-primary):hover {
+    color: #ffffff !important;
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+    transform: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ==================================================
+   HERO PILL (100% ISOLIERT & EINDEUTIG)
+================================================== */
+
+.ce-hero-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  width: fit-content !important;
+  margin-bottom: 1.5rem !important;
+  transition: all 0.25s ease !important;
+}
+
+.ce-hero-pill .material-symbols-rounded {
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+}
+
+/* Light Mode: Purple */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .ce-hero-pill,
+.ce-hero-pill {
+  color: var(--brand-purple, #7c3aed) !important;
+  background: rgba(124, 58, 237, 0.08) !important;
+  border: 1px solid rgba(124, 58, 237, 0.25) !important;
+}
+
+.ce-hero-pill span {
+  color: inherit !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Dark Mode: Teal */
+[data-theme="dark"] .ce-hero-pill,
+body.dark-mode .ce-hero-pill,
+.dark .ce-hero-pill {
+  color: var(--brand-teal, #06b6d4) !important;
+  background: rgba(6, 182, 212, 0.1) !important;
+  border: 1px solid rgba(6, 182, 212, 0.3) !important;
+}
+
+/* ==================================================
+   FEATURED PRICING CARD: PURPLE BORDER & GLOW
+   (Trifft exakt .card-inner im Dark Mode)
+================================================== */
+
+/* 1. Normalzustand im Dark Mode */
+[data-theme="dark"] .pricing-card.featured .card-inner,
+[data-theme="dark"] .price-card.featured .card-inner,
+body.dark-mode .pricing-card.featured .card-inner,
+body.dark-mode .price-card.featured .card-inner,
+.dark .pricing-card.featured .card-inner,
+.dark .price-card.featured .card-inner {
+  border-color: var(--brand-purple, #7c3aed) !important;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.35) !important;
+}
+
+/* 2. Hover-Zustand im Dark Mode */
+[data-theme="dark"] .pricing-card.featured:hover .card-inner,
+[data-theme="dark"] .price-card.featured:hover .card-inner,
+body.dark-mode .pricing-card.featured:hover .card-inner,
+body.dark-mode .price-card.featured:hover .card-inner,
+.dark .pricing-card.featured:hover .card-inner,
+.dark .price-card.featured:hover .card-inner {
+  border-color: var(--brand-purple, #7c3aed) !important;
+  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.55) !important;
+}
+
+/* ==================================================
+   TESTIMONIALS "LOAD MORE" SYSTEM
+================================================== */
+
+/* Anfangs ausgeblendet */
+.card.testimonial-card.hidden-testimonial {
+  display: none !important;
+}
+
+/* Sichtbar mit sanfter Fade-In-Animation */
+.card.testimonial-card.show-testimonial {
+  display: flex !important;
+  animation: testimonialFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes testimonialFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==================================================
+   SECONDARY "MEHR LADEN" BUTTON (GLASS & DESKTOP HOVER-GLOW)
+================================================== */
+
+.btn-testimonial-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-primary, #1e293b);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Icon-Styling */
+.btn-testimonial-secondary .btn-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode Basis-Zustand */
+[data-theme="dark"] .btn-testimonial-secondary,
+body.dark-mode .btn-testimonial-secondary,
+.dark .btn-testimonial-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* --- HOVER-EFFEKTE EXKLUSIV NUR FÜR ECHTE COMPUTERNÄUSE --- */
+@media (hover: hover) and (pointer: fine) {
+  /* Allgemeines Schweben & Pfeilbewegung */
+  .btn-testimonial-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-testimonial-secondary:hover .btn-icon {
+    transform: translateX(5px);
+  }
+
+  /* Light Mode Hover (Purple) */
+  :root:not(.dark):not([data-theme="dark"])
+    body:not(.dark):not(.dark-mode)
+    .btn-testimonial-secondary:hover,
+  .btn-testimonial-secondary:hover {
+    border-color: rgba(124, 58, 237, 0.4) !important;
+    color: var(--brand-purple, #7c3aed) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.15) !important;
+  }
+
+  /* Dark Mode Hover (Teal) */
+  [data-theme="dark"] .btn-testimonial-secondary:hover,
+  body.dark-mode .btn-testimonial-secondary:hover,
+  .dark .btn-testimonial-secondary:hover {
+    border-color: rgba(6, 182, 212, 0.5) !important;
+    color: var(--brand-teal, #06b6d4) !important;
+    background: rgba(6, 182, 212, 0.08) !important;
+    box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2) !important;
+  }
+}
+
+/* ==================================================
+   ABOUT SECTION: GALERIE & STATS-GRID STYLING
+================================================== */
+
+.about-gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.about-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Thumbnails unter dem Hauptbild */
+.about-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.about-thumb-btn {
+  height: 75px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.6;
+}
+
+.about-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-thumb-btn:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Aktives Thumbnail: Light Mode Purple / Dark Mode Teal */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .about-thumb-btn.active,
+.about-thumb-btn.active {
+  border-color: var(--brand-purple, #7c3aed) !important;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+[data-theme="dark"] .about-thumb-btn.active,
+body.dark-mode .about-thumb-btn.active,
+.dark .about-thumb-btn.active {
+  border-color: var(--brand-teal, #06b6d4) !important;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+/* Stats Grid */
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 520px) {
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-stat-card {
+  padding: 1.2rem 1.4rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.about-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .about-stat-card,
+body.dark-mode .about-stat-card,
+.dark .about-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.about-stat-card .stat-number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+  background: var(
+    --gradient-brand,
+    linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-stat-card .stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+}
+
+[data-theme="dark"] .about-stat-card .stat-label,
+body.dark-mode .about-stat-card .stat-label,
+.dark .about-stat-card .stat-label {
+  color: #e2e8f0;
+}
+
+/* Gradient Text für Highlights & Zahlen */
+.stat-number,
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    #00c9a7 0%,
+    #845ec2 100%
+  ); /* Passe die Farbcodes ggf. an deine exakten Teal-/Purple-Werte an */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  font-weight: 800; /* Hebt den Farbverlauf noch besser hervor */
+}
+
+/* --- GRADIENT FÜR STATISTIK-ZAHLEN --- */
+.stat-number {
+  font-size: 2.2rem; /* bzw. deine aktuelle Schriftgröße */
+  font-weight: 800;
+  display: inline-block;
+
+  /* Teal-to-Purple Gradient */
+  background: linear-gradient(135deg, #00d2c4 0%, #7b2cbf 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Verhindert, dass der Counter-Span eine feste Farbe erzwingt */
+.stat-number .counter {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  background: transparent !important;
+}
+
+/* --- BASIS-TEXTFARBE FÜR DEN SATZ (FÜR LESBARKEIT) --- */
+.hero-subline {
+  color: #1a1a24; /* Dunkles Anthrazit für Light Mode */
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Im Dark Mode (passe den Selektor ggf. an deine Umschalt-Logik an) */
+[data-theme="dark"] .hero-subline,
+body.dark-mode .hero-subline {
+  color: #ffffff; /* Weiß für Dark Mode */
+}
+
+/* --- DEIN BRANDING-GRADIENT AUF DEN WÖRTERN --- */
+.hero-subline .text-gradient {
+  display: inline-block; /* Wichtig, damit der Verlauf korrekt berechnet wird */
+  font-weight: 700; /* Wörter fett hervorheben */
+
+  /* Dein exakter Teal-to-Purple Gradient */
+  background: linear-gradient(135deg, #00d2c4 0%, #7b2cbf 100%) !important;
+
+  /* Magie: Den Hintergrund auf den Text clippen */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+
+  /* Den Text selbst transparent machen, damit der Hintergrund durchscheint */
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* --- GRADIENT FÜR KEYWORDS (echtes, gesundes, funktionelles) --- */
+.hero-subline .text-gradient {
+  display: inline-block;
+  font-weight: 700;
+
+  /* Exakt wie der Button: Purple startet, läuft nach Teal */
+  background: linear-gradient(135deg, #7b2cbf 0%, #00d2c4 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* --- GRADIENT FÜR DIE 4 STATISTIK-ZAHLEN --- */
+.stat-number {
+  font-weight: 800;
+  display: inline-block;
+
+  /* Exakt dieselbe Richtung: Purple nach Teal */
+  background: linear-gradient(135deg, #7b2cbf 0%, #00d2c4 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Verhindert, dass der Counter-Span den Gradienten überschreibt */
+.stat-number .counter {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  background: transparent !important;
+}
+
+/* 1. Für die Wörter im Text ("echtes", "gesundes", "funktionelles") */
+.hero-subline .text-gradient {
+  display: inline-block;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7b2cbf 0%, #00a89e 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* 2. Für die Zahlen in den Boxen (+2 Jahre, 100%, 1 zu 1, 24/7) */
+.stat-number {
+  font-weight: 800;
+  display: inline-block;
+  background: linear-gradient(135deg, #7b2cbf 0%, #00a89e 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Verhindert, dass das Zähl-Skript die Farbe stört */
+.stat-number .counter {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  background: transparent !important;
+}
+
+/* ==================================================
+   DARK MODE: NUR DIE INNERE NAVBAR DUNKEL (MIT GLAS-EFFEKT)
+================================================== */
+[data-theme="dark"] .navbar {
+  background: rgba(11, 15, 23, 0.85) !important;
+  background-color: rgba(11, 15, 23, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==================================================
+   DARK MODE: BUTTONS IN DER NAVBAR (OUTLINE OHNE HOVER-EFFEKT)
+================================================== */
+[data-theme="dark"] .nav-actions .theme-toggle-btn,
+[data-theme="dark"] .nav-actions .mobile-nav-toggle {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: var(--m3-on-surface) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+[data-theme="dark"] .nav-actions .theme-toggle-btn:hover,
+[data-theme="dark"] .nav-actions .mobile-nav-toggle:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--m3-on-surface) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Falls vorhanden: auch für den sekundären Action-Button */
+[data-theme="dark"] .nav-actions .btn-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: var(--m3-on-surface) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+[data-theme="dark"] .nav-actions .btn-secondary:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--m3-on-surface) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.highlight-text {
+  display: inline;
+}
+
+/* Google Trust Badge Styling */
+.google-trust-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 2.5rem auto 1.5rem auto;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  max-width: fit-content;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.google-trust-badge .badge-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.google-trust-badge .badge-rating {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #f8fafc;
+}
+
+.google-trust-badge .badge-stars {
+  color: #f59e0b;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+}
+
+.google-trust-badge .badge-location {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* Light Mode Farbanpassung */
+body.light-theme .google-trust-badge,
+[data-theme="light"] .google-trust-badge {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .google-trust-badge .badge-rating,
+[data-theme="light"] .google-trust-badge .badge-rating {
+  color: #0f172a;
+}
+
+body.light-theme .google-trust-badge .badge-location,
+[data-theme="light"] .google-trust-badge .badge-location {
+  color: #475569;
+}
+
+/* Testimonial Job/Erfolg: Klare, adaptive Farbe statt Verlauf */
+.testimonial-meta .testimonial-job {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.02rem;
+  opacity: 0.85;
+}
+
+/* Dark Mode (Standard) */
+.testimonial-meta .testimonial-job {
+  color: #a7f3d0; /* Ein klares, sanftes Smaragd-Grün, das gut zum Fitness-Vibe passt */
+}
+
+/* Light Mode Anpassung */
+body.light-theme .testimonial-meta .testimonial-job {
+  color: #059669; /* Ein kräftigeres Smaragd-Grün für klaren Kontrast */
+}
+
+/* Testimonial Job/Erfolg: Dark Mode (Brand Teal) */
+.testimonial-meta .testimonial-job {
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.02rem;
+  color: var(--brand-teal, var(--teal, #2dd4bf));
+  display: inline-block;
+}
+
+/* Testimonial Job/Erfolg: Light Mode (Brand Purple) */
+body.light-theme .testimonial-meta .testimonial-job,
+body.light-mode .testimonial-meta .testimonial-job,
+[data-theme="light"] .testimonial-meta .testimonial-job,
+html[data-theme="light"] .testimonial-meta .testimonial-job {
+  color: var(--brand-purple, #8b5cf6) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--brand-purple, #8b5cf6) !important;
+  opacity: 1 !important;
+}
+
+/* Saubere Ausrichtung der Listenpunkte in allen Preiskarten */
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem 0;
+  text-align: left; /* Textblock linksbündig */
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem; /* Gleichmäßiger Abstand zwischen den Punkten */
+}
+
+.pricing-card ul li {
+  display: flex;
+  align-items: flex-start; /* Häkchen bleibt immer auf Höhe der ersten Textzeile */
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.pricing-card ul li .material-symbols-rounded {
+  color: var(--teal, #2dd4bf);
+  font-size: 1.15rem;
+  flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+  margin-top: 2px; /* Perfekte optische Ausrichtung zur Textkante */
+}
+
+/* Light Mode Anpassung für das Häkchen */
+body.light-theme .pricing-card ul li .material-symbols-rounded,
+[data-theme="light"] .pricing-card ul li .material-symbols-rounded {
+  color: var(--brand-purple, #8b5cf6);
+}
+
+.hidden-faq {
+  display: none !important;
+}
+
+/* FAQ Pfeil-Icon Animation */
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+
+/* Dreht den Pfeil beim aktiven/geöffneten Item um 90 Grad nach unten */
+.faq-item.active .faq-icon {
+  transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   STATS-SEKTION (RESPONSIV, NAHTLOS & LIGHT/DARK THEME UNTERSTÜTZUNG)
+   ========================================================================== */
+.stats-section {
+  padding: var(--space-2xl, 64px) 0;
+  background: transparent;
+  border: none;
+}
+
+/* 4 Spalten im Desktop */
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+/* Basis-Styling (Dark Mode Standard) */
+.about-stat-card {
+  background: var(--card-bg, #1a1a24);
+  border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-lg, 16px);
+  padding: 32px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-stat-card .stat-number {
+  font-family: var(--font-heading, "Inter Tight", sans-serif);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--brand-purple-light, #c084fc);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.about-stat-card .stat-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Dark Mode Hover */
+.about-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--brand-purple, #7c3aed);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+}
+
+/* ==========================================================================
+   LIGHT MODE ANPASSUNG (TEAL / TÜRKIS AKZENTE)
+   ========================================================================== */
+[data-theme="light"] .about-stat-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .about-stat-card .stat-number {
+  color: #0d9488; /* Teal / Türkis */
+}
+
+[data-theme="light"] .about-stat-card .stat-label {
+  color: #4b5563; /* Angenehmes Dunkelgrau für Lesbarkeit */
+}
+
+[data-theme="light"] .about-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #0d9488; /* Teal Rahmen beim Hover */
+  box-shadow: 0 12px 28px rgba(13, 148, 136, 0.18); /* Teal Leuchten */
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS (4 -> 2 -> 1)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-stat-card {
+    padding: 24px 16px;
+  }
+
+  .about-stat-card .stat-number {
+    font-size: 2.1rem;
+  }
+}
+
+/* ==========================================================================
+   ABOUT STATS ROW: UNTER 1440px IN EINE REIHE / UNTEREINANDER UMBRECHEN
+   ========================================================================== */
+
+@media (max-width: 1440px) {
+  .about-stats-row {
+    grid-template-columns: 1fr !important; /* Macht 1 Spalte = alle 3 Boxen sauber untereinander */
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .about-stat-item {
+    display: flex !important;
+    flex-direction: row !important; /* Zahl/Kürzel links, Text rechts */
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 14px 18px !important;
+    gap: 16px !important;
+  }
+
+  .about-stat-item .stat-number {
+    font-size: 1.5rem !important;
+    min-width: 80px !important; /* Feste Breite für gleichmäßige Ausrichtung */
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .about-stat-item .stat-label {
+    font-size: 0.95rem !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   HERO BADGE FIX (FÜR 400px - 640px SMARTPHONES & KLEINE TABLETS)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .hero-tag,
+  .hero-badge,
+  .hero-section .location-badge,
+  .hero-section .badge {
+    display: inline-flex !important;
+    flex-direction: column !important; /* Icon über Text */
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 6px !important;
+    padding: 10px 16px !important;
+    width: auto !important;
+    max-width: 92% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Icon-Größe & Zentrierung */
+  .hero-tag .material-symbols-rounded,
+  .hero-badge .material-symbols-rounded,
+  .hero-section .badge .material-symbols-rounded {
+    font-size: 20px !important;
+    margin: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   AKKORDEON MOBIL OVERFLOW & EXPAND FIX
+   ========================================================================== */
+
+/* Wenn das Akkordeon geöffnet ist: Genug Raum geben */
+.accordion-item.active .accordion-content,
+.accordion-item.active .accordion-body,
+.qualification-accordion .accordion-item.active .accordion-content {
+  max-height: 1500px !important; /* Genug Puffer für alle 4 Kacheln */
+  height: auto !important;
+  overflow: visible !important; /* Verhindert das harte Abschneiden */
+  transition: max-height 0.4s ease-in-out;
+}
+
+/* Inneres Grid auf Smartphones sauber skalieren */
+@media (max-width: 635px) {
+  .nested-license-grid,
+  .accordion-content .grid,
+  .qualification-accordion .license-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .nested-license-card,
+  .accordion-content .license-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Google-Bewertungs-Badge auf Tablets & Smartphones ausblenden */
+@media (max-width: 1024px) {
+  [class*="rating"],
+  [class*="google"],
+  .google-rating-box,
+  .rating-badge {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   MODAL HEADINGS (IMPRESSUM & DATENSCHUTZ NEUTRALISIEREN)
+   ========================================================================== */
+
+/* DARK MODE: Alle Zwischenüberschriften in sauberem Weiß */
+#modal-impressum h3,
+#modal-impressum h4,
+#modal-impressum strong.section-subhead,
+#modal-impressum .modal-section-title,
+#modal-datenschutz h3,
+#modal-datenschutz h4,
+#modal-datenschutz strong.section-subhead,
+#modal-datenschutz .modal-section-title,
+.modal-overlay .modal-body h3,
+.modal-overlay .modal-body h4 {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+/* LIGHT MODE: Alle Zwischenüberschriften in tiefem Dunkelgrau/Schwarz */
+[data-theme="light"] #modal-impressum h3,
+[data-theme="light"] #modal-impressum h4,
+[data-theme="light"] #modal-impressum strong.section-subhead,
+[data-theme="light"] #modal-impressum .modal-section-title,
+[data-theme="light"] #modal-datenschutz h3,
+[data-theme="light"] #modal-datenschutz h4,
+[data-theme="light"] #modal-datenschutz strong.section-subhead,
+[data-theme="light"] #modal-datenschutz .modal-section-title,
+[data-theme="light"] .modal-overlay .modal-body h3,
+[data-theme="light"] .modal-overlay .modal-body h4 {
+  color: #0f172a !important;
+}
+
+/* Die lila Hinweiskarte (Prototyp-Notice) im Impressum etwas dezenter gestalten */
+#modal-impressum .prototype-notice h4,
+.prototype-box h4 {
+  color: var(--primary-accent, #38bdf8) !important; /* oder #ffffff */
+}
+
+/* Links in den Modals exakt wie normalen Text aussehen lassen */
+#modal-impressum a,
+#modal-datenschutz a,
+.modal-body a {
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-decoration: none !important;
+  cursor: text;
+}
+
+/* ==========================================================================
+   MODAL LINKS & HERVORHEBUNGEN (IMPRESSUM & DATENSCHUTZ)
+   ========================================================================== */
+
+/* Alle Links in den Modals wie normalen Fließtext behandeln */
+#modal-impressum a,
+#modal-datenschutz a,
+.modal-body a {
+  color: inherit !important;
+  font-weight: 700 !important; /* Fett hervorheben */
+  text-decoration: none !important;
+  cursor: text !important;
+  pointer-events: none; /* Deaktiviert den Klick-Effekt */
+}
+
+/* Fettungen (<strong>) im Modal farblich perfekt abstimmen */
+/* Dark Mode: Sauberes, klares Weiß für gefettete Wörter/Links */
+#modal-impressum strong,
+#modal-datenschutz strong,
+.modal-body strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Light Mode: Sattes Dunkelgrau für gefettete Wörter/Links */
+[data-theme="light"] #modal-impressum strong,
+[data-theme="light"] #modal-datenschutz strong,
+[data-theme="light"] .modal-body strong,
+[data-theme="light"] #modal-impressum a,
+[data-theme="light"] #modal-datenschutz a,
+[data-theme="light"] .modal-body a {
+  color: #0f172a !important;
+}
+
+/* ==========================================================================
+   FOOTER FARB-OVERRIDE (ÜBERSCHREIBT DEN :root:not(...) SELEKTOR)
+   ========================================================================== */
+
+/* --- LIGHT MODE: Sattes Dunkelgrau (#0f172a) --- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  a,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  span,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  span.material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-col
+  a[onclick*="modal"],
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-legal-links
+  a,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .legal-link {
+  color: #475569 !important;
+  stroke: none !important;
+  fill: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+
+/* --- DARK MODE: Reines Weiß (#ffffff) --- */
+:root[data-theme="dark"] body .footer-contact-list li,
+:root[data-theme="dark"] body .footer-contact-list li a,
+:root[data-theme="dark"] body .footer-contact-list li span,
+:root[data-theme="dark"]
+  body
+  .footer-contact-list
+  li
+  span.material-symbols-rounded,
+:root[data-theme="dark"] body .footer-col a[onclick*="modal"],
+:root[data-theme="dark"] body .footer-legal-links a,
+:root[data-theme="dark"] body .legal-link,
+html[data-theme="dark"] .footer-contact-list li a,
+html[data-theme="dark"] .footer-contact-list li span,
+html[data-theme="dark"] .footer-legal-links a {
+  color: #bfc9c3 !important;
+  stroke: none !important;
+  fill: #bfc9c3 !important;
+  -webkit-text-fill-color: #bfc9c3 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --body-bg: linear-gradient(135deg, #070a10 0%, #0b0f17 50%, #121824 100%);
+  }
+}
+
+/* Falls data-theme="dark" auch manuell gesetzt wird: */
+[data-theme="dark"] {
+  --body-bg: linear-gradient(135deg, #070a10 0%, #0b0f17 50%, #121824 100%);
+}
+
+/* ==========================================================================
+   FOOTER HINTERGRUND (DARK MODE ABSTIMMUNG)
+   ========================================================================== */
+
+/* Exakt der Farbton der Navbar (als solider Hintergrund) */
+html[data-theme="dark"] footer.footer,
+body[data-theme="dark"] footer.footer,
+:root:not([data-theme="light"]) footer.footer {
+  background: #0b0f17 !important; /* Exakt rgba(11, 15, 23) */
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ==========================================================================
+   ABOUT STAT CARDS (DARK MODE)
+   ========================================================================== */
+
+[data-theme="dark"] .about-stat-card,
+body.dark-mode .about-stat-card,
+.dark .about-stat-card,
+:root:not([data-theme="light"]) .about-stat-card {
+  background: rgba(11, 15, 23, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* ==========================================================================
+   BG-LIGHT SEKTIONEN / SERVICES / KURSE (DARK MODE)
+   ========================================================================== */
+
+[data-theme="dark"] .bg-light,
+[data-theme="dark"] #services.bg-light,
+[data-theme="dark"] #kurse.bg-light,
+:root:not([data-theme="light"]) .bg-light,
+:root:not([data-theme="light"]) #services.bg-light,
+:root:not([data-theme="light"]) #kurse.bg-light {
+  background: linear-gradient(
+    135deg,
+    #070a10 0%,
+    #0b0f17 50%,
+    #0d1724 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   ACCORDION ITEMS / FAQ (DARK MODE ANPASSUNG)
+   ========================================================================== */
+
+/* DARK MODE: Dunkler Slate-Glassmorphism passend zu Navbar & Body */
+[data-theme="dark"] .accordion-item,
+body.dark-mode .accordion-item,
+.dark .accordion-item,
+:root:not([data-theme="light"]) .accordion-item {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 15, 23, 0.85) 0%,
+    rgba(15, 22, 34, 0.9) 100%
+  ) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Optional: Dezenter Hover-Effekt beim Drüberfahren */
+[data-theme="dark"] .accordion-item:hover,
+:root:not([data-theme="light"]) .accordion-item:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   DARK MODE: ACCORDION, PREISKARTEN & INNER CARDS
+   ========================================================================== */
+
+[data-theme="dark"] .accordion-item,
+[data-theme="dark"] .card,
+[data-theme="dark"] .card-inner,
+[data-theme="dark"] .pricing-card,
+body.dark-mode .accordion-item,
+body.dark-mode .card,
+body.dark-mode .card-inner,
+body.dark-mode .pricing-card,
+:root:not([data-theme="light"]) .accordion-item,
+:root:not([data-theme="light"]) .card,
+:root:not([data-theme="light"]) .card-inner,
+:root:not([data-theme="light"]) .pricing-card {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 15, 23, 0.85) 0%,
+    rgba(15, 22, 34, 0.9) 100%
+  ) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Hover-Effekte strikt nur im Dark Mode */
+[data-theme="dark"] .accordion-item:hover,
+[data-theme="dark"] .card:hover,
+[data-theme="dark"] .card-inner:hover,
+[data-theme="dark"] .pricing-card:hover,
+:root:not([data-theme="light"]) .accordion-item:hover,
+:root:not([data-theme="light"]) .card:hover,
+:root:not([data-theme="light"]) .card-inner:hover,
+:root:not([data-theme="light"]) .pricing-card:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   SUB-CERT LIST (DARK MODE - KONTRAST-FEINSCHLIFF)
+   ========================================================================== */
+
+[data-theme="dark"] .sub-cert-list li,
+body.dark-mode .sub-cert-list li,
+.dark .sub-cert-list li,
+:root:not([data-theme="light"]) .sub-cert-list li {
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 15, 23, 0.95) 0%,
+    rgba(17, 24, 39, 0.9) 100%
+  ) !important;
+  border: 1px solid rgba(168, 85, 247, 0.25) !important;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.35),
+    0 0 10px rgba(168, 85, 247, 0.08) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+  /* 1. Fließtext dezent abdimmen */
+  color: #94a3b8 !important;
+}
+
+/* 2. Überschriften / Fachtitel in klarem Weiß */
+[data-theme="dark"] .sub-cert-list li strong,
+body.dark-mode .sub-cert-list li strong,
+.dark .sub-cert-list li strong,
+:root:not([data-theme="light"]) .sub-cert-list li strong {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* 3. Icons ebenfalls in sauberem Weiß hervorheben */
+[data-theme="dark"] .sub-cert-list li .material-symbols-rounded,
+body.dark-mode .sub-cert-list li .material-symbols-rounded,
+.dark .sub-cert-list li .material-symbols-rounded,
+:root:not([data-theme="light"]) .sub-cert-list li .material-symbols-rounded {
+  color: #ffffff !important;
+}
+
+/* Hover-Effekt */
+[data-theme="dark"] .sub-cert-list li:hover,
+body.dark-mode .sub-cert-list li:hover,
+.dark .sub-cert-list li:hover,
+:root:not([data-theme="light"]) .sub-cert-list li:hover {
+  border-color: rgba(168, 85, 247, 0.5) !important;
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.45),
+    0 0 15px rgba(168, 85, 247, 0.18) !important;
+}
+
+/* ==========================================================================
+   ALLE SEKUNDÄREN BUTTONS (DARK MODE - EINHEITLICH SLATE-LOOK)
+   ========================================================================== */
+
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .btn-outline,
+[data-theme="dark"] a.btn-secondary,
+[data-theme="dark"] a.btn-outline,
+[data-theme="dark"] .btn-testimonial-secondary,
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-outline,
+body.dark-mode a.btn-secondary,
+body.dark-mode a.btn-outline,
+body.dark-mode .btn-testimonial-secondary,
+.dark .btn-secondary,
+.dark .btn-outline,
+.dark .btn-testimonial-secondary,
+:root:not([data-theme="light"]) .btn-secondary,
+:root:not([data-theme="light"]) .btn-outline,
+:root:not([data-theme="light"]) a.btn-secondary,
+:root:not([data-theme="light"]) a.btn-outline,
+:root:not([data-theme="light"]) .btn-testimonial-secondary {
+  /* Dunkler Midnight-Slate-Gradient: dezent abgehoben vom Body-Background */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 36, 0.9) 0%,
+    rgba(22, 33, 50, 0.85) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Hover-Zustand: Sanftes Aufhellen & feines Schweben */
+[data-theme="dark"] .btn-secondary:hover,
+[data-theme="dark"] .btn-outline:hover,
+[data-theme="dark"] a.btn-secondary:hover,
+[data-theme="dark"] a.btn-outline:hover,
+[data-theme="dark"] .btn-testimonial-secondary:hover,
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-outline:hover,
+body.dark-mode a.btn-secondary:hover,
+body.dark-mode a.btn-outline:hover,
+body.dark-mode .btn-testimonial-secondary:hover,
+.dark .btn-secondary:hover,
+.dark .btn-outline:hover,
+.dark .btn-testimonial-secondary:hover,
+:root:not([data-theme="light"]) .btn-secondary:hover,
+:root:not([data-theme="light"]) .btn-outline:hover,
+:root:not([data-theme="light"]) a.btn-secondary:hover,
+:root:not([data-theme="light"]) a.btn-outline:hover,
+:root:not([data-theme="light"]) .btn-testimonial-secondary:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 33, 50, 0.95) 0%,
+    rgba(30, 45, 68, 0.9) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ==========================================================================
+   SEKUNDÄRE BUTTONS: TEAL HOVER-EFFEKT (DARK MODE - NUR DESKTOP-MAUS)
+   ========================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="dark"] .btn-secondary:hover,
+  [data-theme="dark"] .btn-outline:hover,
+  [data-theme="dark"] a.btn-secondary:hover,
+  [data-theme="dark"] a.btn-outline:hover,
+  [data-theme="dark"] .btn-testimonial-secondary:hover,
+  body.dark-mode .btn-secondary:hover,
+  body.dark-mode .btn-outline:hover,
+  body.dark-mode a.btn-secondary:hover,
+  body.dark-mode a.btn-outline:hover,
+  body.dark-mode .btn-testimonial-secondary:hover,
+  .dark .btn-secondary:hover,
+  .dark .btn-outline:hover,
+  .dark .btn-testimonial-secondary:hover,
+  :root:not([data-theme="light"]) .btn-secondary:hover,
+  :root:not([data-theme="light"]) .btn-outline:hover,
+  :root:not([data-theme="light"]) a.btn-secondary:hover,
+  :root:not([data-theme="light"]) a.btn-outline:hover,
+  :root:not([data-theme="light"]) .btn-testimonial-secondary:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 36, 0.95) 0%,
+      rgba(13, 33, 44, 0.9) 100%
+    ) !important;
+    color: #2dd4bf !important;
+    -webkit-text-fill-color: #2dd4bf !important;
+    border-color: rgba(45, 212, 191, 0.6) !important;
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.4),
+      0 0 16px rgba(45, 212, 191, 0.25) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  [data-theme="dark"] .btn-secondary:hover *,
+  [data-theme="dark"] .btn-outline:hover *,
+  [data-theme="dark"] .btn-testimonial-secondary:hover *,
+  :root:not([data-theme="light"]) .btn-secondary:hover *,
+  :root:not([data-theme="light"]) .btn-outline:hover *,
+  :root:not([data-theme="light"]) .btn-testimonial-secondary:hover * {
+    color: #2dd4bf !important;
+  }
+}
+
+/* ==========================================================================
+   GOOGLE TRUST BADGE (DARK MODE ONLY)
+   ========================================================================== */
+
+[data-theme="dark"] .google-trust-badge,
+body.dark-mode .google-trust-badge,
+.dark .google-trust-badge,
+:root:not([data-theme="light"]) .google-trust-badge {
+  /* Dunkler Midnight-Slate-Gradient passend zum Rest */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 36, 0.9) 0%,
+    rgba(22, 33, 50, 0.85) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+  color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   NAVBAR LOGO: VERTIKALE ZENTRIERUNG & FARBEN
+   ========================================================================== */
+
+/* 1. Perfekte vertikale Zentrierung in der Navbar */
+.nav-brand,
+.navbar-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+}
+
+/* 2. SVG-Größe & Rendering */
+.logo-svg {
+  height: 26px !important; /* Ideale Höhe für die Navbar */
+  width: auto !important;
+  display: block !important;
+  vertical-align: middle !important;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+/* ==========================================================================
+   LOGO FARB-ANPASSUNG (LIGHT & DARK MODE)
+   ========================================================================== */
+
+/* LIGHT MODE -> #0f172a (oder Wunschfarbe) */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .logo-svg,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .logo-svg
+  path,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .logo-svg
+  rect,
+[data-theme="light"] .logo-svg,
+[data-theme="light"] .logo-svg path,
+[data-theme="light"] .logo-svg rect {
+  fill: #0f172a !important;
+  color: #0f172a !important;
+}
+
+/* DARK MODE -> #ffffff (Weiß) */
+[data-theme="dark"] .logo-svg,
+[data-theme="dark"] .logo-svg path,
+[data-theme="dark"] .logo-svg rect,
+body.dark-mode .logo-svg,
+body.dark-mode .logo-svg path,
+body.dark-mode .logo-svg rect,
+:root:not([data-theme="light"]) .logo-svg,
+:root:not([data-theme="light"]) .logo-svg path,
+:root:not([data-theme="light"]) .logo-svg rect {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Hover-Effekt */
+.navbar-logo:hover .logo-svg {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   FINALE BEHEBUNG: MODAL KLICKS & WEISSE BUTTON-FARBE
+   ========================================================================== */
+
+/* 1. Klick-Blockade restlos aufheben & Klicks erzwingen */
+#modal-nav {
+  pointer-events: auto !important;
+}
+
+#modal-nav .modal-card,
+#modal-nav .modal-card-nav,
+#modal-nav .modal-body,
+#modal-nav .modal-body-nav {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+#modal-nav .modal-body-nav a,
+#modal-nav .nav-modal-link,
+#modal-nav .nav-modal-cta {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 20 !important;
+  display: flex !important;
+}
+
+/* 2. Text- & Icon-Farbe des CTA-Buttons im Light Mode WEISS erzwingen */
+#modal-nav .modal-body-nav a.nav-modal-cta,
+#modal-nav .modal-body-nav a.btn-pill-primary,
+#modal-nav a.nav-modal-cta,
+#modal-nav .nav-modal-cta {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, #6b4ea2 0%, #006a6a 100%) !important;
+}
+
+/* Garantiert, dass auch der Textknoten und der Pfeil im Button weiß sind */
+#modal-nav .modal-body-nav a.nav-modal-cta *,
+#modal-nav .modal-body-nav a.btn-pill-primary * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* 3. Hover-Effekt für den Button */
+#modal-nav .modal-body-nav a.nav-modal-cta:hover {
+  filter: brightness(1.15) !important;
+  transform: translateY(-2px) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   DARK MODE: CLOSE-BUTTON (TRANSPARENT MIT RUNDEM BORDER & HOVER-EFFEKT)
+   ========================================================================== */
+[data-theme="dark"] .modal-close {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important; /* Feiner runder Kreis-Border */
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  transition: all 0.25s ease !important;
+}
+
+/* Hover-Effekt: Sanfter Glanz & leichte Betonung der Kontur */
+[data-theme="dark"] .modal-close:hover {
+  /* Dezenter Glaseffekt beim Drüberfahren */
+  transform: rotate(90deg) scale(1.05) !important; /* Schickes leichtes Drehen beim Hover */
+}
+
+/* ==========================================================================
+   FORMULAR-BORDER: ROT BEI FEHLER & GRÜN BEI GÜLTIGKEIT
+   ========================================================================== */
+
+/* 1. FEHLERZUSTAND (ROT) */
+.form-group input.invalid-field,
+.form-group textarea.invalid-field,
+.form-group select.invalid-field,
+input.invalid-field,
+textarea.invalid-field,
+select.invalid-field {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.05) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Fokus im Fehlerzustand: Bleibt rot statt wieder grün zu werden */
+.form-group input.invalid-field:focus,
+.form-group textarea.invalid-field:focus,
+.form-group select.invalid-field:focus,
+input.invalid-field:focus,
+textarea.invalid-field:focus,
+select.invalid-field:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3) !important;
+  outline: none !important;
+}
+
+/* 2. GÜLTIGER ZUSTAND (GRÜN) */
+.form-group input.valid-field,
+.form-group textarea.valid-field,
+.form-group select.valid-field,
+input.valid-field,
+textarea.valid-field,
+select.valid-field {
+  border-color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.04) !important;
+}
+
+/* ==========================================================================
+   HERO-BADGE MOBILE OPTIMIERUNG (ICON WEG & KOMPAKTES DESIGN)
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* 1. Grünes Icon auf schmalen Bildschirmen komplett ausblenden */
+  .badge-hero .material-symbols-rounded,
+  .hero-badge .material-symbols-rounded,
+  .badge .material-symbols-rounded {
+    display: none !important;
+  }
+
+  /* 2. Badge schön flach, zentriert und ohne vertikalen Stretch halten */
+  .badge-hero,
+  .hero-badge {
+    padding: 6px 14px !important;
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    width: fit-content !important;
+    max-width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ==========================================================================
+   FOOTER SOCIALS: FINALE TRANSPARENZ & ICON-HOVER (LIGHT & DARK)
+   ========================================================================== */
+
+/* 1. GRUNDZUSTAND: KEIN HINTERGRUND, NUR FEINER GRAUER KREIS */
+.footer-socials a,
+.footer-socials a.hevy-btn,
+:root .footer-socials a,
+html[data-theme="light"] .footer-socials a,
+html[data-theme="dark"] .footer-socials a {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease !important;
+}
+
+/* 2. HOVER ALLGEMEIN: HINTERGRUND BLEIBT GARANTIERT WEG */
+.footer-socials a:hover,
+.footer-socials a.hevy-btn:hover,
+:root:not(.dark):not([data-theme="dark"]) body .footer-socials a:hover,
+[data-theme="light"] .footer-socials a:hover,
+[data-theme="dark"] .footer-socials a:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   A) LIGHT MODE
+   -------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .footer-socials a,
+[data-theme="light"] .footer-socials a {
+  border: 1.5px solid rgba(0, 0, 0, 0.15) !important; /* Feines Grau */
+  color: #4b5563 !important; /* Dunkles Grau für das Icon */
+}
+
+:root:not([data-theme="dark"]) .footer-socials a .material-symbols-rounded,
+[data-theme="light"] .footer-socials a .material-symbols-rounded {
+  color: #4b5563 !important;
+  -webkit-text-fill-color: #4b5563 !important;
+  transition: color 0.25s ease !important;
+}
+
+/* Light Mode Hover: Rahmen & Icon werden zum sportlichen Teal */
+:root:not([data-theme="dark"]) .footer-socials a:hover,
+[data-theme="light"] .footer-socials a:hover {
+  border-color: #006a6a !important;
+}
+
+:root:not([data-theme="dark"])
+  .footer-socials
+  a:hover
+  .material-symbols-rounded,
+[data-theme="light"] .footer-socials a:hover .material-symbols-rounded {
+  color: #006a6a !important;
+  -webkit-text-fill-color: #006a6a !important;
+}
+
+/* --------------------------------------------------------------------------
+   B) DARK MODE
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .footer-socials a {
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important; /* Feines Hellgrau */
+  color: #e5e7eb !important; /* Helles Icon */
+}
+
+[data-theme="dark"] .footer-socials a .material-symbols-rounded {
+  color: #e5e7eb !important;
+  -webkit-text-fill-color: #e5e7eb !important;
+  transition: color 0.25s ease !important;
+}
+
+/* Dark Mode Hover: Rahmen & Icon leuchten in hellem Teal */
+[data-theme="dark"] .footer-socials a:hover {
+  border-color: #4cdada !important;
+  box-shadow: 0 0 10px rgba(76, 218, 218, 0.25) !important;
+}
+
+[data-theme="dark"] .footer-socials a:hover .material-symbols-rounded {
+  color: #4cdada !important;
+  -webkit-text-fill-color: #4cdada !important;
+}
+
+/* ==========================================================================
+   FOOTER SOCIALS: EXAKTER FIX AUS DEVTOOLS FÜR LIGHT & DARK MODE
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. LIGHT MODE: RUHEZUSTAND (Transparenter Background + Grauer Border & Icon)
+   -------------------------------------------------------------------------- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important; /* Feiner grauer Kreis */
+  box-shadow: none !important;
+}
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  .material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  svg {
+  color: #4b5563 !important; /* Graues Icon */
+  -webkit-text-fill-color: #4b5563 !important;
+  fill: #4b5563 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. LIGHT MODE: HOVER (Kein lila Background/Shadow -> Teal Border & Teal Icon)
+   -------------------------------------------------------------------------- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: #006a6a !important; /* Feiner Teal-Rahmen */
+  box-shadow: 0 0 10px rgba(0, 106, 106, 0.2) !important; /* Dezenter Teal-Glow statt lila Kasten */
+  transform: translateY(-2px) !important;
+}
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover
+  .material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover
+  svg {
+  color: #006a6a !important; /* Icon wird sportliches Teal */
+  -webkit-text-fill-color: #006a6a !important;
+  fill: #006a6a !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. DARK MODE: RUHEZUSTAND (Transparenter Background + Grauer Border & Icon)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .footer-socials a {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .footer-socials a .material-symbols-rounded,
+[data-theme="dark"] .footer-socials a svg {
+  color: #e5e7eb !important;
+  -webkit-text-fill-color: #e5e7eb !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. DARK MODE: HOVER (Teal Border, Teal Glow & Teal Icon)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .footer-socials a:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: #4cdada !important;
+  box-shadow: 0 0 10px rgba(76, 218, 218, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+[data-theme="dark"] .footer-socials a:hover .material-symbols-rounded,
+[data-theme="dark"] .footer-socials a:hover svg {
+  color: #4cdada !important;
+  -webkit-text-fill-color: #4cdada !important;
+}
+
+/* ==========================================================================
+   FOOTER SOCIALS: TRANSPARENT + BRAND PURPLE (LIGHT) / BRAND TEAL (DARK)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. LIGHT MODE: RUHEZUSTAND (Transparenter Background, feiner grauer Border & Icon)
+   -------------------------------------------------------------------------- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease !important;
+}
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  .material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  svg {
+  color: #4b5563 !important; /* Neutrales Grau */
+  -webkit-text-fill-color: #4b5563 !important;
+  fill: #4b5563 !important;
+  transition: all 0.25s ease !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. LIGHT MODE: HOVER (Transparenter Background, Brand Purple für Border, Shadow & Icon)
+   -------------------------------------------------------------------------- */
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: var(--brand-purple, #6b4ea2) !important;
+  box-shadow: 0 0 12px rgba(107, 78, 162, 0.35) !important; /* Lila Glow */
+  transform: translateY(-2px) !important;
+}
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover
+  .material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a:hover
+  svg {
+  color: var(--brand-purple, #6b4ea2) !important; /* Lila Icon */
+  -webkit-text-fill-color: var(--brand-purple, #6b4ea2) !important;
+  fill: var(--brand-purple, #6b4ea2) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. DARK MODE: RUHEZUSTAND (Transparenter Background, feiner hellgrauer Border & Icon)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .footer-socials a {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease !important;
+}
+
+[data-theme="dark"] .footer-socials a .material-symbols-rounded,
+[data-theme="dark"] .footer-socials a svg {
+  color: #e5e7eb !important; /* Helles Grau */
+  -webkit-text-fill-color: #e5e7eb !important;
+  fill: #e5e7eb !important;
+  transition: all 0.25s ease !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. DARK MODE: HOVER (Transparenter Background, Brand Teal für Border, Shadow & Icon)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .footer-socials a:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: var(--brand-teal-light, #4cdada) !important;
+  box-shadow: 0 0 12px rgba(76, 218, 218, 0.35) !important; /* Teal Glow */
+  transform: translateY(-2px) !important;
+}
+
+[data-theme="dark"] .footer-socials a:hover .material-symbols-rounded,
+[data-theme="dark"] .footer-socials a:hover svg {
+  color: var(--brand-teal-light, #4cdada) !important; /* Teal Icon */
+  -webkit-text-fill-color: var(--brand-teal-light, #4cdada) !important;
+  fill: var(--brand-teal-light, #4cdada) !important;
+}
+
+/* Logo Basis-Ausrichtung */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.navbar-logo-svg {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   PERFEKTER CONTRAST & BRAND MATCH (style.css)
+   ========================================================================== */
+
+/* LIGHT MODE: 
+   Tiefes, massives Slate-Graphit (wie deine Headlines) mit minimalem Deep-Indigo-Schimmer */
+.logo-grad-start {
+  stop-color: #0f172a; /* Absolut sattes Slate/Graphit */
+}
+.logo-grad-end {
+  stop-color: #1e293b; /* Dunkler Stahl */
+}
+
+/* DARK MODE: 
+   Klares, leuchtendes Reinweiß (wie deine Hauptüberschrift) mit hauchzartem Ice-Silver */
+[data-theme="dark"] .logo-grad-start,
+body.dark .logo-grad-start {
+  stop-color: #ffffff; /* Strahlend clean & weiß */
+}
+[data-theme="dark"] .logo-grad-end,
+body.dark .logo-grad-end {
+  stop-color: #cbd5e1; /* Kühles, edles Silber */
+}
+
+.card-inner .badge {
+  /* ...deine bestehenden Farben, Position, Box-Shadow etc. bleiben 1:1 stehen... */
+
+  white-space: nowrap; /* Verhindert das Umbrechen in 2 Zeilen */
+  width: auto; /* Lässt die Box flexibel mit dem Text mitwachsen */
+}
+
+/* ==========================================================================
+   PRICING CARD: 10% PROMO HIGHLIGHT (FARBLICH HERVORGEHOBEN)
+   ========================================================================== */
+.pricing-price-wrap {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   PRICING CARD: EDLES PROMO-HIGHLIGHT (VIOLETT/TEAL GLOW)
+   ========================================================================= */
+
+.price-promo-highlight {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+/* 1. Zeile: Der edle Farb-Glow */
+.price-promo-highlight .promo-main {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+
+  /* Farbverlauf: Ein edles Violett-Teal statt hartem Cyan */
+  background: linear-gradient(135deg, #a78bfa, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important; /* Macht den Text durchsichtig für den Verlauf */
+
+  /* Subtiler Glow-Effekt */
+  text-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+}
+
+/* Light-Mode Anpassung (weniger Glow, dunklere Farben) */
+[data-theme="light"] .price-promo-highlight .promo-main,
+body.light .price-promo-highlight .promo-main {
+  background: linear-gradient(135deg, #7c3aed, #0891b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  text-shadow: none;
+}
+
+/* 2. Zeile: Dezenter Untertitel */
+.price-promo-highlight .promo-sub {
+  color: #94a3b8 !important;
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+[data-theme="light"] .price-promo-highlight .promo-sub,
+body.light .price-promo-highlight .promo-sub {
+  color: #64748b !important;
+}
+
+/* ==========================================================================
+   GALLERY MAIN WRAPPER & BADGE
+   ========================================================================== */
+.gallery-main-container {
+  position: relative !important;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.gallery-main-container .gallery-main-image,
+.gallery-main-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Das Badge sitzt fest AUF dem Bild (unten links) */
+.trust-location-badge {
+  position: absolute !important;
+  bottom: 14px !important;
+  left: 14px !important;
+  z-index: 20 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  font-size: 0.82rem !important;
+  color: #f8fafc !important;
+  white-space: nowrap !important;
+  pointer-events: none;
+}
+
+[data-theme="light"] .trust-location-badge,
+body.light .trust-location-badge {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+  color: #0f172a !important;
+}
+
+/* Icons */
+.trust-location-badge .badge-icon {
+  font-size: 1.1rem !important;
+  color: #10b981 !important; /* Smaragdgrün */
+  line-height: 1;
+}
+
+.trust-location-badge .location-icon {
+  font-size: 1.05rem !important;
+  color: #38bdf8 !important; /* Cyan */
+  line-height: 1;
+}
+
+.trust-location-badge .badge-divider {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.trust-location-badge .badge-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #e2e8f0;
+}
+
+[data-theme="light"] .trust-location-badge .badge-location {
+  color: #334155 !important;
+}
+
+/* ==========================================================================
+   LEGAL MODALS (Datenschutz, Impressum, AGB, Widerruf)
+   ========================================================================== */
+.legal-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.legal-modal.active {
+  display: flex !important;
+}
+
+.legal-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.legal-modal-content {
+  position: relative;
+  background: #f8fafc !important; /* Helles Off-White/Grau */
+  border-radius: 24px !important;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  z-index: 2;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  font-family: inherit;
+}
+
+/* Header */
+.legal-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 28px 28px 16px 28px !important;
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.legal-modal-header h2 {
+  font-size: 1.45rem !important; /* Kräftiger Titel wie 'Datenschutzerklärung' */
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin: 0 !important;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.legal-modal-subtitle {
+  margin: 6px 0 0 0 !important;
+  font-size: 0.88rem !important;
+  color: #334155 !important; /* Gleiche Textfarbe wie 'Stand: 2026 (Gemäß DSGVO...)' */
+  font-weight: 500 !important;
+  line-height: 1.4;
+}
+
+/* Runder Close-Button */
+.legal-modal-close {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem !important;
+  line-height: 1 !important;
+  color: #475569 !important;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  padding: 0 !important;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.legal-modal-close:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Scrollbarer Textbereich */
+.legal-modal-body {
+  padding: 0 28px 28px 28px !important;
+  overflow-y: auto;
+  line-height: 1.6 !important;
+}
+
+/* Zwischenüberschriften (1. Datenschutz auf einen Blick etc.) */
+.legal-modal-body h3 {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin-top: 1.75rem !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.015em;
+}
+
+/* Fließtext */
+.legal-modal-body p {
+  font-size: 0.92rem !important;
+  color: #334155 !important;
+  margin-bottom: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+.legal-modal-body strong {
+  color: #0f172a !important;
+  font-weight: 700;
+}
+
+/* Kasten für Muster-Widerrufsformular */
+.legal-revocation-box {
+  background: #ffffff !important;
+  padding: 16px 18px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  margin-top: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.legal-revocation-box p {
+  font-size: 0.88rem !important;
+  color: #334155 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Optionaler Style für den Glossar-Link im FAQ */
+.faq-glossar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  border-radius: 9999px;
+  color: #0284c7;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.faq-glossar-link:hover {
+  background: rgba(2, 132, 199, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   PERFEKTER FIX FÜR .trust-location-badge (Mobile 320px bis 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .trust-location-badge {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90% !important;
+    max-width: 320px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 5px 6px !important;
+    border-radius: 9999px !important;
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    z-index: 10 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+
+  /* Text für Trainer & Ort */
+  .trust-location-badge .badge-title,
+  .trust-location-badge .badge-location,
+  .trust-location-badge .badge-divider {
+    font-size: clamp(
+      0.55rem,
+      2.2vw,
+      0.7rem
+    ) !important; /* Skaliert automatisch mit der Displaybreite */
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Icons */
+  .trust-location-badge .badge-icon,
+  .trust-location-badge .location-icon {
+    font-size: clamp(0.75rem, 2.6vw, 0.9rem) !important;
+    flex-shrink: 0 !important;
+    margin-right: 2px !important;
+  }
+
+  /* Farbe für Icons */
+  .trust-location-badge .badge-icon {
+    color: #10b981 !important; /* Grüner Haken / Schild */
+  }
+
+  .trust-location-badge .location-icon {
+    color: #38bdf8 !important; /* Blauer Pin */
+  }
+}
+
+/* ==========================================================================
+   LIGHT-MODE & MOBILE FIX FÜR DAS TRUST-LOCATION-BADGE
+   ========================================================================== */
+
+/* 1. Im Light Mode: Dunkle Schrift auf hellem Glas (oder klares dunkles Pill) */
+[data-theme="light"] .trust-location-badge,
+body.light-mode .trust-location-badge,
+.light-mode .trust-location-badge {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .trust-location-badge .badge-title,
+[data-theme="light"] .trust-location-badge .badge-location,
+[data-theme="light"] .trust-location-badge .badge-divider,
+body.light-mode .trust-location-badge .badge-title,
+body.light-mode .trust-location-badge .badge-location,
+body.light-mode .trust-location-badge .badge-divider {
+  color: #0f172a !important; /* Knackiges Dunkelblau/Schwarz für perfekten Kontrast */
+  text-shadow: none !important;
+}
+
+/* 2. Responsives Mobile-Layout (320px bis 480px) */
+@media (max-width: 480px) {
+  .trust-location-badge {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    max-width: 92% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    padding: 5px 10px !important;
+    border-radius: 9999px !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+  }
+
+  .trust-location-badge .badge-title,
+  .trust-location-badge .badge-location,
+  .trust-location-badge .badge-divider {
+    font-size: 0.64rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+  }
+
+  .trust-location-badge .badge-icon,
+  .trust-location-badge .location-icon {
+    font-size: 0.82rem !important;
+    margin: 0 !important;
+  }
+}
+
+/* Extra klein für z. B. 320px Screens */
+@media (max-width: 360px) {
+  .trust-location-badge {
+    padding: 4px 8px !important;
+    gap: 3px !important;
+  }
+  .trust-location-badge .badge-title,
+  .trust-location-badge .badge-location,
+  .trust-location-badge .badge-divider {
+    font-size: 0.58rem !important;
+  }
+}
+
+/* ==========================================================================
+   FAQ Glossar Link (Typografisch clean, perfekter Abstand, kein störendes Icon)
+   ========================================================================== */
+.faq-glossar-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--primary, #0284c7);
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  cursor: pointer;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.faq-glossar-link:hover {
+  color: #0369a1;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Dark Mode */
+body.dark-mode .faq-glossar-link,
+[data-theme="dark"] .faq-glossar-link {
+  color: #38bdf8;
+}
+
+body.dark-mode .faq-glossar-link:hover,
+[data-theme="dark"] .faq-glossar-link:hover {
+  color: #7dd3fc;
+}
+
+/* ==========================================================================
+   Preise Sektion: Responsive Abstand für Hover-Effekt
+   ========================================================================== */
+
+/* 1. Desktop (3 Boxen nebeneinander): 5rem Luft für den Hover-Effekt */
+#kurse .card-grid {
+  margin-top: 5rem;
+}
+
+/* 2. Tablet & Mobil (Sobald das Grid bricht & Boxen untereinander stehen): Wieder hochrutschen */
+@media (max-width: 1024px) {
+  #kurse .card-grid {
+    margin-top: 2.5rem !important;
+  }
+}
+
+/* ==========================================================================
+   Google Trust Badge: 320px Mobile Fix & Kein Underline
+   ========================================================================== */
+
+/* 1. Global: Garantiert kein Unterstrich auf dem Link und allen Unterelementen */
+.google-trust-badge,
+a.google-trust-badge,
+.google-trust-badge * {
+  text-decoration: none !important;
+}
+
+.google-trust-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Verhindert das Umknicken auf 320px */
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.google-trust-badge .badge-content {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+/* 2. Spezieller Fix für sehr schmale Screens (<= 360px bzw. 320px) */
+@media (max-width: 360px) {
+  .google-trust-badge {
+    padding: 4px 8px !important;
+    gap: 4px !important;
+    font-size: 0.68rem !important; /* Schrift minimal feiner */
+  }
+
+  .google-trust-badge svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .google-trust-badge .badge-content {
+    gap: 4px !important;
+  }
+
+  .google-trust-badge .badge-stars {
+    letter-spacing: -0.5px !important; /* Sterne rücken ganz leicht zusammen */
+    font-size: 0.72rem !important;
+  }
+
+  /* Blendet nur auf 320px-340px den Zusatz 'in Gotha' bzw. 'Zufriedenheit' ganz dezent ab, falls nötig */
+  .google-trust-badge .badge-location {
+    font-size: 0.65rem !important;
+  }
+}
+
+.hero-pill-icon {
+  font-size: 1.15rem !important;
+  color: var(--primary, #0284c7);
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transform: scaleX(
+    -1
+  ) !important; /* Spiegelt die Hantel horizontal -> zeigt nach rechts oben */
+}
+
+/* ==========================================================================
+   Hero Badge / Pill: Garantiert 1 Zeile, Hantel-Icon & Responsive
+   ========================================================================== */
+.ce-hero-pill,
+.hero-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important; /* Verhindert Zeilenumbruch komplett */
+  gap: 8px !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.hero-pill-icon {
+  font-size: 1.15rem !important;
+  color: var(--primary, #0284c7);
+  flex-shrink: 0 !important; /* Icon wird niemals zusammengedrückt */
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.hero-pill-text {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+/* --- Tablet / kleiner Laptop (<= 768px): Text leicht kürzen --- */
+@media (max-width: 768px) {
+  .ce-hero-pill,
+  .hero-badge {
+    padding: 6px 14px !important;
+    font-size: 0.8rem !important;
+    gap: 6px !important;
+  }
+
+  .hero-pill-icon {
+    font-size: 1rem !important;
+  }
+
+  /* Blendet ", Functional Training" mobil aus, damit es schlank bleibt */
+  .hero-pill-extra {
+    display: none !important;
+  }
+}
+
+/* --- Kleines Smartphone (<= 400px / 320px) --- */
+@media (max-width: 400px) {
+  .ce-hero-pill,
+  .hero-badge {
+    font-size: 0.72rem !important;
+    padding: 5px 10px !important;
+    gap: 5px !important;
+  }
+
+  .hero-pill-icon {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ==========================================================================
+   Hero Pill Icon Fix: Bleibt auch unter 640px IMMER sichtbar & nach rechts oben geflippt
+   ========================================================================== */
+
+/* 1. Basis-Eigenschaften für das Hantel-Icon */
+.hero-pill-icon,
+.hero-badge .hero-pill-icon,
+.ce-hero-pill .material-symbols-rounded {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: scaleX(-1) !important; /* Nach rechts oben geflippt */
+  color: var(--primary, #0284c7) !important;
+  font-size: 1.15rem !important;
+}
+
+/* 2. Explizit für Mobile & Bildschirme unter 640px */
+@media (max-width: 640px) {
+  .hero-pill-icon,
+  .hero-badge .hero-pill-icon,
+  .ce-hero-pill .material-symbols-rounded {
+    display: inline-flex !important; /* Verhindert das Ausblenden bei <= 640px */
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: 0.95rem !important; /* Passt sich dezent der kleineren Schrift an */
+  }
+}
+
+/* 3. Für Mini-Displays (<= 360px / 320px) */
+@media (max-width: 360px) {
+  .hero-pill-icon,
+  .hero-badge .hero-pill-icon,
+  .ce-hero-pill .material-symbols-rounded {
+    display: inline-flex !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* ==========================================================================
+   Hero Pill Icon: Übernimmt exakt die Textfarbe (Light & Dark Mode)
+   ========================================================================== */
+.hero-pill-icon,
+.hero-badge .hero-pill-icon,
+.ce-hero-pill .material-symbols-rounded {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: scaleX(-1) !important; /* Nach rechts oben geflippt */
+  color: inherit !important; /* Übernimmt automatisch 1:1 die Textfarbe */
+  font-size: 1.15rem !important;
+}
+
+@media (max-width: 640px) {
+  .hero-pill-icon,
+  .hero-badge .hero-pill-icon,
+  .ce-hero-pill .material-symbols-rounded {
+    display: inline-flex !important;
+    font-size: 0.95rem !important;
+    color: inherit !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-pill-icon,
+  .hero-badge .hero-pill-icon,
+  .ce-hero-pill .material-symbols-rounded {
+    display: inline-flex !important;
+    font-size: 0.85rem !important;
+    color: inherit !important;
+  }
+}
+
+.hero-pill-text {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================================
+   AKKORDEON: 100% RUCKELFREI FÜR TEXT & MULTI-KARTEN
+   ========================================================================== */
+
+/* 1. Haupt-Container Basis */
+.accordion-content {
+  display: block !important;
+  max-height: 0 !important;
+  opacity: 1 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  transition:
+    max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 2. Geöffneter Zustand für normale Text-Items & FAQs (Kein Leerlauf mehr!) */
+.accordion-item.active .accordion-content {
+  max-height: 220px !important;
+  padding-top: 0.85rem !important;
+  padding-bottom: 1.35rem !important;
+  border-top: 1px solid rgba(150, 150, 150, 0.1) !important;
+  transition:
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 3. Speziell für die große A-Lizenz mit den 4 Kacheln (braucht mehr Höhe) */
+.accordion-item:has(.sub-cert-list).active .accordion-content,
+.accordion-item.active:has(.sub-cert-list) .accordion-content {
+  max-height: 650px !important;
+}
+
+/* 4. Textabsatz */
+.accordion-content p {
+  width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 5. Sub-Karten (A-Lizenz) exakt im Rahmen */
+.accordion-content .sub-cert-list {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0.85rem 0 0 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  box-sizing: border-box !important;
+}
+
+.accordion-content .sub-cert-list li {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 6. Mobile Anpassung (unter 600px) */
+@media (max-width: 600px) {
+  .accordion-content {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  .accordion-item.active .accordion-content {
+    max-height: 500px !important;
+  }
+
+  .accordion-item:has(.sub-cert-list).active .accordion-content,
+  .accordion-item.active:has(.sub-cert-list) .accordion-content {
+    max-height: 950px !important;
+  }
+
+  .accordion-content .sub-cert-list {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* 7. Chevron-Pfeildrehung */
+.accordion-header .chevron-icon {
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.accordion-item.active .chevron-icon {
+  transform: rotate(180deg) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ==========================================================================
+   REINE PERFORMANCE- & LADE-OPTIMIERUNG
+   ========================================================================== */
+
+/* 1. Verhindert Text-Aufblitzen bei Icons vor dem Laden */
+.material-symbols-rounded {
+  font-family: "Material Symbols Rounded" !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+  font-feature-settings: "liga" !important;
+}
+
+/* 2. Preloader */
+#page-preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--body-bg);
+  background-attachment: fixed;
+  z-index: 999999;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.3s ease-out,
+    visibility 0.3s ease-out;
+  pointer-events: none;
+}
+
+[data-theme="dark"] #page-preloader {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(15, 23, 42, 0.6) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(30, 41, 59, 0.5) 0%,
+      transparent 45%
+    ),
+    linear-gradient(180deg, #0b1120 0%, #0f172a 50%, #1e293b 100%) !important;
+  background-color: #0b1120 !important;
+}
+
+[data-theme="light"] #page-preloader {
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(226, 232, 240, 0.6) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(241, 245, 249, 0.7) 0%,
+      transparent 45%
+    ),
+    linear-gradient(180deg, #e2e8f0 0%, #ffffff 45%, #f1f5f9 100%) !important;
+  background-color: #ffffff !important;
+}
+
+#page-preloader.loaded {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* 3. GPU-Rendering */
+[data-aos],
+.ce-hero-pill,
+.btn-primary,
+.pricing-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+section:not(:first-of-type),
+.section:not(:first-of-type),
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* ==========================================================================
+   SCHRITT 2.3: MODALS & POP-UP FEINSCHLIFF (320px - 420px FIXES)
+   ========================================================================== */
+
+/* 1. Modal-Container & saubere Innenabstände bei schmalen Screens */
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 12px !important; /* Verhindert, dass das Modal am Bildschirmrand klebt */
+  }
+
+  .modal-card,
+  .modal-content,
+  .legal-modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Header & Body bündig ausrichten (kein Rausragen über den linken Rand) */
+  .modal-header,
+  .legal-modal-header {
+    padding: 1.25rem 1rem 0.75rem 1rem !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-body,
+  .legal-modal-body {
+    padding: 0.75rem 1rem 1.5rem 1rem !important;
+    box-sizing: border-box !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .modal-header h2,
+  .modal-header h3,
+  .legal-modal-header h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+    padding-right: 32px !important; /* Platzhalter für das X oben rechts */
+  }
+
+  .legal-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .legal-list li {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 0.825rem !important;
+    gap: 0.4rem !important;
+  }
+}
+
+/* 2. Modal Close-Button: Keine nachhängende Drehung auf Touch/Mobile */
+.modal-close,
+.legal-modal-close {
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease !important;
+  transform: none !important; /* Standardmäßig keine Transformation */
+}
+
+/* Drehung EXKLUSIV nur mit echter Computermaus beim Hovern */
+@media (hover: hover) and (pointer: fine) {
+  .modal-close:hover,
+  .legal-modal-close:hover {
+    transform: rotate(90deg) !important;
+  }
+}
+
+/* 3. Pop-up Scrollbars auf Mobilgeräten unsichtbar schalten */
+.modal-body,
+.legal-modal-body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.modal-body::-webkit-scrollbar,
+.legal-modal-body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ==========================================================================
+   PREISLISTE: MOBIL-OVERFLOW-KILLER (≤ 420px / 320px)
+   ========================================================================== */
+
+@media (max-width: 425px) {
+  /* 1. Sektions-Container vollflächig & ohne seitlichen Versatz */
+  #kurse,
+  #kurse.bg-light,
+  [data-theme="dark"] #kurse.bg-light {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  #kurse .card-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 1.5rem auto 0 auto !important;
+    padding: 0 !important;
+    gap: 28px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Äußere Preiskarte & Innere Card bündig und zentriert halten */
+  .pricing-card,
+  .price-card,
+  .pricing-card.featured,
+  .price-card.featured {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .pricing-card .card-inner,
+  .price-card .card-inner,
+  .pricing-card.featured .card-inner,
+  .price-card.featured .card-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 2rem 1rem 1.5rem 1rem !important;
+    box-sizing: border-box !important;
+    transform: none !important;
+  }
+
+  /* 3. Listen-Inhalt innerhalb der Karte */
+  .pricing-card ul {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 1.25rem 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .pricing-card ul li {
+    font-size: 0.84rem !important;
+    line-height: 1.35 !important;
+    gap: 0.45rem !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 4. Buttons in den Preiskarten vollflächig & flexibel */
+  .pricing-card .btn-primary,
+  .pricing-card .btn-secondary,
+  .pricing-card .btn-pricing-cta,
+  .pricing-card .card-inner a {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.75rem 0.8rem !important;
+    font-size: 0.85rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 5. Badge oben mittig & flexibel */
+  .pricing-card .badge,
+  .pricing-card.featured .badge,
+  .card-inner .badge {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    white-space: nowrap !important;
+    font-size: 0.72rem !important;
+    padding: 0.25rem 0.85rem !important;
+    max-width: 90% !important;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL FIXES: SCROLLBARS, TAP-HIGHLIGHT & MODAL CLOSE-ICON
+   ========================================================================== */
+
+/* 1. Blauen Klick-Blitz & blaue Focus-Ränder auf Touchgeräten eliminieren */
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.accordion-header:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 2. Alle Scrollbars global unsichtbar schalten (Scroll-Funktion bleibt 100% aktiv) */
+html,
+body,
+section,
+.section,
+.container,
+.card-grid,
+.sub-cert-list,
+.modal-overlay,
+.modal-card,
+.modal-content,
+.modal-body,
+.legal-modal-content,
+.legal-modal-body,
+#kurse,
+#leistungen,
+#qualifikationen,
+#faq {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE & Edge */
+}
+
+/* WebKit-Browser (Chrome, Safari, Edge, Android, iOS) */
+::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+section::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar,
+.legal-modal-body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 3. Modal Close-Button: Keine nachhängende Drehung auf Mobile */
+.modal-close,
+.legal-modal-close,
+.modal-card-close,
+button[aria-label="Schließen"],
+button[aria-label="Modal schließen"] {
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease !important;
+  transform: none !important;
+}
+
+/* Drehung EXKLUSIV nur mit echter Maus beim Hovern */
+@media (hover: hover) and (pointer: fine) {
+  .modal-close:hover,
+  .legal-modal-close:hover,
+  .modal-card-close:hover,
+  button[aria-label="Schließen"]:hover {
+    transform: rotate(90deg) !important;
+  }
+}
+
+/* ==========================================================================
+   HERO MOBILE: BUTTERWEICHE ANIMATION OHNE SPRUNG-EFFEKT (≤ 480px / 320px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  /* 1. Hero-Container: Feste Höhe & stabiler Abstand zur Sticky-Navbar */
+  .hero,
+  header.hero,
+  section.hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 5.5rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Doppelte Keyframe-Animation auf H1 deaktivieren (AOS übernimmt das allein) */
+  .hero h1 {
+    animation: none !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* 3. Feiner, butterweicher AOS-Startzustand (18px statt 100px Versatz) */
+  .hero [data-aos="fade-up"] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) !important;
+    transition-property: transform, opacity !important;
+  }
+
+  .hero [data-aos="fade-up"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+/* ==========================================================================
+   BILD-, PICTURE- & VIDEO-OPTIMIERUNG (EXAKT FÜR DEINE INDEX.HTML)
+   ========================================================================== */
+
+/* 1. Globales Medien-Rendering & GPU-Beschleunigung */
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 2. Echte Klassen aus deiner index.html: About-Bilder & Cards */
+.about-image-card img,
+.about-image img,
+.about-img-main,
+.about-img-secondary {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.4s ease !important;
+}
+
+/* 3. Social-Proof Avatare (Hero & Testimonials) */
+.social-proof-avatars img,
+.avatar-group img,
+.testimonial-avatar img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+/* 4. Subtiler Hover-Zoom auf deinen About-Bildkarten (nur Desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .about-image-card:hover img,
+  .about-image:hover img {
+    transform: scale(1.03) translateZ(0);
+  }
+}
+
+/* ==========================================================================
+   BUTTON: MEHR ERFOLGSGESCHICHTEN LADEN (FLUID, 1-ZEILIG & KEIN UMBRUCH)
+   ========================================================================== */
+
+#loadMoreTestimonialsBtn,
+.btn-testimonial-secondary {
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  /* Skaliert stufenlos: von ~0.78rem (320px) bis 0.95rem (Desktop) */
+  font-size: clamp(0.78rem, 2.7vw, 0.95rem) !important;
+  padding: 0.85rem 1.25rem !important;
+  max-width: 95vw !important;
+  box-sizing: border-box !important;
+}
+
+#loadMoreTestimonialsBtn span:first-child {
+  white-space: nowrap !important;
+}
+
+#loadMoreTestimonialsBtn .btn-icon,
+#loadMoreTestimonialsBtn .material-symbols-rounded {
+  font-size: clamp(1rem, 3.5vw, 1.25rem) !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Feinabstimmung für sehr schmale Displays (≤ 360px / 320px) */
+@media (max-width: 360px) {
+  #loadMoreTestimonialsBtn,
+  .btn-testimonial-secondary {
+    padding: 0.75rem 0.8rem !important;
+    gap: 0.3rem !important;
+  }
+}
+
+/* ==========================================================================
+   LOGO: FINALE MAßE (OHNE HOVER-SCALE & PERFEKTE FOOTER-ABSTÄNDE)
+   ========================================================================== */
+
+/* 1. Klick-Container */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+/* 2. Navbar Logo Maße (oben etwas größer) */
+.navbar-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition:
+    opacity 0.2s ease,
+    filter 0.3s ease;
+}
+
+/* 3. Footer Logo Maße & Abstand (unten dezenter & nah am Text) */
+.footer-logo-img {
+  height: 30px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin-bottom: 0.15rem; /* Zieht das Logo ganz nah an den Folgetext */
+  transition:
+    opacity 0.2s ease,
+    filter 0.3s ease;
+}
+
+/* 4. Mobile Anpassung (≤ 480px) */
+@media (max-width: 480px) {
+  .navbar-logo-img {
+    height: 32px;
+  }
+  .footer-logo-img {
+    height: 26px;
+    margin-bottom: 0.1rem;
+  }
+}
+
+/* 5. Subtiler Hover ohne Bewegung / kein Scale */
+@media (hover: hover) and (pointer: fine) {
+  .logo:hover .navbar-logo-img,
+  .logo:hover .footer-logo-img {
+    opacity: 0.8; /* Nur dezente Transparenz, absolut kein Wackeln/Zoomen */
+    transform: none !important;
+  }
+}
+
+/* 6. Automatische Farb-Anpassung bei Light / Dark Mode */
+[data-theme="light"] .navbar-logo-img,
+[data-theme="light"] .footer-logo-img {
+  filter: invert(1) brightness(0.2);
+}
+
+[data-theme="dark"] .navbar-logo-img,
+[data-theme="dark"] .footer-logo-img {
+  filter: none;
+}

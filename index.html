@@ -1,0 +1,3041 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <script>
+      // PWA-Titel sofort beim allerersten Frame setzen (verhindert Dopplung in ChromeOS)
+      if (
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.matchMedia("(display-mode: window-controls-overlay)").matches ||
+        window.navigator.standalone
+      ) {
+        document.title = "Personal Trainer, Kraft- & Functional Coach in Gotha";
+      }
+    </script>
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const theme = saved ? saved : prefersDark ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="format-detection"
+      content="telephone=no, date=no, address=no, email=no"
+    />
+
+    <script>
+      (function () {
+        const isPWA =
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.matchMedia("(display-mode: window-controls-overlay)")
+            .matches ||
+          window.navigator.standalone === true;
+
+        if (isPWA) {
+          // 1. Titel für die installierte Web-App (Chromebook / Desktop-Fenster)
+          document.write(
+            "<title>Personal Trainer, Kraft- & Functional Coach in Gotha</title>",
+          );
+        } else {
+          // 2. Titel für den normalen Browser-Tab & Google
+          document.write(
+            "<title>CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional Coach in Gotha</title>",
+          );
+        }
+      })();
+    </script>
+    <noscript>
+      <title>
+        CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional Coach in
+        Gotha
+      </title>
+    </noscript>
+    <meta name="author" content="Christian Erlebach" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="Dein Personal Trainer in Gotha für sichtbaren Muskelaufbau, Gewichtsreduktion & schmerzfreie Kraft. 1-zu-1 Coaching, saubere Biomechanik und datengestütztes Tracking."
+    />
+    <meta
+      name="keywords"
+      content="Christian Erlebach, Personal Trainer Gotha, Krafttraining Gotha, Functional Training Gotha, Schlingentraining Gotha, Faszientraining Gotha, Muskelaufbau, Gewichtsreduktion Thüringen, Ernährungsplan Gotha, Progressive Overload, Anthropometrie Gotha"
+    />
+    <link
+      rel="canonical"
+      href="https://3utbg8rv0xw4t5z.github.io/christian-erlebach/"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta
+      property="og:url"
+      content="https://3utbg8rv0xw4t5z.github.io/christian-erlebach/"
+    />
+    <meta
+      property="og:title"
+      content="CHRISTIAN ERLEBACH | Dein Weg zu echter Kraft, Muskelaufbau & Definition in Gotha"
+    />
+    <meta
+      property="og:description"
+      content="Schluss mit Rätselraten und Stagnation im Gym. Ich verbinde saubere Biomechanik, Freihanteln, Maschinen, Schlingentraining und transparente Diagnostik für deinen echten Fortschritt. 1-zu-1 Betreuung in Gotha."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&h=630&q=85"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&h=630&q=85"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="CHRISTIAN ERLEBACH | Dein Weg zu echter Kraft, Muskelaufbau & Definition in Gotha"
+    />
+    <meta
+      name="twitter:description"
+      content="Schluss mit Rätselraten und Stagnation im Gym. Ich verbinde saubere Biomechanik, Freihanteln, Maschinen, Schlingentraining und transparente Diagnostik für deinen echten Fortschritt. 1-zu-1 Betreuung in Gotha."
+    />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&h=630&q=85"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="src/assets/icons/favicon.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="src/assets/icons/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="manifest.json?v=2" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Christian E." />
+
+    <meta name="application-name" content="Christian E." />
+    <meta name="msapplication-TileColor" content="#0b0f19" />
+    <meta
+      name="msapplication-TileImage"
+      content="src/assets/icons/apple-touch-icon.png"
+    />
+
+    <meta
+      id="meta-theme-light"
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      id="meta-theme-dark"
+      name="theme-color"
+      content="#0b0f19"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="src/css/style.css?v=6" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional Coach in Gotha",
+        "description": "Personal Trainer, Kraft- & Functional Coach in Gotha und Umgebung.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Gotha",
+          "addressRegion": "Thüringen",
+          "postalCode": "99867",
+          "addressCountry": "DE"
+        },
+        "url": "https://3utbg8rv0xw4t5z.github.io/christian-erlebach/",
+        "logo": "https://3utbg8rv0xw4t5z.github.io/christian-erlebach/src/assets/icons/favicon.svg",
+        "image": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&h=630&q=85"
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="page-preloader"></div>
+    <header class="nav-container" id="top">
+      <nav class="navbar">
+        <a
+          href="#"
+          class="logo"
+          onclick="
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return false;
+          "
+          title="Zurück zum Seitenanfang"
+          aria-label="Coach Chris - Zurück zum Seitenanfang"
+        >
+          <img
+            src="src/assets/icons/logo-dark.svg"
+            alt="CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional Coach in Gotha"
+            class="navbar-logo-img"
+            width="48"
+            height="32"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+
+        <ul class="nav-links desktop-only">
+          <li><a href="#services">Coaching</a></li>
+          <li><a href="#about">Über Mich</a></li>
+          <li><a href="#testimonials">Erfolge</a></li>
+          <li><a href="#kurse">Preise</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            id="theme-toggle"
+            class="theme-toggle-btn"
+            aria-label="Dark/Light Mode umschalten"
+            title="Farbschema umschalten"
+          >
+            <span class="material-symbols-rounded icon-moon">dark_mode</span>
+            <span class="material-symbols-rounded icon-sun">light_mode</span>
+          </button>
+
+          <a
+            href="#"
+            onclick="
+              openModal('modal-contact');
+              return false;
+            "
+            class="btn-pill-primary desktop-only"
+            title="Erstgespräch vereinbaren"
+          >
+            Erstgespräch sichern
+            <span class="material-symbols-rounded">arrow_forward</span>
+          </a>
+
+          <button
+            class="mobile-nav-toggle"
+            onclick="openModal('modal-nav')"
+            aria-label="Menü öffnen"
+            title="Menü öffnen"
+          >
+            <span class="material-symbols-rounded">menu</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      id="modal-nav"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-nav')"
+    >
+      <div class="modal-card modal-card-nav">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-nav')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+
+        <div class="modal-header">
+          <h2>Navigation</h2>
+          <p class="modal-subtitle">Wähle einen Bereich aus</p>
+        </div>
+
+        <div class="modal-body modal-body-nav">
+          <a
+            href="#services"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">fitness_center</span>
+            Coaching
+          </a>
+          <a
+            href="#about"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">person</span> Über Mich
+          </a>
+          <a
+            href="#qualifications"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">verified</span>
+            Qualifikationen
+          </a>
+          <a
+            href="#testimonials"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">emoji_events</span>
+            Erfolge
+          </a>
+          <a
+            href="#kurse"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">payments</span> Preise
+          </a>
+          <a
+            href="#faq"
+            class="nav-modal-link"
+            onclick="closeModal('modal-nav')"
+          >
+            <span class="material-symbols-rounded">help</span> FAQ
+          </a>
+
+          <a
+            href="#hero-banner"
+            class="btn-pill-primary nav-modal-cta"
+            onclick="closeModal('modal-nav')"
+          >
+            Erstgespräch sichern
+            <span class="material-symbols-rounded">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="hero-content">
+        <div
+          class="ce-hero-pill hero-badge"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <span class="material-symbols-rounded hero-pill-icon"
+            >fitness_center</span
+          >
+          <span class="hero-pill-text"
+            >1-zu-1 Personal Coaching<span class="hero-pill-extra"
+              >, Functional Training</span
+            >
+            &amp; Kraftsport in Gotha</span
+          >
+        </div>
+
+        <h1 data-aos="fade-up" data-aos-delay="150">
+          Körperfett reduzieren.
+          <span class="highlight-text heading-font">Muskeln aufbauen.</span>
+          Schmerzfrei stärker werden.
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="250">
+          Schluss mit planlosem Trainieren, Stagnation und Fitness-Mythen. Egal,
+          wo du heute startest: Ob mit starkem Übergewicht, als schmaler
+          Körpertyp auf der Suche nach Muskelmasse, nach einer langen Pause, mit
+          wenig Zeit oder mit körperlichen Vorbelastungen wie Rückenschmerzen.
+          Gemeinsam etablieren wir ein klares System aus biomechanisch sauberer
+          Technik, gesteuertem Progressive Overload (progressiver
+          Belastungssteigerung) und individueller Ernährungssteuerung – direkt
+          vor Ort im Partner-Gym in Gotha.
+        </p>
+
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="350">
+          <a
+            href="#hero-banner"
+            class="btn-primary"
+            onclick="
+              openModal('modal-contact');
+              return false;
+            "
+          >
+            Kostenloses Erstgespräch anfragen
+            <span class="material-symbols-rounded">arrow_forward</span>
+          </a>
+          <a href="#services" class="btn-secondary">
+            Coaching-System entdecken
+            <span class="material-symbols-rounded">chevron_right</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <section id="stats" class="section stats-section">
+          <div class="container">
+            <div class="about-stats-grid">
+              <div
+                class="about-stat-card"
+                data-aos="fade-up"
+                data-aos-delay="0"
+              >
+                <div class="stat-number">1:1</div>
+                <div class="stat-label">Individuelle Steuerung</div>
+              </div>
+
+              <div
+                class="about-stat-card"
+                data-aos="fade-up"
+                data-aos-delay="80"
+              >
+                <div class="stat-number">
+                  <span class="counter" data-target="100">0</span>%
+                </div>
+                <div class="stat-label">Maßgeschneidert</div>
+              </div>
+
+              <div
+                class="about-stat-card"
+                data-aos="fade-up"
+                data-aos-delay="160"
+              >
+                <div class="stat-number">
+                  <span class="counter" data-target="4">0</span>+
+                </div>
+                <div class="stat-label">Trainer-Qualifikationen</div>
+              </div>
+
+              <div
+                class="about-stat-card"
+                data-aos="fade-up"
+                data-aos-delay="240"
+              >
+                <div class="stat-number">
+                  <span class="counter" data-target="0">0</span>%
+                </div>
+                <div class="stat-label">Zeitverschwendung</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" class="section bg-light">
+          <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Mein Coaching-System</h2>
+            <p class="section-subtitle">
+              Kein standardisierter 08/15-Plan. Wir verbinden wissenschaftlich
+              fundierte Trainingslehre mit praxistauglicher Betreuung im
+              Partner-Studio in Gotha.
+            </p>
+          </div>
+
+          <div class="card-grid">
+            <div class="card" data-aos="fade-up" data-aos-delay="0">
+              <div class="card-icon">
+                <span class="material-symbols-rounded">fitness_center</span>
+              </div>
+              <h3>1-zu-1 Live Coaching: Eisen, Maschinen & Functional</h3>
+              <p class="card-intro">
+                Gemeinsam im Gym an Langhantel, Kurzhanteln, Kabelzügen und
+                Maschinen. Wir optimieren deinen Bewegungsablauf, damit jeder
+                Satz maximale Reize setzt und deine Gelenke geschont werden.
+              </p>
+              <ul class="card-feature-list">
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Sichere Bewegungsausführung:</strong> Volle
+                    Ausnutzung der ROM (vollständiger Bewegungsumfang) und
+                    dehnungsinduzierter Reize bei kontrollierter Kadenz.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Präzise Intensitätssteuerung:</strong> Gezielte
+                    Steuerung über RIR & RPE im produktiven Bereich – ganz ohne
+                    unproduktives Junk Volume.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Fortgeschrittene Reize:</strong> Gezielter Einsatz
+                    von Supersätzen, Dropsätzen oder Myo-Reps zur maximalen
+                    Muskelfaser-Rekrutierung.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+              <div class="card-icon">
+                <span class="material-symbols-rounded">assignment</span>
+              </div>
+              <h3>Faszientraining, Mobility & Smarte Periodisierung</h3>
+              <p class="card-intro">
+                Wahre Kraft braucht Beweglichkeit und stabile Gelenke. Wir
+                kombinieren zielgerichtete Trainingspläne mit Faszien- und
+                Mobilitätstraining gegen Verspannungen und Dysbalancen.
+              </p>
+              <ul class="card-feature-list">
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Faszientraining & SMR:</strong> Gezielte
+                    Selbstmassage mit Faszienrollen und Bällen zur Lösung von
+                    Gewebeverklebungen und Schmerzlinderung.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Funktionelle Rumpfstabilität:</strong>
+                    Schlingentraining (Sling Training) und freie Übungen zur
+                    Stärkung der tiefen Core-Muskulatur.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Periodisierte Trainingspläne:</strong> Individuelle
+                    Ganzkörper- oder Split-Systeme inklusive geplanter
+                    Deload-Wochen zur ZNS-Regeneration.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+              <div class="card-icon">
+                <span class="material-symbols-rounded">monitoring</span>
+              </div>
+              <h3>Messbare Diagnostik & Alltagstaugliche Ernährung</h3>
+              <p class="card-intro">
+                Erfolg im Training ist keine Glückssache, sondern transparent
+                planbar. Wir erfassen deinen Fortschritt mehrdimensional und
+                stimmen deine Ernährung flexibel auf deinen Alltag ab.
+              </p>
+              <ul class="card-feature-list">
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Aussagekräftige Körpervermessung:</strong> Umfänge
+                    an Taille, Beinen & Armen, standardisierte
+                    Fortschrittsbilder, BMI & FFMI-Einordnung.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Digitales Leistungs-Monitoring:</strong> Lückenlose
+                    Erfassung deiner Gewichte, Wiederholungen und der Tonnage
+                    über die Trainings-App.</span
+                  >
+                </li>
+                <li>
+                  <span class="material-symbols-rounded">check</span>
+                  <span
+                    ><strong>Ernährung ohne Verbote:</strong> Exakte
+                    TDEE-Berechnung für Body Recomposition, Fettabbau im Defizit
+                    oder Lean Bulk via Flexible Dieting (IIFYM).</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section">
+          <div class="about-grid">
+            <div class="about-gallery-container">
+              <div
+                class="about-image-wrapper"
+                data-aos="fade-up"
+                style="
+                  position: relative;
+                  overflow: hidden;
+                  border-radius: 16px;
+                "
+              >
+                <img
+                  id="aboutMainImg"
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80"
+                  alt="1-zu-1 Personal Coaching und Technik-Korrektur in Gotha"
+                  loading="lazy"
+                  decoding="async"
+                  class="about-img"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                  "
+                />
+
+                <div class="trust-location-badge">
+                  <span class="material-symbols-rounded badge-icon"
+                    >verified</span
+                  >
+                  <span class="badge-title">Zertifizierter Trainer</span>
+                  <span class="badge-divider">•</span>
+                  <span class="badge-location">
+                    <span class="material-symbols-rounded location-icon"
+                      >location_on</span
+                    >
+                    Gotha &amp; Umgebung
+                  </span>
+                </div>
+              </div>
+
+              <div class="about-thumbs">
+                <button
+                  type="button"
+                  class="about-thumb-btn active"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  onclick="
+                    swapAboutImg(
+                      this,
+                      'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80',
+                    )
+                  "
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=300&q=80"
+                    alt="Langhantel-Training und Progressive Overload"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  class="about-thumb-btn"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  onclick="
+                    swapAboutImg(
+                      this,
+                      'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80',
+                    )
+                  "
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=300&q=80"
+                    alt="Functional Training und Rumpfstabilität mit Schlingentrainer"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  class="about-thumb-btn"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  onclick="
+                    swapAboutImg(
+                      this,
+                      'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80',
+                    )
+                  "
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=300&q=80"
+                    alt="Faszientraining, Mobilität und Regeneration"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div class="about-content" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="section-title left-align">
+                Dein Experte für nachhaltige Transformation
+              </h2>
+              <p class="hero-subline">
+                Wissenschaftliche Trainingslehre trifft auf gelebte Praxis im
+                Gym.
+              </p>
+              <p class="about-body">
+                Hi, ich bin Christian. Krafttraining und funktionelle Fitness
+                sind für mich kein kurzfristiger Trend, sondern ein präzises
+                Handwerk. Mein Ziel ist es, dir die Werkzeuge an die Hand zu
+                geben, mit denen du deinen Körper nachhaltig veränderst – ganz
+                ohne leere Versprechen, gefährliches Halbwissen oder
+                zeitraubendes Ausprobieren.
+              </p>
+              <p class="about-body">
+                Als zertifizierter Trainer begleite ich dich bei jedem Schritt
+                im Partner-Studio in Gotha: Von der ersten Haltungs- und
+                Bewegungsanalyse über das biomechanisch saubere Erlernen der
+                Grundübungen bis hin zur systematischen Progressions- und
+                Ernährungssteuerung.
+              </p>
+              <p class="about-body">
+                Egal, ob du 15 kg Fett verlieren willst, als Hardgainer solide
+                Muskelmasse aufbauen möchtest oder einen schmerzfreien Ausgleich
+                suchst: Wir trainieren fokussiert, datengestützt und immer auf
+                Augenhöhe.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="qualifications" class="section bg-light">
+          <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">
+              Fundierte Expertise & Trainer-Lizenzen
+            </h2>
+            <p class="section-subtitle">
+              Qualität, Sicherheit und wissenschaftlich fundierte
+              Trainingssteuerung stehen an erster Stelle. Klicke auf die
+              Lizenzen, um Details zu den Inhalten zu sehen. (Klick zum
+              Ausklappen).
+            </p>
+          </div>
+
+          <div class="accordion-container">
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >check_circle</span
+                  >
+                  <strong>Fitnesstrainer B-Lizenz</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Fundierte Grundlagen in Anatomie, Physiologie, Biomechanik und
+                  Trainingslehre. Sichere Einweisung an Kraftgeräten,
+                  Freihanteln und Seilzügen sowie Erstellung zielgerichteter
+                  Trainingspläne für Einsteiger und Fortgeschrittene.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >verified</span
+                  >
+                  <strong>Fitnesstrainer A-Lizenz</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Vertiefte Trainingswissenschaft für Fortgeschrittene,
+                  Leistungsdiagnostik und komplexe Periodisierungsmodelle. Im
+                  Rahmen dieser Ausbildung habe ich folgende Fachtitel erworben:
+                </p>
+                <ul class="sub-cert-list">
+                  <li>
+                    <span class="material-symbols-rounded">fitness_center</span>
+                    <span
+                      ><strong>Coach für Freihanteltraining:</strong>
+                      Kniebeugen, Kreuzheben, Bankdrücken & gezielter
+                      Progressive Overload</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">bolt</span>
+                    <span
+                      ><strong>Functional Trainer/in:</strong> Mehrdimensionale
+                      Bewegungsmuster, Core-Stabilität und Reaktivkraft</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">sync</span>
+                    <span
+                      ><strong>Coach für Schlingentraining:</strong>
+                      Instabilitäts- und Suspension-Training gegen das eigene
+                      Körpergewicht</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">vital_signs</span>
+                    <span
+                      ><strong>Faszientrainer/in:</strong> Self-Myofascial
+                      Release (SMR), Gewebeelastizität und
+                      Triggerpunkt-Behandlung</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >person_check</span
+                  >
+                  <strong>Personal Trainer Lizenz</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Spezialisierung auf exklusive 1-zu-1 Betreuung, Anamnese,
+                  Haltungs- und Bewegungsanalyse. Gezielte Steuerung von
+                  Trainingsintensität (RIR/RPE), Übungsvariation und
+                  individuelle Motivation zur Erreichung persönlicher
+                  Bestleistungen.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >restaurant</span
+                  >
+                  <strong>Ernährungsberater Lizenz</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Praxisnahe Ernährungsstrategien für Muskelaufbau, Fettabbau
+                  und Recomposition. Exakte Energiebedarfsermittlung (TDEE),
+                  Makronährstoff-Verteilung und nachhaltige Ernährungskonzepte
+                  ohne strikte Verbote oder Jo-Jo-Effekt.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >favorite</span
+                  >
+                  <strong>Medizinischer Fitnesstrainer</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Präventives und rehabilitatives Training bei orthopädischen
+                  Einschränkungen, Haltungsschwächen und muskulären Dysbalanzen.
+                  Gezielter Rumpf- und Gelenkaufbau zur nachhaltigen Linderung
+                  von Rücken-, Nacken- und Knieschmerzen.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >workspace_premium</span
+                  >
+                  <strong>Master Fitnesstrainer</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Das Premium-Gesamtdiplom der KAF Akademie vereint alle
+                  Kernkompetenzen: Trainingslehre, Biomechanik, medizinisches
+                  Aufbautraining, Functional Fitness und Sporternährung zu einem
+                  ganzheitlichen Coaching-System.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="testimonials" class="section">
+          <div class="section-header" data-aos="fade-up">
+            <a
+              href="https://search.google.com/local/writereview?placeid=DEINE_GOOGLE_PLACE_ID"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="google-trust-badge"
+              title="Zu den offiziellen Google-Bewertungen"
+            >
+              <svg
+                style="width: 18px; height: 18px; flex-shrink: 0"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                />
+              </svg>
+              <div class="badge-content">
+                <span class="badge-rating">5.0 / 5.0</span>
+                <span class="badge-stars">★★★★★</span>
+                <span class="badge-location">• 100% Zufriedenheit</span>
+              </div>
+            </a>
+            <h2 class="section-title">Erfolgsgeschichten aus der Praxis</h2>
+            <p class="section-subtitle">
+              Echte Ergebnisse von Klienten, die mit gezielter Progression und
+              System ihre Ziele in Gotha erreicht haben.
+            </p>
+          </div>
+
+          <div class="card-grid" id="testimonialsGrid">
+            <div
+              class="card testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                "Nach Jahren mit Rückenschmerzen und erfolglosem Training im
+                Alleingang habe ich mit Christian in 6 Monaten 14 kg Fett
+                verloren und endlich schmerzfrei Kniebeugen und Kreuzheben
+                gelernt. Sein Blick für die Technik ist Gold wert!"
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Stefan M. – 14 kg Gewichtsverlust und schmerzfreier Rücken durch Personal Training in Gotha"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Stefan M., 41 Jahre</strong>
+                  <span class="testimonial-job"
+                    >−14 kg Körperfett & schmerzfreier Rücken</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="card testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="80"
+            >
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                „Ich hatte immer Angst vor schweren Gewichten und wusste nicht,
+                wie ich richtig essen soll. Durch das 1-zu-1 Coaching habe ich
+                gelernt, was Progressive Overload wirklich bedeutet. Ich fühle
+                mich so stark und athletisch wie noch nie!“
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Laura K. – Gezielter Muskelaufbau und Krafttraining für Frauen in Gotha"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Laura K., 29 Jahre</strong>
+                  <span class="testimonial-job"
+                    >+4 kg Muskelaufbau & straffere Definition</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="card testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="160"
+            >
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                „Als Schreibtischtäter mit chronischen Nackenverspannungen war
+                die Kombination aus medizinischem Aufbautraining,
+                Faszientraining und Freihanteln genau der richtige Weg.
+                Christian motiviert auf Augenhöhe und korrigiert präzise.“
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Michael B. – Funktionelles Rückentraining und Haltungsverbesserung in Gotha"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Michael B., 52 Jahre</strong>
+                  <span class="testimonial-job"
+                    >Haltungsverbesserung & Schmerzfreiheit</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="card testimonial-card hidden-testimonial">
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                „Die individuelle Betreuung und das App-Tracking geben mir
+                endlich die nötige Verbindlichkeit. Meine Kraftwerte beim
+                Bankdrücken und Kniebeugen sind in 4 Monaten durch die Decke
+                gegangen – ganz ohne Gelenkschmerzen.“
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Dennis R. – Progressive Overload und Leistungssteigerung im Krafttraining"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Dennis R., 36 Jahre</strong>
+                  <span class="testimonial-job"
+                    >Kraftsteigerung & saubere Biomechanik</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="card testimonial-card hidden-testimonial">
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                „Keine sinnlosen Crash-Diäten mehr! Christian hat mir gezeigt,
+                wie ich meine Kalorien und Proteine stressfrei in meinen
+                Familien- und Berufsalltag integriere. Das Training im Studio
+                macht richtig Laune.“
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Sarah K. – Nachhaltige Ernährungsumstellung und Fettabbau ohne Jo-Jo-Effekt"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Sarah K., 34 Jahre</strong>
+                  <span class="testimonial-job"
+                    >Nachhaltiger Fettabbau & Wohlbefinden</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="card testimonial-card hidden-testimonial">
+              <div class="testimonial-header">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-quote-icon">“</div>
+              </div>
+              <p class="testimonial-text">
+                „Nach jahrelanger Pause wollte ich wieder fit werden, ohne mich
+                zu verletzen. Die Kombination aus Schlingentraining, Mobility
+                und strukturiertem Krafttraining hat mir meine alte Grundfitness
+                zurückgebracht.“
+              </p>
+              <div class="testimonial-footer">
+                <img
+                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&h=200&q=80"
+                  alt="Erfolgsgeschichte Markus S. – Wiedereinstieg ins Fitnesstraining und funktionelle Rumpfstabilität"
+                  loading="lazy"
+                  decoding="async"
+                  class="testimonial-avatar"
+                />
+                <div class="testimonial-meta">
+                  <strong class="testimonial-name">Markus S., 45 Jahre</strong>
+                  <span class="testimonial-job"
+                    >Wiedereinstieg & funktionelle Fitness</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="testimonials-actions"
+            style="text-align: center; margin-top: 2.5rem"
+          >
+            <button
+              id="loadMoreTestimonialsBtn"
+              class="btn-testimonial-secondary"
+              type="button"
+              onclick="loadMoreTestimonials()"
+            >
+              <span>Mehr Erfolgsgeschichten laden</span>
+              <span class="material-symbols-rounded btn-icon"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </section>
+
+        <section id="kurse" class="section bg-light">
+          <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Transparente Pakete & Preise</h2>
+            <p class="section-subtitle">
+              Wähle das Betreuungsmodell, das exakt zu deinem aktuellen
+              Trainingsstand und deinen Zielen passt. Keine versteckten Kosten.
+            </p>
+          </div>
+
+          <div class="card-grid">
+            <div
+              class="card pricing-card"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
+              <div class="card-inner">
+                <h3>Technik & Fundament Kickstart</h3>
+                <p class="card-desc">
+                  Ideal für Einsteiger oder Wiedereinsteiger, die die
+                  Grundübungen von Grund auf sicher und verletzungsfrei erlernen
+                  wollen.
+                </p>
+                <div class="price">89 € <span>/ Std.</span></div>
+                <ul>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Ausführliche Anamnese:</strong> Haltungs-,
+                      Mobilitäts- & Leistungscheck</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>1-zu-1 Live Coaching:</strong> Präzise
+                      Biomechanik an Hanteln & Maschinen</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Trainingsplan-Erstellung:</strong> Exakt auf
+                      deine Studio-Ausstattung angepasst</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Basis Ernährungs-Guide:</strong> TDEE-Kalorien &
+                      Makro-Bedarfsanalyse</span
+                    >
+                  </li>
+                </ul>
+                <a href="#hero-banner" class="btn-secondary"
+                  >Kickstart anfragen</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="card pricing-card featured"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="card-inner">
+                <div class="badge">Maximale Progression</div>
+                <h3>Ganzheitliche Transformation</h3>
+                <p class="card-desc">
+                  Das Rundum-sorglos-System für maximale Hypertrophie,
+                  nachhaltigen Fettabbau und lückenlose Progression.
+                </p>
+
+                <div class="pricing-price-wrap">
+                  <div class="price">299 € <span>/ Monat</span></div>
+                  <div class="price-promo-highlight">
+                    <span class="promo-main">-10% Startvorteil</span>
+                    <span class="promo-sub">für Neukunden im 1. Monat</span>
+                  </div>
+                </div>
+
+                <ul>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Regelmäßige 1-zu-1 Sessions:</strong> Intensives
+                      Coaching im Studio Gotha</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Smarte Periodisierung:</strong> Kontinuierliche
+                      Plan-Updates inkl. Deloads</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Flexible Dieting (IIFYM):</strong> Wöchentliche
+                      Anpassung ohne Verbote</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Lückenlose Diagnostik:</strong> Umfangmessung,
+                      Bilder &amp; App-Tracking</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>WhatsApp &amp; Video Support:</strong> Schnelle
+                      Feedback-Schleifen im Alltag</span
+                    >
+                  </li>
+                </ul>
+
+                <a
+                  href="#hero-banner"
+                  class="btn-primary btn-pricing-cta"
+                  onclick="
+                    openModal('modal-contact');
+                    return false;
+                  "
+                >
+                  <span>Transformation starten</span>
+                  <span class="material-symbols-rounded">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div
+              class="card pricing-card"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="card-inner">
+                <h3>Premium Performance & Mobility</h3>
+                <p class="card-desc">
+                  Maximale Betreuung mit Fokus auf medizinisches Aufbautraining,
+                  Faszientherapie, Schmerzlinderung und Spitzenleistung.
+                </p>
+                <div class="price">449 € <span>/ Monat</span></div>
+                <ul>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Höchste Betreuungsdichte:</strong>
+                      Frequenz-Coaching direkt im Gym</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Faszien- & Schlingentraining:</strong>
+                      SMR-Techniken & tiefe Core-Stabilität</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Medizinisches Reha-Konzept:</strong> Gezielter
+                      Ausgleich von Dysbalancen</span
+                    >
+                  </li>
+                  <li>
+                    <span class="material-symbols-rounded">check</span>
+                    <span
+                      ><strong>Priority VIP-Support:</strong> Direkter 24/7
+                      Draht für alle Coaching-Fragen</span
+                    >
+                  </li>
+                </ul>
+                <a href="#hero-banner" class="btn-secondary"
+                  >Premium Platz sichern</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="section">
+          <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Häufig gestellte Fragen (FAQ)</h2>
+            <p class="section-subtitle">
+              Alles über Ablauf, Trainingsorte in Gotha, Betreuung und die
+              Zusammenarbeit auf einen Blick.
+            </p>
+          </div>
+
+          <div class="accordion-container" id="faqAccordion">
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon">help</span>
+                  <strong
+                    >Ist das Personal Training auch für absolute Anfänger ohne
+                    Vorerfahrung geeignet?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Absolut! Ein Großteil meiner Klienten startet ohne
+                  Vorerfahrung. Wir beginnen mit einer gründlichen Anamnese und
+                  Haltungsanalyse. Du lernst die Grundübungen (Kniebeugen,
+                  Kreuzheben, Drückübungen) Schritt für Schritt mit
+                  biomechanisch sauberer Technik, bevor wir die Gewichte
+                  systematisch steigern.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >vital_signs</span
+                  >
+                  <strong
+                    >Ich habe Rücken- oder Gelenkschmerzen – kann ich trotzdem
+                    mittrainieren?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Ja, definitiv. Als ausgebildeter Medizinischer Fitnesstrainer
+                  und Faszientrainer passe ich jede Übung an deine individuelle
+                  Anatomie und Schmerzgrenze an. Gezieltes Krafttraining ist
+                  nachweislich die effektivste Methode, muskuläre Dysbalanzen
+                  auszugleichen und Schmerzen dauerhaft zu lindern.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >calendar_today</span
+                  >
+                  <strong
+                    >Wie oft pro Woche ist ein Coaching sinnvoll, um sichtbare
+                    Erfolge zu erzielen?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Für spürbaren Kraftaufbau und nachhaltigen Fettabbau sind 2
+                  bis 3 Trainingseinheiten pro Woche ideal. Viele Klienten
+                  nutzen 1 bis 2 betreute 1-zu-1 Sessions mit mir im Studio und
+                  absolvieren weitere Einheiten selbstständig nach dem
+                  maßgeschneiderten App-Trainingsplan.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >restaurant</span
+                  >
+                  <strong
+                    >Bekomme ich einen strikten Ernährungsplan oder wie läuft
+                    die Ernährungsberatung?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Vergiss starre Diäten und Jo-Jo-Effekte. Wir ermitteln deinen
+                  exakten Kalorienbedarf (TDEE) und etablieren ein flexibles
+                  Ernährungskonzept (Flexible Dieting /
+                  Makronährstoff-Steuerung). So lernst du, wie du deine
+                  Lieblingsspeisen stressfrei in deinen Alltag und Beruf
+                  integrierst.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >location_on</span
+                  >
+                  <strong
+                    >Wo und in welchem Fitnessstudio findet das Training in
+                    Gotha statt?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Das 1-zu-1 Coaching findet primär in einem modern
+                  ausgestatteten Partner-Fitnessstudio in Gotha statt, das über
+                  einen umfangreichen Freihantelbereich, Kabelzüge und
+                  Functional-Equipment verfügt. Nach Absprache sind auch
+                  Outdoor-Einheiten oder funktionelles Training bei dir zu Hause
+                  möglich.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="0">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >schedule</span
+                  >
+                  <strong>Wie läuft das kostenlose Erstgespräch ab?</strong>
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Das 30-minütige Erstgespräch (telefonisch oder vor Ort in
+                  Gotha) ist zu 100 % unverbindlich und kostenlos. Wir
+                  analysieren deinen aktuellen Trainingsstand, besprechen deine
+                  sportlichen und gesundheitlichen Ziele und prüfen, welches
+                  Betreuungsmodell am besten in deinen Alltag passt.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >card_membership</span
+                  >
+                  <strong
+                    >Benötige ich eine eigene Mitgliedschaft im
+                    Partner-Fitnessstudio?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Wenn du bereits in unserem Partnerstudio in Gotha angemeldet
+                  bist, trainieren wir dort direkt. Falls nicht, klären wir im
+                  Erstgespräch die günstigste Zugangsoption (Tageskarte,
+                  Zehnerkarte oder Studiomitgliedschaft), damit für dich alles
+                  transparent und unkompliziert bleibt.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon">alarm</span>
+                  <strong
+                    >Wie flexibel sind die Trainingszeiten für Berufstätige oder
+                    Schichtarbeiter?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Sehr flexibel. Die Trainingstermine werden individuell
+                  abgestimmt – egal ob frühmorgens vor der Arbeit, in der
+                  Mittagspause, abends oder am Wochenende. Auch bei wechselnden
+                  Schichtplänen finden wir verlässliche Zeiten.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon">chat</span>
+                  <strong
+                    >Was passiert zwischen den Einheiten – kann ich dir bei
+                    Fragen schreiben?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Absolut! Du wirst abseits unserer gemeinsamen Sessions nicht
+                  allein gelassen. Bei Fragen zur Übungsausführung,
+                  Restaurant-Besuchen oder Ernährungsentscheidungen stehe ich
+                  dir per WhatsApp verlässlich mit Feedback und Motivation zur
+                  Seite.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >event_busy</span
+                  >
+                  <strong
+                    >Was passiert, wenn ich einen vereinbarten Trainingstermin
+                    absagen muss?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Das Leben kommt manchmal dazwischen: Bei einer Absage bis 24
+                  Stunden vor dem Termin finden wir unkompliziert per WhatsApp
+                  einen zeitnahen Ersatztermin, ohne dass dir die Einheit
+                  verfällt.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >lock_open</span
+                  >
+                  <strong
+                    >Sind die monatlichen Coaching-Pakete flexibel
+                    kündbar?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Ja, absolute Flexibilität: Alle monatlichen Betreuungsmodelle
+                  sind monatlich kündbar und binden dich nicht an starre
+                  Jahresverträge. Du entscheidest selbst, wie lange du intensiv
+                  begleitet werden möchtest – fair, transparent und ohne
+                  versteckte Klauseln.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >straighten</span
+                  >
+                  <strong
+                    >Wie messen wir meinen Fortschritt – geht es nur um das
+                    Gewicht auf der Waage?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Nein, die Waage ist nur ein kleiner Teil der Wahrheit. Da
+                  Muskelgewebe dichter als Körperfett ist, verändert sich bei
+                  einer Body Recomposition oft der Körperumfang drastisch,
+                  während das Gewicht stabil bleibt. Deshalb nutzen wir Maßband,
+                  standardisierte Fortschrittsbilder und dein Spiegelbild als
+                  verlässliche Indikatoren.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >monitoring</span
+                  >
+                  <strong
+                    >Wie wird mein Fortschritt während des Trainings genau
+                    getrackt?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Dein Trainingsfortschritt wird digital und transparent
+                  erfasst: Jede Einheit dokumentieren wir direkt per
+                  Coaching-App mit deinen bewegten Gewichten, Wiederholungen und
+                  der Tonnage. So sehen wir schwarz auf weiß, wie deine
+                  Kraftkurven steigen und wann das Gewicht planmäßig erhöht
+                  werden muss.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >menu_book</span
+                  >
+                  <strong
+                    >Was bedeuten die Fachbegriffe wie Progressive Overload,
+                    RIR, RPE oder TDEE?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Im Coaching trainieren wir nach wissenschaftlich fundierten
+                  Methoden statt nach Fitness-Mythen. Im Zentrum steht das
+                  Prinzip des <em>Progressive Overload</em> (kontinuierliche
+                  Reizsteigerung) sowie die exakte Intensitätssteuerung über
+                  <em>RIR</em> und <em>RPE</em>. Damit du jederzeit den
+                  Überblick behältst, haben wir alle wichtigen Begriffe und
+                  Abkürzungen für dich zusammengefasst:
+                </p>
+                <p style="margin-top: 12px">
+                  <a
+                    href="javascript:void(0)"
+                    onclick="openModal('modal-glossar')"
+                    class="faq-glossar-link"
+                  >
+                    <span
+                      >Alle Fachbegriffe findest du in unserem kompakten
+                      Trainings-Glossar</span
+                    >
+                    <span class="material-symbols-rounded">arrow_forward</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon"
+                    >fitness_center</span
+                  >
+                  <strong
+                    >Was ist der Unterschied zwischen Freihanteltraining und
+                    geführten Maschinen?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Freihanteln (Lang- und Kurzhanteln) fordern die tiefe Rumpf-
+                  und Stabilisationsmuskulatur sowie die Koordination. Maschinen
+                  eignen sich hervorragend für geführte Belastung und gezielte
+                  Muskelermüdung ohne Balanceaufwand. Im Coaching kombinieren
+                  wir beides optimal nach deinem Leistungsstand.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item hidden-faq">
+              <button class="accordion-header" type="button">
+                <span class="accordion-title-wrapper">
+                  <span class="material-symbols-rounded cert-icon">sync</span>
+                  <strong
+                    >Was bringt Schlingen- und Faszientraining (SMR) im
+                    Coaching?</strong
+                  >
+                </span>
+                <span class="material-symbols-rounded chevron-icon"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <p>
+                  Schlingentraining nutzt das eigene Körpergewicht gegen die
+                  Schwerkraft und kräftigt die tiefe Core-Muskulatur.
+                  Faszientraining (Self-Myofascial Release) löst Verklebungen im
+                  Bindegewebe, verbessert die Beweglichkeit und beschleunigt
+                  deine Regeneration spürbar.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-actions"
+            style="text-align: center; margin-top: 2.5rem"
+          >
+            <button
+              id="loadMoreFaqBtn"
+              class="btn-testimonial-secondary"
+              type="button"
+              onclick="loadMoreFaqs()"
+            >
+              <span>Weitere Fragen laden</span>
+              <span class="material-symbols-rounded btn-icon"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </section>
+
+        <section id="hero-banner" class="banner-section">
+          <div class="banner-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="banner-tag">Kostenfrei & Unverbindlich</span>
+            <h2>Lass uns über deine Ziele sprechen!</h2>
+            <p>
+              Vereinbare jetzt ein kurzes Erstgespräch. Wir klären deine Fragen
+              und besprechen, wie wir dich in Gotha fit machen.
+            </p>
+
+            <div class="banner-cta-buttons">
+              <a href="mailto:deine-email@domain.de" class="btn-banner">
+                <span class="material-symbols-rounded">mail</span> E-Mail
+                Schreiben
+              </a>
+              <a
+                href="https://wa.me/491234567890"
+                target="_blank"
+                rel="noopener"
+                class="btn-banner btn-whatsapp"
+              >
+                <span class="material-symbols-rounded">chat</span> WhatsApp Chat
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container container">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <a
+              href="#"
+              class="logo footer-logo-link"
+              onclick="
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return false;
+              "
+              title="Zurück zum Seitenanfang"
+              aria-label="Zurück zum Seitenanfang"
+            >
+              <img
+                src="src/assets/icons/logo-dark.svg"
+                alt="CHRISTIAN ERLEBACH | Personal
+          Trainer, Kraft- & Functional Coach in Gotha."
+                class="footer-logo-img"
+                width="54"
+                height="36"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
+          <p class="footer-desc">
+            Dein Partner für ganzheitliches Personal Training, Hypertrophie,
+            Functional Training, Schlingentraining, Faszientherapie und
+            datengestützte Diagnostik im Raum Gotha.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Kontakt</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="material-symbols-rounded">location_on</span>
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Gotha & Umgebung</a
+              >
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">call</span>
+              <a href="tel:+491234567890">[DEINE TELEFONNUMMER]</a>
+            </li>
+            <li>
+              <span class="material-symbols-rounded">mail</span>
+              <a href="mailto:kontakt@christian-erlebach.de"
+                >[DEINE E-MAIL-ADRESSE]</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Folge mir</h4>
+          <div class="footer-socials">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+            >
+              <span class="material-symbols-rounded">photo_camera</span>
+            </a>
+
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <span class="material-symbols-rounded">hub</span>
+            </a>
+
+            <a
+              href="https://hevy.com/user/3utbg8rv0xw4t5z"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Hevy Profil"
+              title="Hevy Profil"
+            >
+              <span class="material-symbols-rounded">fitness_center</span>
+            </a>
+          </div>
+
+          <div class="footer-legal-links">
+            <a
+              href="#"
+              onclick="
+                openModal('modal-contact');
+                return false;
+              "
+              >Kontakt</a
+            >
+            <span class="dot">•</span>
+            <a
+              href="#"
+              onclick="
+                openModal('modal-impressum');
+                return false;
+              "
+              >Impressum</a
+            >
+            <span class="dot">•</span>
+            <a
+              href="#"
+              onclick="
+                openModal('modal-datenschutz');
+                return false;
+              "
+              >Datenschutz</a
+            >
+            <span class="dot">•</span>
+            <a
+              href="#"
+              onclick="
+                openModal('modal-agb');
+                return false;
+              "
+              >AGB</a
+            >
+            <span class="dot">•</span>
+            <a
+              href="#"
+              onclick="
+                openModal('modal-widerruf');
+                return false;
+              "
+              >Widerruf</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © <span id="year-copyright"></span> CHRISTIAN ERLEBACH | Personal
+          Trainer, Kraft- & Functional Coach in Gotha.<br />
+          Alle Rechte vorbehalten.
+        </p>
+      </div>
+    </footer>
+
+    <div
+      id="modal-contact"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-contact')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-contact')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h3>Kostenloses Erstgespräch anfragen</h3>
+          <p class="modal-subtitle">
+            Schreib mir kurz dein Anliegen – ich melde mich innerhalb von 24
+            Stunden persönlich bei dir zurück.
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="contact-modal-info">
+            <a href="tel:+491234567890" class="contact-method-card">
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">call</span>
+              </div>
+              <div>
+                <strong>Telefon / Anruf</strong>
+                <span>[DEINE TELEFONNUMMER]</span>
+              </div>
+            </a>
+
+            <a
+              href="https://wa.me/"
+              target="_blank"
+              rel="noopener"
+              class="contact-method-card"
+            >
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">chat</span>
+              </div>
+              <div>
+                <strong>WhatsApp Chat</strong>
+                <span>Direkt Nachricht senden</span>
+              </div>
+            </a>
+
+            <a
+              href="mailto:kontakt@christian-erlebach.de"
+              class="contact-method-card contact-method-full"
+            >
+              <div class="contact-icon">
+                <span class="material-symbols-rounded">mail</span>
+              </div>
+              <div>
+                <strong>E-Mail Adresse</strong>
+                <span>[DEINE E-MAIL-ADRESSE]</span>
+              </div>
+            </a>
+          </div>
+
+          <form
+            id="contactForm"
+            class="contact-form"
+            novalidate
+            onsubmit="handleContactSubmit(event)"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-firstname">Vorname *</label>
+                <input
+                  type="text"
+                  id="contact-firstname"
+                  placeholder="Max"
+                  required
+                />
+                <span class="error-text">Bitte gib deinen Vornamen ein.</span>
+              </div>
+              <div class="form-group">
+                <label for="contact-lastname">Nachname *</label>
+                <input
+                  type="text"
+                  id="contact-lastname"
+                  placeholder="Mustermann"
+                  required
+                />
+                <span class="error-text">Bitte gib deinen Nachnamen ein.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-email">E-Mail-Adresse *</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  placeholder="max@beispiel.de"
+                  required
+                />
+                <span class="error-text"
+                  >Bitte gib eine gültige E-Mail-Adresse ein.</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="contact-phone"
+                  >Telefonnummer <small>(Optional)</small></label
+                >
+                <input
+                  type="tel"
+                  id="contact-phone"
+                  placeholder="+49 170 1234567"
+                />
+                <span class="error-text"
+                  >Bitte gib eine gültige Telefonnummer ein.</span
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-training"
+                >Wobei kann ich dich unterstützen? *</label
+              >
+              <select id="contact-training" required>
+                <option value="" disabled selected>
+                  Bitte wähle dein Trainingsziel / Wunschpaket...
+                </option>
+                <option value="erstgespraech">
+                  Kostenloses Erstgespräch & Beratung
+                </option>
+                <option value="transform">
+                  Transform Coaching (Ganzheitliche Betreuung: Kraft,
+                  Functional, Faszien & Ernährung)
+                </option>
+                <option value="intensiv">
+                  Intensiv-Athlet (2x wöchentliches Live-Coaching im Gym)
+                </option>
+                <option value="einzelstunde">
+                  Einzelstunde / Technik-, Functional- & Mobilitäts-Check
+                </option>
+                <option value="planung">
+                  Individuelle Trainings- & Ernährungsplanung
+                </option>
+                <option value="sonstiges">Allgemeine Anfrage</option>
+              </select>
+              <span class="error-text">Bitte wähle eine Option aus.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Deine Nachricht *</label>
+              <textarea
+                id="contact-message"
+                rows="4"
+                placeholder="Wie kann ich dir helfen?"
+                maxlength="1500"
+                required
+              ></textarea>
+              <div class="textarea-footer">
+                <small id="char-counter" class="char-counter"
+                  >1500 Zeichen übrig</small
+                >
+                <span class="error-text"
+                  >Bitte gib eine Nachricht ohne schädliche Zeichen ein.</span
+                >
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              class="btn-primary"
+              style="width: 100%"
+              disabled
+            >
+              <span id="submit-btn-text">Nachricht absenden</span>
+              <span class="material-symbols-rounded">send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="modal-impressum"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-impressum')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-impressum')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h2>Impressum</h2>
+          <p class="modal-subtitle">
+            Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)
+          </p>
+        </div>
+        <div class="modal-body">
+          <div
+            class="legal-section"
+            style="
+              background: rgba(124, 58, 237, 0.1);
+              border-left: 4px solid var(--brand-purple, #7c3aed);
+              padding: 12px 16px;
+              margin-bottom: 20px;
+              border-radius: 6px;
+            "
+          >
+            <strong style="color: var(--brand-purple, #a855f7)"
+              >Wichtiger Hinweis (Prototyp):</strong
+            ><br />
+            <span style="font-size: 0.9em; opacity: 0.9">
+              Diese Website befindet sich derzeit in der Entwicklungs- und
+              Testphase (Prototyp). Sie dient ausschließlich
+              Demonstrationszwecken zur Vorbereitung einer
+              freiberuflichen/gewerblichen Tätigkeit und wird aktuell nicht
+              kommerziell genutzt.
+            </span>
+          </div>
+
+          <div class="legal-section">
+            <h3>Diensteanbieter</h3>
+            <p>
+              <strong
+                >CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional
+                Coach in Gotha.</strong
+              >
+            </p>
+            <p>Inhaber: Christian Erlebach</p>
+            <p>[DEINE STRASSE & HAUSNUMMER]</p>
+            <p>99867 Gotha, Deutschland</p>
+          </div>
+
+          <div class="legal-section">
+            <h3>Kontakt</h3>
+            <p>Telefon: [DEINE TELEFONNUMMER]</p>
+            <p>
+              E-Mail: [DEINE E-MAIL-ADRESSE]
+              <a
+                href="mailto:kontakt@christian-erlebach.de"
+                class="legal-link"
+              ></a>
+            </p>
+            <p>
+              Website: https://3utbg8rv0xw4t5z.github.io/christian-erlebach/
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>Umsatzsteuer-Identifikationsnummer / Steuernummer</h3>
+            <p>
+              [Kleinunternehmer gemäß § 19 UStG – es wird keine Umsatzsteuer
+              erhoben und ausgewiesen]
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>Berufsbezeichnung & Gewerbeanmeldung</h3>
+            <p>
+              Angestrebte Berufsbezeichnung: Master Fitnesstrainer / Personal
+              Trainer (Freiberufliche / Gewerbliche Tätigkeit)
+            </p>
+            <p>
+              Zuständige Behörde / Gewerbeamt: Gewerbeamt Gotha /
+              Stadtverwaltung Gotha
+            </p>
+          </div>
+
+          <div
+            class="legal-section"
+            style="border-top: 1px solid rgba(255, 255, 255, 0.1)"
+          >
+            <h3>Bildnachweise & Externe Ressourcen</h3>
+            <p style="font-size: 0.9em; opacity: 0.85">
+              • Fotografien: Unsplash (<a
+                href="https://www.unsplash.com"
+                target="_blank"
+                rel="noopener"
+                class="legal-link"
+                >www.unsplash.com</a
+              >) unter freier Unsplash-Lizenz.<br />
+              • Schriftarten & Icons: Google Fonts (Inter, Inter Tight) & Google
+              Material Symbols.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="modal-datenschutz"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-datenschutz')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-datenschutz')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h2>Datenschutzerklärung</h2>
+          <p class="modal-subtitle">Stand: 2026 (Gemäß DSGVO & TDDDG)</p>
+        </div>
+        <div class="modal-body">
+          <div class="legal-section">
+            <h3>1. Datenschutz auf einen Blick</h3>
+            <p>
+              Die folgenden Hinweise geben einen einfachen Überblick darüber,
+              was mit deinen personenbezogenen Daten passiert, wenn du diese
+              Website besuchst. Personenbezogene Daten sind alle Daten, mit
+              denen du persönlich identifiziert werden kannst.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>2. Verantwortliche Stelle</h3>
+            <p>
+              <strong
+                >CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional
+                Coach in Gotha.</strong
+              >
+            </p>
+            <p>Inhaber: Christian Erlebach</p>
+            <p>[DEINE STRASSE & HAUSNUMMER]</p>
+            <p>99867 Gotha, Deutschland</p>
+            <br />
+            <p>E-Mail: [DEINE E-MAIL-ADRESSE]</p>
+            <p>Telefon: [DEINE TELEFONNUMMER]</p>
+          </div>
+
+          <div class="legal-section">
+            <h3>3. Hosting (GitHub Pages)</h3>
+            <p>
+              Wir hosten diese Website bei <strong>GitHub Pages</strong> (GitHub
+              Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim
+              Besuch werden Server-Log-Dateien erfasst (Art. 6 Abs. 1 lit. f
+              DSGVO).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>4. Webfonts & Icons</h3>
+            <p>
+              Diese Seite nutzt zur einheitlichen Darstellung externe
+              Web-Ressourcen von Google Fonts und Google Material Symbols (Art.
+              6 Abs. 1 lit. f DSGVO).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>5. Externe Verlinkungen</h3>
+            <p>
+              • <strong>Hevy:</strong> Verlinkung zur Trainingsplattform Hevy
+              (Boombox Games LLC). Eine Datenübertragung findet erst bei aktivem
+              Klick auf den Link statt.<br />
+              • <strong>WhatsApp:</strong> Weiterleitung zu Meta Platforms
+              Ireland Ltd. bei Klick auf den Kontakt-Button.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>6. Kontaktformular</h3>
+            <p>
+              Die übermittelten Formulardaten werden ausschließlich zur
+              Bearbeitung deiner Anfrage und für eventuelle Anschlussfragen
+              verarbeitet (Art. 6 Abs. 1 lit. b und lit. f DSGVO).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>7. Deine Rechte bezüglich deiner Daten</h3>
+            <p>
+              Dir stehen nach DSGVO folgende Rechte zu: Recht auf Auskunft (Art.
+              15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der
+              Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20),
+              Widerspruchsrecht (Art. 21) sowie ein Beschwerderecht bei der
+              zuständigen Aufsichtsbehörde.
+            </p>
+            <ul class="legal-list" style="margin-top: 12px">
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span><strong>Recht auf Auskunft</strong> (Art. 15 DSGVO)</span>
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span
+                  ><strong>Recht auf Berichtigung</strong> (Art. 16 DSGVO)</span
+                >
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span><strong>Recht auf Löschung</strong> (Art. 17 DSGVO)</span>
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span
+                  ><strong>Recht auf Einschränkung der Verarbeitung</strong>
+                  (Art. 18 DSGVO)</span
+                >
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span
+                  ><strong>Recht auf Datenübertragbarkeit</strong> (Art. 20
+                  DSGVO)</span
+                >
+              </li>
+              <li>
+                <span class="material-symbols-rounded">check_circle</span>
+                <span><strong>Widerspruchsrecht</strong> (Art. 21 DSGVO)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="modal-agb"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-agb')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-agb')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h2>Allgemeine Geschäftsbedingungen</h2>
+          <p class="modal-subtitle">
+            Stand: 2026 (Gültig für Coaching &amp; Personal Training)
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="legal-section">
+            <h3>1. Geltungsbereich &amp; Vertragsgegenstand</h3>
+            <p>
+              Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge,
+              Dienstleistungen und Betreuungsangebote im Bereich Personal
+              Training, Fitness- und Ernährungscoaching zwischen
+              <strong
+                >CHRISTIAN ERLEBACH | Personal Trainer, Kraft- & Functional
+                Coach in Gotha.</strong
+              >
+              (nachfolgend „Coach“) und dem Kunden.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>2. Vertragsschluss</h3>
+            <p>
+              Die Darstellung der Angebote auf der Website stellt kein
+              verbindliches Angebot dar, sondern eine unverbindliche
+              Aufforderung zur Kontaktaufnahme. Der Vertrag kommt nach einem
+              kostenlosen Erstgespräch durch die Bestätigung der
+              Coaching-Vereinbarung zustande.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>3. Preise &amp; Kleinunternehmerregelung</h3>
+            <p>
+              Es gelten die zum Zeitpunkt des Vertragsschlusses vereinbarten
+              Preise. Gemäß
+              <strong>§ 19 UStG (Kleinunternehmerregelung)</strong> wird keine
+              Umsatzsteuer erhoben und folglich nicht gesondert ausgewiesen.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>4. Terminvereinbarungen &amp; 24h-Stornierungsregelung</h3>
+            <p>
+              Vereinbarte 1-zu-1 Trainingstermine sind verbindlich. Eine
+              kostenfreie Absage oder Verschiebung ist bis spätestens
+              <strong>24 Stunden vor dem Termin</strong>
+              möglich. Bei späteren Absagen oder Nichterscheinen wird das
+              Honorar in voller Höhe fällig bzw. die Stunde vom Kontingent
+              abgezogen.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>5. Gesundheitliche Voraussetzungen &amp; Eigenverantwortung</h3>
+            <p>
+              Das Training erfolgt auf eigene Verantwortung. Der Kunde
+              versichert, sportgesund zu sein. Bei Vorerkrankungen, Verletzungen
+              oder gesundheitlichen Einschränkungen ist vorab ärztlicher Rat
+              einzuholen und der Coach vor Trainingsbeginn unaufgefordert zu
+              informieren.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>6. Haftungsausschluss</h3>
+            <p>
+              Der Coach haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit
+              sowie bei Verletzung von Leben, Körper oder Gesundheit. Bei
+              leichter Fahrlässigkeit haftet der Coach nur bei der Verletzung
+              wesentlicher Vertragspflichten. Für mitgebrachte Wertgegenstände
+              wird keine Haftung übernommen.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>7. Streitbeilegung</h3>
+            <p>
+              Die Europäische Kommission stellt eine Plattform zur
+              Online-Streitbeilegung (OS) bereit. Wir sind nicht bereit und
+              nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+              Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="modal-widerruf"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-widerruf')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-widerruf')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h2>Widerrufsbelehrung</h2>
+          <p class="modal-subtitle">
+            Stand: 2026 (Gesetzliches Widerrufsrecht für Verbraucher)
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="legal-section">
+            <h3>1. Widerrufsrecht</h3>
+            <p>
+              Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen
+              diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn
+              Tage ab dem Tag des Vertragsschlusses.
+            </p>
+            <p>
+              Um dein Widerrufsrecht auszuüben, musst du uns (Christian
+              Erlebach, E-Mail: info@coach-chris.de, Anschrift gemäß Impressum)
+              mittels einer eindeutigen Erklärung über deinen Entschluss
+              informieren.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>2. Folgen des Widerrufs</h3>
+            <p>
+              Wenn du diesen Vertrag widerrufst, haben wir dir alle Zahlungen
+              unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag
+              zurückzuzahlen, an dem die Mitteilung über deinen Widerruf bei uns
+              eingegangen ist.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>3. Vorzeitiges Erlöschen des Widerrufsrechts</h3>
+            <p>
+              Das Widerrufsrecht erlischt bei Dienstleistungen vorzeitig, wenn
+              die Dienstleistung vollständig erbracht wurde und mit der
+              Ausführung erst begonnen wurde, nachdem du deine ausdrückliche
+              Zustimmung erteilt und bestätigt hast, dass du dein Widerrufsrecht
+              bei vollständiger Vertragserfüllung verlierst.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>4. Muster-Widerrufsformular</h3>
+            <p>
+              <em
+                >(Wenn du den Vertrag widerrufen willst, fülle bitte dieses
+                Formular aus und sende es zurück.)</em
+              >
+            </p>
+            <br />
+            <p>
+              An: Christian Erlebach, Anschrift gemäß Impressum, E-Mail:
+              info@coach-chris.de<br /><br />
+              Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*)
+              abgeschlossenen Vertrag über die Erbringung der folgenden
+              Dienstleistung (*):<br /><br />
+              Bestellt am (*)/erhalten am (*):<br />
+              Name des/der Verbraucher(s):<br />
+              Anschrift des/der Verbraucher(s):<br />
+              Datum &amp; Unterschrift:<br /><br />
+              <small><em>(*) Unzutreffendes streichen.</em></small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="modal-glossar"
+      class="modal-overlay"
+      onclick="closeModalOnOverlay(event, 'modal-glossar')"
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          onclick="closeModal('modal-glossar')"
+          aria-label="Schließen"
+        >
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="modal-header">
+          <h2>Trainings- &amp; Coaching-Glossar</h2>
+          <p class="modal-subtitle">
+            Fachbegriffe aus Sportwissenschaft, Trainingslehre &amp; Ernährung
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="legal-section glossar-text">
+            <h3>1. Trainingsplanung, Systeme &amp; Progressionsmodelle</h3>
+            <p>
+              <strong>Trainingsplan (Workout Plan / Training Routine):</strong>
+              Systematisch strukturierte Zusammenstellung von Übungen, Sätzen,
+              Wiederholungen, Pausenzeiten und Intensitäten, abgestimmt auf ein
+              spezifisches Periodisierungsziel.
+            </p>
+            <p>
+              <strong>Ganzkörpertraining (Full Body Workout):</strong>
+              Trainingssystem, bei dem in einer einzigen Trainingseinheit alle
+              primären Hauptmuskelgruppen des Körpers über Verbund- und
+              Isolationsübungen stimuliert werden.
+            </p>
+            <p>
+              <strong>Split-Training:</strong> Aufteilung der Muskelgruppen auf
+              unterschiedliche Trainingstage (z. B. 2er-Split, 3er-Split wie
+              Push/Pull/Legs oder Upper/Lower).
+            </p>
+            <p>
+              <strong>Progressive Overload (Progressive Überlastung):</strong>
+              Die schrittweise, geplante Steigerung des Trainingsreizes über die
+              Zeit (durch Last, Volumen, Dichte oder ROM), um kontinuierliche
+              Muskel- und Kraftadaptionen zu erzwingen.
+            </p>
+            <p>
+              <strong>Trainingsvolumen (Volume):</strong> Die quantitative
+              Gesamtmenge der verrichteten Arbeit, primär quantifiziert über
+              effektive Arbeitssätze pro Muskelgruppe/Woche oder als
+              Gesamttonnage.
+            </p>
+            <p>
+              <strong>Tonnage (Volumenlast):</strong> Mathematische Kennzahl für
+              die verrichtete Arbeit: Sätze × Wiederholungen × Gewicht.
+            </p>
+            <p>
+              <strong>Wiederholungen (Reps / Repetitions):</strong> Die Anzahl
+              der vollständigen Ausführungen eines Bewegungsablaufs innerhalb
+              eines Satzes.
+            </p>
+            <p>
+              <strong>Sätze (Sets):</strong> Ein Block aufeinanderfolgender
+              Wiederholungen, getrennt durch definierte Pausenintervalle (Rest
+              Periods).
+            </p>
+            <p>
+              <strong>Dauer (Belastungsdauer / Training Duration):</strong>
+              Zeitspanne einer gesamten Trainingseinheit bzw. Dauer einzelner
+              Intervalle.
+            </p>
+            <p>
+              <strong>RPE (Rate of Perceived Exertion):</strong> Skala von 1 bis
+              10 zur subjektiven Steuerung und Messung der Belastungsintensität.
+            </p>
+            <p>
+              <strong>RIR (Reps in Reserve):</strong> Die Anzahl an
+              Wiederholungen, die vor Erreichen des muskulären Versagens noch
+              technisch sauber möglich gewesen wären (z. B. RIR 2 = noch 2
+              saubere Wdh. im Tank).
+            </p>
+            <p>
+              <strong>1RM (One-Repetition Maximum):</strong> Die Maximalkraft;
+              das maximale Gewicht, das für genau eine saubere Wiederholung
+              bewältigt werden kann.
+            </p>
+            <p>
+              <strong>Periodisierung (Periodization):</strong> Systematische
+              Zyklisierung des Trainings in Makro-, Meso- und Mikrozyklen zur
+              Vermeidung von Stagnation und zur gezielten Leistungssteuerung
+              (Linear vs. DUP – Daily Undulating Periodization).
+            </p>
+            <p>
+              <strong>Deload:</strong> Geplante Regenerationsphase (meist 1
+              Woche) mit drastisch reduziertem Volumen und/oder reduzierter
+              Intensität zur systemischen Erholung des zentralen Nervensystems
+              (ZNS) und des passiven Bewegungsapparats.
+            </p>
+            <p>
+              <strong>Volumenschwellen (MEV / MAV / MRV):</strong><br />
+              • <em>MEV (Minimum Effective Volume):</em> Mindestvolumen für
+              messbaren Zuwachs.<br />
+              • <em>MAV (Maximum Adaptive Volume):</em> Optimales Volumenfenster
+              für maximale Fortschritte.<br />
+              • <em>MRV (Maximum Recoverable Volume):</em> Maximal tolerierbares
+              Volumen, das noch regeneriert werden kann.
+            </p>
+            <p>
+              <strong>Junk Volume:</strong> Unproduktives Trainingsvolumen, das
+              über das MRV/MAV hinausgeht und lediglich Ermüdung statt eines
+              weiteren Wachstumsreizes erzeugt.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>2. Anatomie: Muskelgruppen &amp; Zielmuskeln</h3>
+            <p>
+              <strong>Oberkörper – Druckmuskulatur (Push):</strong><br />
+              • <em>Großer Brustmuskel (Pectoralis Major):</em> Drückbewegungen
+              (Bankdrücken, Dips).<br />
+              • <em>Vorderer Schultermuskel (Anterior Deltoid):</em> Heben des
+              Arms nach vorne.<br />
+              • <em>Seitlicher Schultermuskel (Lateral Deltoid):</em> Abduktion
+              zur Seite (Schulterbreite).<br />
+              • <em>Trizeps (Triceps Brachii):</em> Streckung des
+              Ellenbogengelenks.
+            </p>
+            <p>
+              <strong>Oberkörper – Zugmuskulatur (Pull):</strong><br />
+              • <em>Breiter Rückenmuskel (Latissimus Dorsi):</em> Vertikale und
+              horizontale Zugbewegungen (Klimmzüge, Rudern).<br />
+              • <em>Trapezmuskel / Nacken (Trapezius):</em> Schulterblattführung
+              (Shrugs, Rudern).<br />
+              •
+              <em>Hinterer Schultermuskel (Posterior Deltoid):</em>
+              Außenrotation &amp; Face Pulls.<br />
+              • <em>Bizeps (Biceps Brachii):</em> Beugung des Ellenbogens &amp;
+              Unterarmsupination.
+            </p>
+            <p>
+              <strong>Unterkörper (Legs):</strong><br />
+              •
+              <em>Vierköpfiger Oberschenkelmuskel (Quadriceps Femoris):</em>
+              Kniestreckung (Squats, Beinpresse).<br />
+              • <em>Beinbeuger (Hamstrings):</em> Kniebeugung &amp;
+              Hüftstreckung (Deadlifts, Leg Curls).<br />
+              • <em>Großer Gesäßmuskel (Gluteus Maximus):</em> Stärkster
+              Hüftstrecker (Hip Thrusts).<br />
+              •
+              <em>Wadenmuskeln (Gastrocnemius &amp; Soleus):</em> Plantarflexion
+              des Sprunggelenks.
+            </p>
+            <p>
+              <strong>Rumpf &amp; Stabilisation (Core):</strong><br />
+              • <em>Gerade Bauchmuskeln (Rectus Abdominis):</em> Rumpfbeugung
+              &amp; Beckenstabilität.<br />
+              • <em>Schräge Bauchmuskeln (Obliques):</em> Rumpfrotation &amp;
+              laterale Stabilisation.<br />
+              • <em>Rückenstrecker (Erector Spinae):</em> Aufrichtung &amp;
+              statische Wirbelsäulensicherung.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>3. Muskelhypertrophie &amp; Biomechanik</h3>
+            <p>
+              <strong>Mechanische Spannung (Mechanical Tension):</strong> Der
+              primäre biochemische Hauptantrieb für Muskelhypertrophie, erzeugt
+              durch Kontraktion gegen hohe Lasten.
+            </p>
+            <p>
+              <strong>Muskelkontraktionsphasen:</strong><br />
+              • <em>Konzentrisch:</em> Aktive Muskelverkürzung zur
+              Lastüberwindung (positive Phase).<br />
+              • <em>Exzentrisch:</em> Kontrollierte Muskelverlängerung unter
+              Last (starker Hypertrophietreiber).<br />
+              • <em>Isometrisch:</em> Statische Haltearbeit bei unveränderter
+              Muskellänge.
+            </p>
+            <p>
+              <strong>ROM (Range of Motion):</strong> Der vollständige,
+              anatomisch sichere Bewegungsumfang über das gesamte beteiligte
+              Gelenk.
+            </p>
+            <p>
+              <strong>Stretch-Mediated Hypertrophy:</strong> Verstärkter
+              Muskelzuwachs durch mechanische Last in der maximal gedehnten
+              Muskelposition.
+            </p>
+            <p>
+              <strong>TUT (Time Under Tension):</strong> Die gesamte Zeitspanne,
+              in der eine Muskelgruppe während eines Satzes unter
+              kontinuierlicher Spannung steht.
+            </p>
+            <p>
+              <strong
+                >Neuromuskuläre Ansteuerung (Mind-Muscle-Connection):</strong
+              >
+              Die bewusste neuronale Fokussierung und Rekrutierung maximaler
+              motorischer Einheiten im Zielmuskel.
+            </p>
+            <p>
+              <strong>Sarkoplasmatische vs. Myofibrilläre Hypertrophie:</strong>
+              Zunahme des Zellvolumens/Glykogens vs. Zuwachs an kontraktilen
+              Proteinstrukturen (Aktin &amp; Myosin).
+            </p>
+            <p>
+              <strong>DOMS (Delayed Onset Muscle Soreness):</strong> Verzögert
+              einsetzender Muskelkater infolge mikroskopischer Risse
+              (Mikrotraumata) in den Z-Scheiben der Muskelfasern.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>4. Ernährung, Energiehaushalt &amp; Gewichtsmanagement</h3>
+            <p>
+              <strong>Ernährungsplan (Meal Plan):</strong> Berechnete
+              Zufuhrstruktur von Makronährstoffen, Mikronährstoffen,
+              Kaloriengesamtzahl und Timing zur gezielten
+              Körperkompositionssteuerung.
+            </p>
+            <p>
+              <strong>Kaloriendefizit (Caloric Deficit):</strong> Zustand, in
+              dem der Gesamtenergieverbrauch die Zufuhr übersteigt;
+              Grundvoraussetzung für Körperfettabbau (CICO-Prinzip).
+            </p>
+            <p>
+              <strong>TDEE (Total Daily Energy Expenditure):</strong> Der
+              tägliche Gesamtenergieverbrauch, bestehend aus BMR (Grundumsatz),
+              NEAT (Alltagsbewegung), EAT (Sport/Training) und TEF (Thermic
+              Effect of Food).
+            </p>
+            <p>
+              <strong>Body Recomposition:</strong> Der synchrone Aufbau von
+              fettfreier Muskelmasse bei gleichzeitigem Abbau von Körperfett.
+            </p>
+            <p>
+              <strong>Refeed vs. Diet Break:</strong> Kurzzeitige
+              Kohlenhydraterhöhung (1–2 Tage) zur Glykogen- &amp;
+              Leptinstimulation vs. 1- bis 2-wöchige Pause auf
+              Erhaltungskalorien zur hormonellen Erholung.
+            </p>
+            <p>
+              <strong>Metabolic Adaptation (Adaptive Thermogenese):</strong>
+              Physiologische Absenkung des Energieverbrauchs durch hormonelle
+              Anpassungen bei längerem Defizit.
+            </p>
+            <p>
+              <strong>MPS (Muskelproteinsynthese) &amp; Leucin-Trigger:</strong>
+              Der anabole Prozess zum Einbau von Aminosäuren in Muskelprotein,
+              maximal ausgelöst durch ca. 2,5–3 g L-Leucin pro Mahlzeit.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>5. Ausdauer, Kardiovaskuläres System &amp; Stoffwechsel</h3>
+            <p>
+              <strong>VO2max (Maximale Sauerstoffaufnahme):</strong> Der
+              Goldstandard für kardiorespiratorische Fitness (ml/min/kg).
+            </p>
+            <p>
+              <strong>Laktatschwelle (Anaerobe Schwelle / LT2):</strong> Der
+              Belastungspunkt, an dem die Laktatakkumulation im Blut die
+              körpereigene Abbaurate übersteigt.
+            </p>
+            <p>
+              <strong>Zone-2-Training:</strong> Aerobes
+              Grundlagenausdauertraining niedriger Intensität zur Optimierung
+              der mitochondrialen Dichte und Fettverbrennung (Lipolyse).
+            </p>
+            <p>
+              <strong>HIIT (High-Intensity Interval Training):</strong>
+              Hochintensives Intervalltraining zur Maximierung der anaeroben
+              Kapazität und des EPOC-Effekts (Nachbrenneffekt).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>6. Progress-Tracking, Anthropometrie &amp; Diagnostik</h3>
+            <p>
+              <strong>Fortschrittsbilder (Progress Photos):</strong>
+              Standardisierte Fotodokumentation unter konstanten Bedingungen
+              (gleiches Licht, nüchtern, identische Posen) zur objektiven
+              Verlaufskontrolle.
+            </p>
+            <p>
+              <strong>Anthropometrische Umfänge:</strong> Regelmäßige Erfassung
+              definierter Körperumfänge (Taille, Hüfte, Brust, Oberschenkel,
+              Arme) mittels Maßband.
+            </p>
+            <p>
+              <strong>Gleitender Wochendurchschnitt (Moving Average):</strong>
+              7-Tage-Mittelwert des Körpergewichts zur Eliminierung natürlicher
+              Wasser- und Mageninhaltsschwankungen.
+            </p>
+            <p>
+              <strong>FFMI (Fat-Free Mass Index):</strong>
+              Fettfreie-Masse-Index; wissenschaftlich präzise Kennzahl für die
+              Muskelmasse in Relation zur Körpergröße (aussagekräftiger als der
+              BMI).
+            </p>
+            <p>
+              <strong>HRV (Herzratenvariabilität):</strong> Messung der
+              zeitlichen Abstände zwischen Herzschlägen; direkter Indikator für
+              die Erholung des vegetativen Nervensystems.
+            </p>
+            <p>
+              <strong>DEXA, BIA &amp; Kalipermetrie:</strong> Diagnoseverfahren
+              zur Ermittlung von Körperfettanteil (KFA), Knochendichte und
+              Magermasse (LBM).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>7. Übungsklassifikation &amp; Biomechanik</h3>
+            <p>
+              <strong
+                >Grundübungen / Verbundübungen (Compound Movements):</strong
+              >
+              Mehrgelenkige Übungen, die mehrere Muskelgruppen synchron
+              beanspruchen (Squat, Deadlift, Bench Press, Overhead Press, Row).
+            </p>
+            <p>
+              <strong>Isolationsübungen (Single-Joint Exercises):</strong>
+              Eingelenkige Übungen zur isolierten Reizung eines einzelnen
+              Zielmuskels (Biceps Curls, Lateral Raises, Leg Extensions).
+            </p>
+            <p>
+              <strong>Widerstandsprofil &amp; Kraftkurve:</strong> Der Verlauf
+              des mechanischen Widerstands über die Range of Motion im
+              Verhältnis zur anatomischen Hebelwirkung.
+            </p>
+            <p>
+              <strong>Offene vs. Geschlossene kinetische Kette:</strong>
+              Bewegungen mit freiem Ende (z. B. Beinstrecker, Latzug) vs.
+              fixiertem Ende am Boden/Stange (z. B. Kniebeuge, Klimmzug).
+            </p>
+            <p>
+              <strong
+                >Rekrutierung motorischer Einheiten (Henneman's Size
+                Principle):</strong
+              >
+              Stufenweise Aktivierung von kleinen/ausdauernden (Typ-I) bis zu
+              großen/kraftvollen Muskelfasern (Typ-II).
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>8. Intensitätstechniken &amp; Satzsysteme</h3>
+            <p>
+              <strong
+                >Aufwärm- &amp; Zubringersätze (Warm-up / Feeder Sets):</strong
+              >
+              Nicht ermüdende Vorbereitungssätze zur Erhöhung der
+              Gelenkschmierung (Synovia) und ZNS-Aktivierung.
+            </p>
+            <p>
+              <strong>Supersätze:</strong> Zwei Übungen ohne Pause
+              hintereinander – entweder als Antagonisten-Supersatz (z. B.
+              Bizeps/Trizeps) oder Agonisten-Supersatz (Vor-/Nachermüdung).
+            </p>
+            <p>
+              <strong>Dropsätze (Reduktionssätze):</strong> Sofortige
+              Gewichtsreduktion um 20–30 % nach Erreichen des Muskelversagens
+              für zusätzliche Wiederholungen.
+            </p>
+            <p>
+              <strong>Rest-Pause &amp; Myo-Reps:</strong> Kurze Mini-Pausen
+              (5–15 Sek.) nach einem Aktivierungssatz zur Akkumulation
+              hochgradig effektiver Wiederholungen.
+            </p>
+            <p>
+              <strong>Cluster-Sätze:</strong> Unterteilung eines Arbeitssatzes
+              in kleine Blöcke (z. B. 3×3 Wdh. mit je 15 Sek. Pause), um höhere
+              Lasten technisch sauber zu bewegen.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>9. Aufbauphasen, Makronährstoffe &amp; Supplemente</h3>
+            <p>
+              <strong>Protein (Eiweiß):</strong> Essentieller Baustein für
+              Gewebereparatur, Muskelaufbau und Strukturerhalt (4 kcal/g).
+            </p>
+            <p>
+              <strong>Kreatin-Monohydrat:</strong> Wissenschaftlich fundiertes
+              Supplement zur Erhöhung der Phosphokreatinspeicher für schnellere
+              ATP-Resynthese bei Maximalkraft.
+            </p>
+            <p>
+              <strong>Lean Bulk vs. Dirty Bulk:</strong> Moderater
+              Kalorienüberschuss (+200–300 kcal) für fettarmen Muskelaufbau vs.
+              unkontrollierter Überschuss mit hoher Fettzunahme.
+            </p>
+            <p>
+              <strong>Makros &amp; Mikros:</strong> Makronährstoffe (Proteine,
+              Kohlenhydrate, Fette) als Energielieferanten; Mikronährstoffe
+              (Vitamine, Mineralien) für Enzym- &amp; Hormonfunktionen.
+            </p>
+            <p>
+              <strong>Insulinsensitivität &amp; Hydratation:</strong> Effiziente
+              Nährstoffeinlagerung in Muskel- statt Fettzellen sowie
+              Elektrolythaushalt (Natrium, Kalium, Magnesium) für neuronale
+              Reizleitung.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>10. Regeneration, Ermüdung &amp; Zentrales Nervensystem</h3>
+            <p>
+              <strong>ZNS-Ermüdung (CNS Fatigue):</strong> Systemische Ermüdung
+              im Gehirn und Rückenmark, die die neuronale Reizweiterleitung und
+              maximale Rekrutierung hemmt.
+            </p>
+            <p>
+              <strong>Overreaching (FOR vs. NFOR):</strong> Geplante,
+              kurzzeitige Überlastung mit anschließender Superkompensation vs.
+              chronische Überlastung als Vorstufe zum Übertraining.
+            </p>
+            <p>
+              <strong>Superkompensation:</strong> Biologische Anpassung, bei der
+              der Organismus sein Leistungsniveau in der Erholungsphase über das
+              Ausgangsniveau anhebt.
+            </p>
+            <p>
+              <strong>Schlafarchitektur:</strong> Tiefschlaf- und REM-Phasen zur
+              Ausschüttung von Wachstumshormonen (HGH) und Zellregeneration.
+            </p>
+            <p>
+              <strong>Aktive Regeneration:</strong> Leichte Bewegung (Spazieren,
+              lockeres Radfahren) zur Förderung der Durchblutung und des
+              Laktatabbaus.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>11. Dehnen, Mobilität &amp; Faszientraining</h3>
+            <p>
+              <strong>Mobilität vs. Flexibilität:</strong> Passive Dehnfähigkeit
+              des Gewebes (Flexibilität) vs. aktive, kontrollierte
+              Kraftentfaltung über die volle ROM (Mobilität).
+            </p>
+            <p>
+              <strong>Dynamisches vs. Statisches Dehnen:</strong> Federnde
+              Bewegungen als Prä-Workout-Aktivierung vs. passives Halten (20–60
+              Sek.) Post-Workout zur Tonussenkung.
+            </p>
+            <p>
+              <strong>PNF-Stretching:</strong> Fortgeschrittene
+              Anspannen-Entspannen-Methode zur Nutzung der autogenen Hemmung
+              über die Golgi-Sehnenorgane.
+            </p>
+            <p>
+              <strong>Faszientraining &amp; SMR:</strong> Selbstmassage mit
+              Schaumstoffrollen/Bällen zur Lösung von Gewebeverklebungen
+              (Adhäsionen) und Verbesserung der Gewebeelastizität.
+            </p>
+            <p>
+              <strong>Joint Centration:</strong> Optimale biomechanische
+              Gelenkausrichtung zur Reduktion von Gelenkverschleiß und
+              Maximierung der Kraftübertragung.
+            </p>
+          </div>
+
+          <div class="legal-section">
+            <h3>12. Coaching-Praxis, Kadenz &amp; Ausführungsfeinheiten</h3>
+            <p>
+              <strong>Kadenz / Tempo-Notation:</strong> Standardisiertes
+              Bewegungstempo in 4 Phasen (z. B. 3-1-1-0 = 3 Sek. exzentrisch, 1
+              Sek. Dehnpunkt, 1 Sek. konzentrisch, 0 Sek. oben).
+            </p>
+            <p>
+              <strong>Muskelversagen (Task Failure):</strong> Punkt im Satz, an
+              dem trotz maximaler Willensanstrengung keine weitere saubere
+              Wiederholung mehr möglich ist.
+            </p>
+            <p>
+              <strong>Adhärenz &amp; Compliance:</strong> Die Beständigkeit und
+              Zuverlässigkeit bei der Umsetzung von Trainings- und
+              Ernährungsplänen (wichtigster Erfolgsfaktor).
+            </p>
+            <p>
+              <strong>IIFYM / Flexible Dieting:</strong> Zielgerichtete
+              Makronährstoffabdeckung ohne starre Nahrungsmittelverbote.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="src/js/script.js?v=5" defer></script>
+  </body>
+</html>

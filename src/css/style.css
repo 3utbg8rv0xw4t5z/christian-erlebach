@@ -6887,3 +6887,811 @@ video {
 [data-theme="dark"] .footer-logo-img {
   filter: none;
 }
+
+/* ==========================================================================
+   Prototyp-Hinweisbox (Impressum Modal)
+   ========================================================================== */
+.prototype-info {
+  background: rgba(124, 58, 237, 0.1);
+  border-left: 4px solid var(--brand-purple, #7c3aed);
+  padding: 14px 18px !important;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-sizing: border-box !important;
+  display: block;
+}
+
+.prototype-info strong {
+  color: var(--brand-purple, #a855f7);
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.prototype-info span {
+  font-size: 0.9em;
+  line-height: 1.5;
+  opacity: 0.9;
+  display: inline-block;
+}
+
+/* Fix für Mobilgeräte unter 480px bis 320px */
+@media (max-width: 480px) {
+  .prototype-info {
+    padding: 12px 14px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   ISOLIERTE FAQ-STYLES & BUGFIXES (Gilt AUSSCHLIESSLICH für #faq)
+   ========================================================================== */
+
+/* 1. OVERFLOW-FIX: Geschlossen MUSS zwingend hidden sein! */
+#faq .accordion-content {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  text-align: left !important;
+}
+
+/* Erst beim Aufklappen (.active) Platz freigeben */
+#faq .accordion-item.active .accordion-content,
+#faq .accordion-content.active {
+  max-height: 2000px !important;
+  overflow: visible !important;
+  padding-top: 12px !important;
+  padding-bottom: 16px !important;
+}
+
+/* 2. Linksbündige Ausrichtung ab 376px aufwärts (Desktop & Tablet) */
+#faq .accordion-header {
+  text-align: left !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+#faq .accordion-title-wrapper {
+  text-align: left !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+#faq .accordion-title-wrapper strong,
+#faq .accordion-header span {
+  text-align: left !important;
+}
+
+#faq .accordion-content p,
+#faq .accordion-content ul,
+#faq .accordion-content ol,
+#faq .accordion-content li {
+  text-align: left !important;
+}
+
+/* 3. Typografie & Spacing für Absätze und Listen */
+#faq .accordion-content p {
+  margin-top: 0 !important;
+  margin-bottom: 0.85rem !important;
+  line-height: 1.65 !important;
+}
+
+#faq .accordion-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+#faq .accordion-content ul {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0rem !important;
+  padding-left: 1.4rem !important;
+  list-style-type: disc !important;
+}
+
+#faq .accordion-content li {
+  margin-bottom: 0.65rem !important;
+  padding-left: 0.35rem !important;
+  line-height: 1.6 !important;
+}
+
+#faq .accordion-content li:last-child {
+  margin-bottom: 0 !important;
+}
+
+#faq .accordion-content li strong {
+  display: inline;
+  color: inherit;
+}
+
+/* 4. Mobile Absicherung (unter 768px bis 376px) */
+@media (max-width: 768px) and (min-width: 376px) {
+  #faq .accordion-header,
+  #faq .accordion-title-wrapper,
+  #faq .accordion-title-wrapper strong,
+  #faq .accordion-content,
+  #faq .accordion-content p {
+    text-align: left !important;
+    justify-content: flex-start !important;
+  }
+}
+
+/* 5. Mobile Zentrierung & Pfeil-Fix NUR für < 375px bis 320px */
+@media (max-width: 375px) {
+  #faq .accordion-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 16px 12px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  #faq .accordion-title-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    gap: 8px !important;
+  }
+
+  /* Themen-Icon oben mittig */
+  #faq .accordion-title-wrapper .cert-icon {
+    display: block !important;
+    margin: 0 auto 4px auto !important;
+    align-self: center !important;
+    text-align: center !important;
+  }
+
+  /* Fragentext mittig */
+  #faq .accordion-title-wrapper strong {
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Chevron-Pfeil zentriert unter der Frage (kein Bogen beim Drehen!) */
+  #faq .accordion-header .chevron-icon {
+    display: inline-block !important;
+    position: static !important;
+    float: none !important;
+    margin: 8px auto 0 auto !important;
+    align-self: center !important;
+    transform-origin: 50% 50% !important; /* Exakte Mitte */
+    transition: transform 0.3s ease !important;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+  }
+
+  /* Drehung exakt auf der Stelle */
+  #faq .accordion-item.active .chevron-icon,
+  #faq .accordion-header.active .chevron-icon {
+    transform: rotate(180deg) !important;
+    transform-origin: 50% 50% !important;
+    margin: 8px auto 0 auto !important;
+  }
+
+  #faq .accordion-content {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAFIE & LISTEN-FIX: MODALS (AGB, Widerruf, Datenschutz) & FAQ
+   - Vereinheitlicht alle Schriftgrößen (keine übergroßen Stichpunkte/Listen mehr)
+   - Bündige Einrückung von Aufzählungen & Ziffern (1., 2., ...)
+   ========================================================================== */
+
+/* 1. Einheitliche Schriftgröße & Zeilenabstand für alle Modals */
+.modal-body,
+.modal-content,
+#modal-agb,
+#modal-widerruf,
+#modal-datenschutz {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: inherit;
+}
+
+.modal-body p,
+.modal-content p,
+.modal-body li,
+.modal-content li {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+}
+
+/* 2. Geordnete Listen (1., 2., 3.) sauber ausrichten */
+.modal-body ol,
+.modal-content ol {
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-left: 1.5rem !important;
+  list-style-position: outside !important;
+}
+
+/* 3. Ungeordnete Listen (Stichpunkte) sauber ausrichten */
+.modal-body ul,
+.modal-content ul {
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-left: 1.5rem !important;
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+}
+
+/* 4. Listen-Elemente: Abstand & konsistente Schrift */
+.modal-body li,
+.modal-content li {
+  margin-bottom: 0.6rem !important;
+  padding-left: 0.25rem !important;
+}
+
+.modal-body li strong,
+.modal-content li strong {
+  font-size: inherit !important;
+}
+
+/* 5. FAQ-Listen ebenfalls exakt auf dieselbe Schriftgröße & Einzug fixieren */
+#faq .accordion-content ul,
+#faq .accordion-content ol,
+#faq .accordion-content li {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+}
+
+/* ==========================================================================
+   THEME-KOMPATIBLE TYPOGRAFIE: MODALS (AGB, Widerruf, Datenschutz) & FAQ
+   - Automatische Farbanpassung für Dark Mode & Light Mode
+   - Einheitliche Schriftgröße (0.95rem) und Zeilenhöhe
+   - Saubere Bündigkeit von Listen und Ziffern
+   ========================================================================== */
+
+/* 1. FAQ: Textgröße, Zeilenhöhe & Farbe erben */
+#faq .accordion-content,
+#faq .accordion-content p,
+#faq .accordion-content ul,
+#faq .accordion-content ol,
+#faq .accordion-content li {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: inherit !important;
+}
+
+/* Fettgedrucktes im FAQ harmonisch absetzen */
+#faq .accordion-content strong {
+  font-weight: 700 !important;
+  color: inherit !important;
+}
+
+/* 2. Modals (AGB, Widerruf, Datenschutz): Fließtext & Absätze */
+.modal-body,
+.modal-content,
+#modal-agb,
+#modal-widerruf,
+#modal-datenschutz,
+.modal-body p,
+.modal-content p,
+.modal-body li,
+.modal-content li {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: inherit !important;
+}
+
+/* 3. Überschriften & fette Hervorhebungen in den Modals */
+.modal-body h3,
+.modal-body h4,
+.modal-content h3,
+.modal-content h4 {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+  color: inherit !important;
+}
+
+.modal-body strong,
+.modal-content strong {
+  font-weight: 700 !important;
+  color: inherit !important;
+}
+
+/* 4. Listen-Einrückungen bündig und übersichtlich */
+.modal-body ol,
+.modal-content ol {
+  margin-top: 0.6rem !important;
+  margin-bottom: 1.1rem !important;
+  padding-left: 1.35rem !important;
+  list-style-position: outside !important;
+}
+
+.modal-body ul,
+.modal-content ul {
+  margin-top: 0.6rem !important;
+  margin-bottom: 1.1rem !important;
+  padding-left: 1.35rem !important;
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+}
+
+.modal-body li,
+.modal-content li {
+  margin-bottom: 0.5rem !important;
+  padding-left: 0.2rem !important;
+}
+
+/* ==========================================================================
+   LEGAL LIST: EXAKTER ORIGINAL-STAND (Bündigkeit & Innenabstand)
+   - Stellt 100%ige Linksbündigkeit mit dem Text her
+   - Stellt den originalen Innenabstand (Padding 0.6rem 0.85rem) für die Icons her
+   ========================================================================== */
+.legal-list,
+ul.legal-list,
+.modal-body ul.legal-list,
+.legal-section ul.legal-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0.85rem 0 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.legal-list li,
+ul.legal-list li,
+.modal-body ul.legal-list li,
+.legal-section ul.legal-list li {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  margin: 0 !important;
+  padding: 0.6rem 0.85rem !important;
+  gap: 0.6rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.legal-list li .material-symbols-rounded,
+.modal-body ul.legal-list li .material-symbols-rounded {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   PREISSEKTION: RECHTSHINWEISE & TRANSPARENZ (Desktop ab 1025px)
+   ========================================================================== */
+.pricing-legal-notice {
+  text-align: center;
+  max-width: 850px;
+  margin: 0rem auto 0 auto;
+  padding: 0 1rem;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.5;
+}
+
+.pricing-legal-notice small {
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+#kurse .card-grid {
+  margin: 2.5rem 0 !important;
+}
+
+/* 3-Spalten-Desktop-Layout (ab 1025px): Genug Abstand zur mittleren Box */
+@media (min-width: 1025px) {
+  #kurse .card-grid {
+    margin: 5rem 0 !important;
+  }
+
+  .pricing-legal-notice {
+    margin-top: 0rem !important; /* Schiebt den Text sauber unter die 3er-Reihe */
+  }
+}
+
+/* ==========================================================================
+   PREISSEKTION (#kurse): CARDS, BADGES, TYPOGRAFIE & LAYOUT
+   ========================================================================== */
+
+/* 1. Grid & Karten-Basis */
+#kurse .card-grid,
+section#kurse .card-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 2.5rem 1.5rem !important;
+  align-items: stretch !important;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 1.5rem 1rem !important; /* Puffer oben/unten für Mobile */
+  box-sizing: border-box;
+}
+
+/* Ab 1025px (Desktop): 3 Spalten nebeneinander, zusätzlicher Puffer wegen scale(1.03) */
+@media (min-width: 1025px) {
+  #kurse .card-grid,
+  section#kurse .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 1.25rem !important;
+    padding-top: 2rem !important; /* Verhindert Kollision mit Section Header */
+    padding-bottom: 2rem !important; /* Verhindert Kollision mit Legal Notices */
+  }
+}
+
+@media (min-width: 1280px) {
+  #kurse .card-grid,
+  section#kurse .card-grid {
+    gap: 0 1.75rem !important;
+  }
+}
+
+#kurse .pricing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#kurse .pricing-card .card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2.25rem 1.5rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+@media (min-width: 992px) and (max-width: 1279px) {
+  #kurse .pricing-card .card-inner {
+    padding: 2rem 1.15rem;
+  }
+}
+
+/* 2. Badges oben */
+/* 2.1 Basisstile & Fixierung */
+#kurse .pricing-card .badge {
+  align-self: center;
+  font-size: clamp(0.65rem, 0.4vw + 0.45rem, 0.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  max-width: 92%;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Speziell im schmalen 3-Spalten-Desktop-Bereich (1025px bis 1279px) */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  #kurse .pricing-card .badge {
+    font-size: 0.66rem !important;
+    padding: 0.3rem 0.5rem !important;
+    letter-spacing: 0.02em !important;
+  }
+}
+
+/* 2.2 Dark Mode: Äußere Karten (1 & 3) */
+[data-theme="dark"] #kurse .pricing-card:not(.featured) .badge {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #f8fafc;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* 2.3 Light Mode: Äußere Karten (1 & 3) */
+[data-theme="light"] #kurse .pricing-card:not(.featured) .badge {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  color: #1f2937;
+  border-color: rgba(203, 213, 225, 0.6);
+}
+
+/* 2.4 Featured-Karte Mitte (Dark & Light) */
+#kurse .pricing-card.featured .badge,
+[data-theme="dark"] #kurse .pricing-card.featured .badge,
+[data-theme="light"] #kurse .pricing-card.featured .badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-color: rgba(5, 150, 105, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Titel & Beschreibung */
+#kurse .pricing-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#kurse .pricing-card .card-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-muted, #94a3b8);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* Desktop-Fluchtlinie für Überschrift & Beschreibung ab 3-Spalten-Layout */
+@media (min-width: 992px) {
+  #kurse .pricing-card h3 {
+    font-size: 1.22rem;
+    min-height: 3.2rem;
+  }
+  #kurse .pricing-card .card-desc {
+    font-size: 0.88rem;
+    min-height: 5.8rem;
+  }
+}
+
+/* 4. Pricing-Bereich, Typografie, Subtexte & Trennlinie */
+#kurse .pricing-card .pricing-price-wrap {
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 1025px) {
+  #kurse .pricing-card .pricing-price-wrap {
+    min-height: 8rem !important; /* Hält alle Boxen und Trennlinien auf Desktop bündig */
+  }
+}
+
+/* Große Preis-Zeile: Startet auf Mobile groß & satt, schrumpft auf kleinen Phones flüssig */
+#kurse .pricing-card .price {
+  font-size: clamp(
+    1.4rem,
+    4vw + 0.6rem,
+    2.25rem
+  ) !important; /* Kräftiger Start unter 1025px */
+  font-weight: 900 !important;
+  line-height: 1.1 !important;
+  margin-bottom: 0.5rem !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.02em !important;
+  color: var(--text-main, #f8fafc);
+  max-width: 100%;
+}
+
+/* Speziell im schmalen 3-Spalten Desktop (1025px bis 1279px): Etwas kompakter */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  #kurse .pricing-card .price {
+    font-size: clamp(1.4rem, 0.8vw + 0.9rem, 1.85rem) !important;
+  }
+}
+
+/* Große Bildschirme ab 1280px */
+@media (min-width: 1280px) {
+  #kurse .pricing-card .price {
+    font-size: 2.25rem !important;
+  }
+}
+
+[data-theme="light"] #kurse .pricing-card .price {
+  color: #0f172a !important;
+}
+
+/* Zeitraum (/ 12 Wochen etc.) */
+#kurse .pricing-card .price-period,
+#kurse .pricing-card .price span {
+  font-size: clamp(0.78rem, 1vw + 0.5rem, 0.95rem) !important;
+  font-weight: 500 !important;
+  color: var(--text-muted, #94a3b8) !important;
+  margin-left: 0.35rem !important;
+  white-space: nowrap !important;
+}
+
+[data-theme="light"] #kurse .pricing-card .price-period,
+[data-theme="light"] #kurse .pricing-card .price span {
+  color: #475569 !important;
+}
+
+/* Subtexte (Raten, Einheitenpreis, Kulanz) */
+#kurse .pricing-card .pricing-subtext,
+#kurse .pricing-card .pricing-price-wrap p {
+  font-size: clamp(0.74rem, 0.4vw + 0.62rem, 0.82rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  color: var(--text-muted, #94a3b8) !important;
+  margin: 0.12rem 0 !important;
+  padding: 0 !important;
+}
+
+[data-theme="light"] #kurse .pricing-card .pricing-subtext,
+[data-theme="light"] #kurse .pricing-card .pricing-price-wrap p {
+  color: #475569 !important;
+}
+
+/* Die Trennlinie unter dem Preisblock */
+#kurse .pricing-card .pricing-divider {
+  width: 100%;
+  height: 1px;
+  margin-top: auto !important;
+  padding-top: 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+[data-theme="light"] #kurse .pricing-card .pricing-divider {
+  border-bottom-color: rgba(203, 213, 225, 0.8) !important;
+}
+
+/* 5. Aufzählungslisten (Features) mit echtem Dark/Light-Switch */
+#kurse .pricing-card ul,
+#kurse .pricing-card.featured ul,
+#kurse .pricing-card .features-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 1.25rem 0 2.25rem 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+  flex-grow: 1 !important;
+  text-align: left !important;
+}
+
+#kurse .pricing-card ul li,
+#kurse .pricing-card.featured ul li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.65rem !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  color: var(--text-muted, #94a3b8) !important;
+}
+
+[data-theme="light"] #kurse .pricing-card ul li,
+[data-theme="light"] #kurse .pricing-card.featured ul li {
+  color: #334155 !important;
+}
+
+#kurse .pricing-card ul li .material-symbols-rounded,
+#kurse .pricing-card.featured ul li .material-symbols-rounded {
+  color: #10b981 !important;
+  font-size: 1.15rem !important;
+  margin-top: 0.15rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hervorhebungen */
+#kurse .pricing-card ul li strong,
+#kurse .pricing-card.featured ul li strong {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] #kurse .pricing-card ul li strong,
+[data-theme="light"] #kurse .pricing-card.featured ul li strong {
+  color: #0f172a !important;
+}
+
+/* 6. Call-to-Action Buttons */
+#kurse .pricing-card .btn,
+#kurse .pricing-card .btn-primary,
+#kurse .pricing-card .btn-secondary,
+#kurse .pricing-card a.btn {
+  margin-top: auto !important;
+  width: 100% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+}
+
+/* Speziell im schmalen 3-Spalten-Desktop-Bereich (1025px bis 1279px) */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  #kurse .pricing-card .btn,
+  #kurse .pricing-card .btn-primary,
+  #kurse .pricing-card .btn-secondary,
+  #kurse .pricing-card a.btn {
+    font-size: clamp(0.75rem, 0.4vw + 0.5rem, 0.84rem) !important;
+    padding: 0.7rem 0.4rem !important;
+    letter-spacing: -0.02em !important;
+    min-height: 2.75rem !important;
+  }
+}
+
+/* Auf großen Bildschirmen ab 1280px */
+@media (min-width: 1280px) {
+  #kurse .pricing-card .btn,
+  #kurse .pricing-card .btn-primary,
+  #kurse .pricing-card .btn-secondary,
+  #kurse .pricing-card a.btn {
+    font-size: 0.92rem !important;
+    padding: 0.85rem 1rem !important;
+    letter-spacing: 0 !important;
+    min-height: 3rem !important;
+  }
+}
+
+/* 7. Highlight-Effekt (Mittlere Karte) */
+#kurse .pricing-card.featured {
+  position: relative;
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+  transform: none !important;
+}
+
+/* Skalierung aktiviert sich erst, wenn das Grid wirklich 3-spaltig auf Desktop steht */
+@media (min-width: 1025px) {
+  #kurse .pricing-card.featured {
+    transform: scale(1.03) !important;
+    z-index: 2;
+  }
+}
+
+/* 8. Transparenz- & Rechtshinweise unten */
+.pricing-legal-notice {
+  text-align: center;
+  max-width: 850px;
+  margin: 2.5rem auto 0 auto;
+  padding: 0 1rem;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.pricing-legal-notice .notice-item {
+  display: block;
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  color: inherit !important;
+  opacity: 0.75;
+}
+
+/* 8.1 Desktop-Abstand mit Puffer für den Scale-Effekt */
+@media (min-width: 1025px) {
+  .pricing-legal-notice {
+    margin-top: 3.5rem !important;
+  }
+}

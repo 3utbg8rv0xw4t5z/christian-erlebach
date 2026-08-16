@@ -26,6 +26,7 @@ Diese Plattform ist eine moderne, performante Web-Präsenz und Progressive Web A
 
 ```text
 christian-erlebach/
+├── 404.html
 ├── index.html              # Startseite / Landing Page
 ├── impressum.html          # Rechtliche Unterseiten (Redirect / Modal)
 ├── datenschutz.html

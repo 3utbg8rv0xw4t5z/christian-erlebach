@@ -7815,3 +7815,362 @@ body.dark-theme .toast-message,
 [data-theme="dark"] .toast-message {
   color: #9ca3af;
 }
+
+.faq-glossar-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-decoration: none !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  width: 100%;
+}
+
+.faq-glossar-link:hover {
+  background: rgba(59, 130, 246, 0.1);
+  text-decoration: none !important;
+  transform: translateX(3px);
+}
+
+.faq-glossar-link span {
+  text-decoration: none !important;
+}
+
+.faq-glossar-link .material-symbols-rounded {
+  font-size: 1.25rem;
+  line-height: 1;
+  text-decoration: none !important;
+}
+
+/* Datenschutzhinweis im Rechner-FAQ: Perfekt zentrierte Trennlinie */
+.faq-calc-privacy-note {
+  display: block !important;
+  margin: 1.25rem 0 0 0 !important; /* Abstand VOR der Linie (nach dem Link) */
+  padding-top: 1.25rem !important; /* Abstand NACH der Linie (vor dem Text) */
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.5 !important;
+  clear: both !important;
+}
+
+/* ==========================================================================
+   INTERAKTIVE FITNESS-RECHNER: FORMULAR-VALIDIERUNG & ERGEBNISKARTEN
+   ========================================================================== */
+
+/* Live-Validierung: Ränder und Icons */
+.contact-form input.is-valid,
+.contact-form select.is-valid {
+  border-color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.05) !important;
+}
+
+.contact-form input.is-invalid,
+.contact-form select.is-invalid {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.05) !important;
+}
+
+.contact-form .form-group .error-text {
+  display: none;
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+.contact-form input.is-invalid ~ .error-text,
+.contact-form select.is-invalid ~ .error-text {
+  display: block;
+}
+
+/* Button-Status */
+.contact-form button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+
+/* Animierte Ergebnis-Container */
+.calc-result-box {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  animation: calcFadeSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes calcFadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ergebnis-Elemente */
+.calc-res-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.calc-res-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.calc-res-badge {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-blue {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.badge-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.badge-yellow {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.badge-purple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.calc-main-val {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #38bdf8;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.calc-main-unit {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-left: 4px;
+}
+
+.calc-res-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+.calc-res-item {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.calc-res-item span {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.calc-res-item strong {
+  display: block;
+  font-size: 1rem;
+  color: #f1f5f9;
+  margin-top: 2px;
+}
+
+.calc-coach-tip {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  background: rgba(56, 189, 248, 0.06);
+  border-left: 3px solid #38bdf8;
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Light-Mode Anpassung */
+[data-theme="light"] .calc-result-box {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .calc-res-header h4 {
+  color: #0f172a;
+}
+
+[data-theme="light"] .calc-res-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .calc-res-item strong {
+  color: #0f172a;
+}
+
+[data-theme="light"] .calc-coach-tip {
+  background: rgba(14, 165, 233, 0.08);
+  color: #1e293b;
+}
+
+/* Erklärungs- / Nutzen-Box in den Rechner-Modals */
+.calc-benefit-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 1.25rem;
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.calc-benefit-box .material-symbols-rounded {
+  color: #38bdf8;
+  font-size: 1.2rem;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .calc-benefit-box {
+  background: rgba(14, 165, 233, 0.06);
+  border-color: rgba(14, 165, 233, 0.2);
+  color: #334155;
+}
+
+/* 320px Mobile Fix für Rechner-Modals */
+@media (max-width: 380px) {
+  .modal-card {
+    padding: 1.25rem 0.85rem !important;
+  }
+  .modal-header h3 {
+    font-size: 1.15rem !important;
+    padding-right: 25px; /* Platz für Close-Button */
+  }
+  .calc-benefit-box {
+    padding: 8px 10px !important;
+    font-size: 0.8rem !important;
+  }
+  .calc-main-val {
+    font-size: 1.75rem !important;
+  }
+  .calc-res-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE FIX FÜR ALLE RECHNER-ERGEBNISBOXEN (320px - 480px)
+   ========================================================================== */
+
+/* 1. Grundsätzlicher Schutz gegen Badge-Umbruch */
+.calc-res-badge {
+  white-space: nowrap !important;
+  display: inline-block !important;
+  text-align: center;
+}
+
+/* 2. Responsives Verhalten ab 480px abwärts */
+@media (max-width: 480px) {
+  .calc-result-box {
+    padding: 1rem 0.85rem !important;
+  }
+
+  /* Header bricht mobil sauber um: Titel oben, Badge darunter */
+  .calc-res-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding-bottom: 0.6rem !important;
+  }
+
+  .calc-res-header h4 {
+    font-size: 0.95rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .calc-res-badge {
+    font-size: 0.7rem !important;
+    padding: 3px 8px !important;
+  }
+
+  /* Hauptwert & Einheit flexibel halten */
+  .calc-main-val {
+    font-size: 1.75rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+  }
+
+  .calc-main-unit {
+    font-size: 0.85rem !important;
+  }
+
+  /* Grid für Mehrfachwerte (z. B. 1RM Zonen, Makros) */
+  .calc-res-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  .calc-res-item {
+    padding: 6px 8px !important;
+  }
+
+  .calc-res-item span {
+    font-size: 0.7rem !important;
+  }
+
+  .calc-res-item strong {
+    font-size: 0.85rem !important;
+  }
+
+  .calc-coach-tip {
+    font-size: 0.8rem !important;
+    padding: 8px 10px !important;
+  }
+}
+
+/* 3. Feinschliff für kleinste Displays (320px) */
+@media (max-width: 340px) {
+  .calc-main-val {
+    font-size: 1.5rem !important;
+  }
+
+  .calc-res-grid {
+    grid-template-columns: 1fr !important; /* Bei 320px einspaltig für perfekte Lesbarkeit */
+  }
+}

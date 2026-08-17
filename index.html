@@ -2983,16 +2983,17 @@
                   Bitte wähle dein Trainingsziel / Wunschpaket...
                 </option>
                 <option value="erstgespraech">
-                  Kostenloses Erstgespräch & Beratung
+                  Kostenloses Erstgespräch &amp; Beratung
                 </option>
                 <option value="einzelstunde">
-                  1:1 Intensiv-Session (Technik- & Form-Check · 89 €)
+                  1:1 Intensiv-Session (Technik- &amp; Form-Check · 89 €)
                 </option>
                 <option value="progressionsfundament">
                   Progressionsfundament (4 Wochen Intensiv-Betreuung · 299 €)
                 </option>
                 <option value="hypertrophie-recomposition">
-                  Hypertrophie & Recomposition (12 Wochen Master-Paket · 749 €)
+                  Hypertrophie &amp; Recomposition (12 Wochen Master-Paket · 749
+                  €)
                 </option>
                 <option value="sonstiges">Allgemeine Anfrage</option>
               </select>
@@ -3016,6 +3017,68 @@
                   >Bitte gib eine Nachricht ohne schädliche Zeichen ein.</span
                 >
               </div>
+            </div>
+
+            <div
+              class="form-privacy-note"
+              style="
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin-bottom: 1.25rem;
+                font-size: 0.78rem;
+                line-height: 1.45;
+                color: var(--m3-on-surface-variant);
+              "
+            >
+              <span
+                class="material-symbols-rounded"
+                style="
+                  font-size: 1.1rem;
+                  color: var(--brand-teal, #2dd4bf);
+                  flex-shrink: 0;
+                  margin-top: 1px;
+                "
+                >lock</span
+              >
+              <span>
+                Mit dem Absenden willigst du in die Verarbeitung deiner Angaben
+                gemäß unserer
+                <a
+                  href="javascript:void(0)"
+                  onclick="
+                    const ds = document.getElementById('modal-datenschutz');
+                    if (ds) ds.style.zIndex = '99999';
+                    closeModal('modal-contact');
+                    openModal('modal-datenschutz');
+                    return false;
+                  "
+                  style="
+                    color: var(--brand-teal, #2dd4bf);
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
+                    font-weight: 500;
+                    cursor: pointer !important;
+                    position: relative;
+                    z-index: 10;
+                    pointer-events: auto;
+                    transition:
+                      opacity 0.2s ease,
+                      filter 0.2s ease;
+                  "
+                  onmouseover="
+                    this.style.cursor = 'pointer';
+                    this.style.filter = 'brightness(1.15)';
+                  "
+                  onmouseout="this.style.filter = 'brightness(1)'"
+                  >Datenschutzerklärung</a
+                >
+                ein. Keine Weitergabe an Dritte.
+              </span>
             </div>
 
             <button
@@ -3217,8 +3280,42 @@
           </div>
 
           <div class="legal-section">
+            <h3>4. Cookies, Local Storage &amp; lokale Berechnungen</h3>
+            <p>
+              <strong>Verzicht auf Tracking-Cookies:</strong> Auf dieser Website
+              werden
+              <strong>keine Tracking-, Analyse- oder Marketing-Cookies</strong>
+              eingesetzt. Es findet keine serverseitige Erstellung von
+              Nutzerprofilen und keine Nachverfolgung deines Nutzungsverhaltens
+              über Werbenetzwerke (wie Google Analytics oder Meta Pixel) statt.
+              Ein Cookie-Einwilligungsbanner ist daher nicht erforderlich (§ 25
+              Abs. 2 TDDDG).
+            </p>
+            <p>
+              <strong>Lokale Speicherung (Local Storage):</strong> Um die
+              Website nutzerfreundlich bereitzustellen, wird deine gewählte
+              Design-Einstellung (Dark Mode / Light Mode) im lokalen Speicher
+              deines Browsers (<code>localStorage</code>) hinterlegt. Diese
+              Daten verbleiben ausschließlich lokal auf deinem Endgerät und
+              werden zu keinem Zeitpunkt an Server übertragen oder mit
+              personenbezogenen Daten verknüpft (Art. 6 Abs. 1 lit. f DSGVO i.
+              V. m. § 25 Abs. 2 Nr. 2 TDDDG).
+            </p>
+            <p>
+              <strong>Lokale Fitness-Rechner:</strong> Alle auf dieser Website
+              bereitgestellten Rechner (Kalorien, BMI, KFA, 1RM etc.)
+              verarbeiten deine eingegebenen Werte
+              <strong
+                >ausschließlich lokal in deinem Browser (Client-Side via
+                JavaScript)</strong
+              >. Es findet keine serverseitige Übertragung oder Speicherung
+              statt.
+            </p>
+          </div>
+
+          <div class="legal-section">
             <h3>
-              4. Verarbeitung von Gesundheits- und Anamnesedaten (Art. 9 DSGVO)
+              5. Verarbeitung von Gesundheits- und Anamnesedaten (Art. 9 DSGVO)
             </h3>
             <p>
               Zur Gewährleistung einer sicheren und verletzungsfreien
@@ -3242,7 +3339,7 @@
           </div>
 
           <div class="legal-section">
-            <h3>5. Kommunikation via WhatsApp Business</h3>
+            <h3>6. Kommunikation via WhatsApp Business</h3>
             <p>
               Wenn du über den WhatsApp-Button Kontakt mit uns aufnimmst, werden
               deine Telefonnummer sowie der Inhalt deiner Nachricht an
@@ -3255,17 +3352,18 @@
           </div>
 
           <div class="legal-section">
-            <h3>6. Externe Verlinkungen &amp; Tracking-Tools (Hevy)</h3>
+            <h3>7. Externe Verlinkungen (z.&nbsp;B. Hevy, Google Maps)</h3>
             <p>
-              Auf dieser Website verlinken wir auf die Trainings- und
-              Analyse-App <strong>Hevy</strong> (Boombox Games LLC). Eine
+              Auf dieser Website verlinken wir auf externe Dienste wie die
+              Trainings-App
+              <strong>Hevy</strong> (Boombox Games LLC) oder Google Maps. Eine
               Datenübertragung an den jeweiligen Plattformbetreiber erfolgt
               erst, wenn du aktiv auf den externen Link bzw. Button klickst.
             </p>
           </div>
 
           <div class="legal-section">
-            <h3>7. Kontaktformular &amp; E-Mail-Anfragen</h3>
+            <h3>8. Kontaktformular &amp; E-Mail-Anfragen</h3>
             <p>
               Die über das Kontaktformular oder per E-Mail übermittelten Angaben
               werden ausschließlich zur Bearbeitung deiner Anfrage und für
@@ -3277,8 +3375,7 @@
 
           <div class="legal-section">
             <h3>
-              8. Speicherdauer, Auskunft und Herausgabe von Trainings- und
-              Leistungsdaten
+              9. Speicherdauer, Auskunft und Herausgabe von Trainingsdaten
             </h3>
             <p>
               Personenbezogene Trainingsdaten (wie dokumentierte
@@ -3310,25 +3407,6 @@
               Diagnostikdaten automatisch und unwiderruflich gelöscht, sofern du
               nicht vorab von deinem Recht auf vorzeitige Löschung (Art. 17
               DSGVO) Gebrauch machst.
-            </p>
-          </div>
-
-          <div class="legal-section">
-            <h3>
-              9. Nutzung der interaktiven Fitness-Rechner (Lokale Verarbeitung)
-            </h3>
-            <p>
-              Die auf dieser Website bereitgestellten Fitness-Rechner
-              verarbeiten deine eingegebenen Werte (wie Alter, Körpergröße,
-              Gewicht oder Kraftwerte)
-              <strong
-                >ausschließlich lokal in deinem Webbrowser (Client-Side)</strong
-              >.
-            </p>
-            <p>
-              Es findet zu keinem Zeitpunkt eine Übertragung, Speicherung oder
-              serverseitige Auswertung dieser Daten statt. Beim Schließen oder
-              Neuladen der Seite werden alle eingegebenen Werte verworfen.
             </p>
           </div>
 
@@ -3635,7 +3713,7 @@
             <br />
             <p>
               An: Christian Erlebach, Anschrift gemäß Impressum, E-Mail:
-              info@coach-chris.de<br /><br />
+              kontakt@christian-erlebach.de<br /><br />
               Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*)
               abgeschlossenen Vertrag über die Erbringung der folgenden
               Dienstleistung (*):<br /><br />

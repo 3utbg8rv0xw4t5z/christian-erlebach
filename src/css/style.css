@@ -8293,3 +8293,27 @@ body.dark-theme .toast-message,
 [data-theme="light"] #kurse .pricing-card p.card-desc {
   color: var(--m3-on-surface-variant) !important;
 }
+
+/* ==========================================================================
+   KURS-SEKTION (#courses): BESCHREIBUNGSTEXT FARBE (Dark & Light Mode)
+   ========================================================================== */
+
+/* ==========================================================================
+   TESTIMONIALS: JOB / UNTERZEILE FARBE (Dark & Light Mode)
+   ========================================================================== */
+
+/* Dark Mode */
+#testimonials .testimonial-meta .testimonial-job,
+.testimonial-card .testimonial-meta .testimonial-job {
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+  background: none !important;
+}
+
+/* Light Mode */
+[data-theme="light"] #testimonials .testimonial-meta .testimonial-job,
+[data-theme="light"] .testimonial-card .testimonial-meta .testimonial-job,
+.light-theme .testimonial-meta .testimonial-job {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}

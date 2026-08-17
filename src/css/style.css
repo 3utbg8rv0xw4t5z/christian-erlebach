@@ -7695,3 +7695,123 @@ section#kurse .card-grid {
     margin-top: 3.5rem !important;
   }
 }
+
+/* Grüne Häkchen in der Service-Sektion (Einheitlich zur Preistabelle) */
+#services .card-feature-list li .material-symbols-rounded {
+  color: #10b981 !important;
+  font-size: 1.15rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Stats-Karten: Grundzustand & Reset
+   ============================================================ */
+#stats .about-stat-card,
+#stats .about-stat-card * {
+  outline: none !important;
+}
+
+/* Pseudo-Elemente (falls der Rahmen über ::before/::after gebaut wurde) */
+#stats .about-stat-card::before,
+#stats .about-stat-card::after {
+  display: none !important;
+}
+
+/* ============================================================
+   1. Light Mode: Nur grüner Schatten & Anheben (Kein Rahmen)
+   ============================================================ */
+#stats .about-stat-card:hover {
+  transform: translateY(-4px) !important;
+  border: 1px solid transparent !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow:
+    0 12px 28px -6px rgba(16, 185, 129, 0.22),
+    0 8px 12px -6px rgba(16, 185, 129, 0.12) !important;
+}
+
+/* ============================================================
+   Erfolgs-Toast Notification (Modern & Responsiv)
+   ============================================================ */
+.toast-notification {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 320px;
+  max-width: 90vw;
+  padding: 16px 22px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow:
+    0 15px 35px -5px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(16, 185, 129, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+/* Sichtbarer Zustand */
+.toast-notification.show {
+  top: 30px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-icon {
+  font-size: 28px;
+  color: #10b981; /* Frisches Grün */
+  flex-shrink: 0;
+}
+
+.toast-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.toast-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.toast-message {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Dark Mode Variante */
+body.dark-mode .toast-notification,
+body.dark-theme .toast-notification,
+[data-theme="dark"] .toast-notification {
+  background: #181b26;
+  color: #f9fafb;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow:
+    0 20px 40px -5px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(168, 85, 247, 0.25);
+}
+
+body.dark-mode .toast-icon,
+body.dark-theme .toast-icon,
+[data-theme="dark"] .toast-icon {
+  color: #a855f7; /* Lila passend zum Dark Mode */
+}
+
+body.dark-mode .toast-message,
+body.dark-theme .toast-message,
+[data-theme="dark"] .toast-message {
+  color: #9ca3af;
+}

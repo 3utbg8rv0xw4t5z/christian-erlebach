@@ -254,7 +254,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ==========================================================================
-// 5. SICHERHEITS- & VALIDIERUNGS-HELFER
+// 5. SICHERHEITS- & VALIDIERUNGS-HELFER & TOAST NOTIFICATION
 // ==========================================================================
 function containsCodeInjection(str) {
   const codeRegex = /<[^>]*>|javascript:|script|eval\(|document\.|window\./i;
@@ -328,15 +328,25 @@ function checkFormValidity() {
   submitBtn.disabled = !allValid;
 }
 
+function showToastNotification() {
+  const toast = document.getElementById("form-toast");
+  if (!toast) return;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 6500);
+}
+
 function handleContactSubmit(event) {
   event.preventDefault();
   const form = event.target;
   const submitBtn = document.getElementById("submit-btn");
   const submitBtnText = document.getElementById("submit-btn-text");
 
-  alert(
-    "Vielen Dank! Deine Nachricht wurde erfolgreich abgesendet. Ich melde mich in Kürze bei dir.",
-  );
+  // Moderner Toast statt Standard-Alert
+  showToastNotification();
 
   form.reset();
   const inputs = form.querySelectorAll("input, select, textarea");

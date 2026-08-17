@@ -8276,3 +8276,20 @@ body.dark-theme .toast-message,
   margin-top: 1rem !important;
   margin-bottom: 1.25rem !important;
 }
+
+/* ==========================================================================
+   KURS-SEKTION (#courses): BESCHREIBUNGSTEXT FARBE (Dark & Light Mode)
+   ========================================================================== */
+
+/* Kurs-Sektion: Beschreibungstext exakt auf var(--m3-on-surface-variant) setzen */
+#kurse .pricing-card .card-desc,
+#kurse .pricing-card p.card-desc,
+#course-desc-text {
+  color: var(--m3-on-surface-variant) !important;
+}
+
+/* Für Light-Mode (greift automatisch auf denselben Variablenwert zu) */
+[data-theme="light"] #kurse .pricing-card .card-desc,
+[data-theme="light"] #kurse .pricing-card p.card-desc {
+  color: var(--m3-on-surface-variant) !important;
+}

@@ -8295,10 +8295,6 @@ body.dark-theme .toast-message,
 }
 
 /* ==========================================================================
-   KURS-SEKTION (#courses): BESCHREIBUNGSTEXT FARBE (Dark & Light Mode)
-   ========================================================================== */
-
-/* ==========================================================================
    TESTIMONIALS: JOB / UNTERZEILE FARBE (Dark & Light Mode)
    ========================================================================== */
 
@@ -8316,4 +8312,86 @@ body.dark-theme .toast-message,
 .light-theme .testimonial-meta .testimonial-job {
   color: #475569 !important;
   -webkit-text-fill-color: #475569 !important;
+}
+
+/* ==========================================================================
+   FOOTER Color Change
+   ========================================================================== */
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  a,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  span,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-contact-list
+  li
+  span.material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-col
+  a[onclick*="modal"],
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-legal-links
+  a,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .legal-link {
+  stroke: none !important;
+  color: #475569 !important;
+  fill: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  .material-symbols-rounded,
+:root:not(.dark):not([data-theme="dark"])
+  body:not(.dark):not(.dark-mode)
+  .footer-socials
+  a
+  svg {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+  fill: #475569 !important;
+}
+
+:root[data-theme="dark"] body .footer-contact-list li,
+:root[data-theme="dark"] body .footer-contact-list li a,
+:root[data-theme="dark"] body .footer-contact-list li span,
+:root[data-theme="dark"]
+  body
+  .footer-contact-list
+  li
+  span.material-symbols-rounded,
+:root[data-theme="dark"] body .footer-col a[onclick*="modal"],
+:root[data-theme="dark"] body .footer-legal-links a,
+:root[data-theme="dark"] body .legal-link,
+html[data-theme="dark"] .footer-contact-list li a,
+html[data-theme="dark"] .footer-contact-list li span,
+html[data-theme="dark"] .footer-legal-links a {
+  stroke: none !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  fill: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+[data-theme="dark"] .footer-socials a .material-symbols-rounded,
+[data-theme="dark"] .footer-socials a svg {
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+  fill: rgba(255, 255, 255, 0.75) !important;
 }

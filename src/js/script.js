@@ -1,50 +1,33 @@
 // ==========================================================================
-// 1. INITIALISIERUNG: PRELOADER & REAKTIVES AOS
+// 1. INITIALISIERUNG: PRELOADER & ULTRA-SMOOTHES AOS
 // ==========================================================================
-function setupAOS() {
-  if (typeof AOS !== "undefined") {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 60,
-      easing: "ease-out-cubic",
-      delay: 0,
-      disable: false,
-      mirror: false,
-      throttleDelay: 50, // Reagiert viel präziser auf Scroll-Positionen
-      debounceDelay: 30,
-    });
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("page-preloader");
   if (preloader) {
     preloader.classList.add("loaded");
   }
-  setupAOS();
+
+  if (typeof AOS !== "undefined") {
+    AOS.init({
+      duration: 950,
+      once: true,
+      offset: 140, // WICHTIG: Wartet, bis Element 140px im Bild ist, bevor es fadet
+      easing: "ease-out-cubic",
+      disable: false,
+    });
+  }
 });
 
-// Sicherheits-Fallback & mehrfacher Layout-Refresh nach dem Nachladen aller Medien
 window.addEventListener("load", () => {
   const preloader = document.getElementById("page-preloader");
   if (preloader && !preloader.classList.contains("loaded")) {
     preloader.classList.add("loaded");
   }
-
-  // Frische Höhenberechnung, sobald Bilder & Schriften vollständig gerendert sind
-  setTimeout(() => {
-    if (typeof AOS !== "undefined") {
-      AOS.refreshHard();
-    }
-  }, 200);
-
-  // Zweiter Puffer für späte Layout-Verschiebungen
   setTimeout(() => {
     if (typeof AOS !== "undefined") {
       AOS.refresh();
     }
-  }, 800);
+  }, 250);
 });
 
 // ==========================================================================

@@ -1,37 +1,50 @@
 // ==========================================================================
-// 1. INITIALISIERUNG: PRELOADER & ULTRASCHNELLES AOS
+// 1. INITIALISIERUNG: PRELOADER & REAKTIVES AOS
 // ==========================================================================
+function setupAOS() {
+  if (typeof AOS !== "undefined") {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 60,
+      easing: "ease-out-cubic",
+      delay: 0,
+      disable: false,
+      mirror: false,
+      throttleDelay: 50, // Reagiert viel präziser auf Scroll-Positionen
+      debounceDelay: 30,
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Preloader entfernen (sofort bei DOM-Bereitschaft)
   const preloader = document.getElementById("page-preloader");
   if (preloader) {
     preloader.classList.add("loaded");
   }
-
-  // AOS sofort feuerbereit schalten
-  if (typeof AOS !== "undefined") {
-    AOS.init({
-      duration: 650,
-      once: true,
-      offset: 40,
-      easing: "ease-out-quad",
-      delay: 0,
-      disable: false,
-      startEvent: "DOMContentLoaded",
-    });
-  }
+  setupAOS();
 });
 
-// Sicherheits-Fallback nach vollständigem Laden aller Ressourcen
+// Sicherheits-Fallback & mehrfacher Layout-Refresh nach dem Nachladen aller Medien
 window.addEventListener("load", () => {
   const preloader = document.getElementById("page-preloader");
   if (preloader && !preloader.classList.contains("loaded")) {
     preloader.classList.add("loaded");
   }
-  // Layout-Check für AOS nach dem Laden aller Bilder
-  if (typeof AOS !== "undefined") {
-    AOS.refresh();
-  }
+
+  // Frische Höhenberechnung, sobald Bilder & Schriften vollständig gerendert sind
+  setTimeout(() => {
+    if (typeof AOS !== "undefined") {
+      AOS.refreshHard();
+    }
+  }, 200);
+
+  // Zweiter Puffer für späte Layout-Verschiebungen
+  setTimeout(() => {
+    if (typeof AOS !== "undefined") {
+      AOS.refresh();
+    }
+  }, 800);
 });
 
 // ==========================================================================

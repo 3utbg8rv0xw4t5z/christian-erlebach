@@ -449,7 +449,7 @@ function loadMoreFaqs() {
   if (isExpanded) {
     // 1. Zuklappen: Zusätzliche FAQs ab Index 4 verstecken & Unter-Inhalte schließen
     faqs.forEach((faq, index) => {
-      if (index >= 4) {
+      if (index >= 5) {
         faq.classList.add("hidden-faq");
         faq.classList.remove("active");
         const content = faq.querySelector(".accordion-content");

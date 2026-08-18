@@ -8396,3 +8396,110 @@ html[data-theme="dark"] .footer-legal-links a {
   -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
   fill: rgba(255, 255, 255, 0.75) !important;
 }
+
+/* FAQ Category Header: Vollständig transparent in Dark- & Light-Mode */
+.accordion-item.faq-category-header,
+:root .accordion-item.faq-category-header,
+:root:not([data-theme="light"]) .accordion-item.faq-category-header,
+[data-theme="dark"] .accordion-item.faq-category-header,
+[data-theme="light"] .accordion-item.faq-category-header {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  margin: 3.5rem auto 1.25rem auto !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* Textfarben für Dark Mode (Standard) */
+.faq-category-header .cat-title {
+  color: var(--m3-on-surface, #ffffff) !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.faq-category-header .cat-subtitle {
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-size: 0.95rem;
+  margin: 0 auto;
+  max-width: 520px;
+  line-height: 1.4;
+}
+
+/* Textfarben für Light Mode */
+[data-theme="light"] .faq-category-header .cat-title {
+  color: #111827 !important;
+}
+
+[data-theme="light"] .faq-category-header .cat-subtitle {
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
+/* =========================================================
+   FAQ FARB-SCHEMA (LIGHT & DARK MODE)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. DARK MODE (Standard / [data-theme="dark"])
+   --------------------------------------------------------- */
+/* Alle Überschriften & Fragen-Titel */
+#faq .section-title,
+#faq .cat-title,
+#faq .accordion-header strong,
+[data-theme="dark"] #faq .section-title,
+[data-theme="dark"] #faq .cat-title,
+[data-theme="dark"] #faq .accordion-header strong {
+  color: #f8fafc !important;
+}
+
+/* Alle Fließtexte, Untertitel & Listen */
+#faq .section-subtitle,
+#faq .cat-subtitle,
+#faq .accordion-content,
+#faq .accordion-content p,
+#faq .accordion-content li,
+[data-theme="dark"] #faq .section-subtitle,
+[data-theme="dark"] #faq .cat-subtitle,
+[data-theme="dark"] #faq .accordion-content,
+[data-theme="dark"] #faq .accordion-content p,
+[data-theme="dark"] #faq .accordion-content li {
+  color: #94a3b8 !important; /* Angenehmes, klares Slate-Grau im Dark Mode */
+}
+
+/* Hervorhebungen innerhalb des Textes (strong) im Dark Mode */
+#faq .accordion-content strong,
+[data-theme="dark"] #faq .accordion-content strong {
+  color: #f8fafc !important;
+}
+
+/* ---------------------------------------------------------
+   2. LIGHT MODE ([data-theme="light"])
+   --------------------------------------------------------- */
+/* Alle Überschriften & Fragen-Titel */
+[data-theme="light"] #faq .section-title,
+[data-theme="light"] #faq .cat-title,
+[data-theme="light"] #faq .accordion-header strong {
+  color: #0f172a !important;
+}
+
+/* Alle Fließtexte, Untertitel & Listen */
+[data-theme="light"] #faq .section-subtitle,
+[data-theme="light"] #faq .cat-subtitle,
+[data-theme="light"] #faq .accordion-content,
+[data-theme="light"] #faq .accordion-content p,
+[data-theme="light"] #faq .accordion-content li {
+  color: #475569 !important; /* Sehr gut lesbares Slate-Dunkelgrau im Light Mode */
+}
+
+/* Hervorhebungen innerhalb des Textes (strong) im Light Mode */
+[data-theme="light"] #faq .accordion-content strong {
+  color: #0f172a !important;
+}

@@ -128,80 +128,62 @@
     </script>
   </head>
   <body>
-    <body>
-      <header class="app-header">
-        <div class="header-container">
-          <div class="brand-group">
-            <img
-              src="./src/assets/icons/favicon.svg"
-              alt="Logo"
-              class="app-logo"
-              width="32"
-              height="32"
-            />
-            <div class="brand-text">
-              <span class="brand-title">Workout Tracker</span>
-              <span class="brand-subtitle">by Christian Erlebach</span>
-            </div>
+    <header class="app-header">
+      <div class="header-container">
+        <div class="brand-group">
+          <img
+            src="./src/assets/icons/favicon.svg"
+            alt="Logo"
+            class="app-logo"
+            width="32"
+            height="32"
+          />
+          <div class="brand-text">
+            <span class="brand-title">Workout Tracker</span>
+            <span class="brand-subtitle">by Christian Erlebach</span>
           </div>
-          <span class="badge-beta">PROTOTYP v0.1</span>
         </div>
-      </header>
+        <span class="badge-beta">PROTOTYP v0.1</span>
+      </div>
+    </header>
 
-      <main id="app-root" class="app-main">
-        <section class="dev-banner-card">
-          <div class="dev-banner-icon">
-            <span class="material-symbols-rounded">construction</span>
-          </div>
-          <h2>Workout Tracker in Entwicklung</h2>
-          <p>
-            Hier entsteht dein persönlicher, datengestützter Trainingsbegleiter
-            für Satz- & Wiederholungs-Tracking, progressive Überlastung und
-            Biomechanik-Steuerung.
-          </p>
+    <main id="app-root" class="app-main">
+      <section class="dev-banner-card">
+        <div class="dev-banner-icon">
+          <span class="material-symbols-rounded">construction</span>
+        </div>
+        <h2>Workout Tracker in Entwicklung</h2>
+        <p>
+          Hier entsteht dein persönlicher, datengestützter Trainingsbegleiter
+          für Satz- & Wiederholungs-Tracking, progressive Überlastung und
+          Biomechanik-Steuerung.
+        </p>
 
-          <div class="dev-features-preview">
-            <h3>Geplante Features:</h3>
-            <ul>
-              <li>Echtzeit-Satzdokumentation (Gewicht, Wdh., RPE/RIR)</li>
-              <li>Integrierter Satzpausen-Timer</li>
-              <li>100 % Offline-Fähigkeit direkt im Gym</li>
-              <li>Progressions-Historie & Laststeigerungs-Analyse</li>
-            </ul>
-          </div>
+        <div class="dev-features-preview">
+          <h3>Geplante Features:</h3>
+          <ul>
+            <li>Echtzeit-Satzdokumentation (Gewicht, Wdh., RPE/RIR)</li>
+            <li>Integrierter Satzpausen-Timer</li>
+            <li>100 % Offline-Fähigkeit direkt im Gym</li>
+            <li>Progressions-Historie & Laststeigerungs-Analyse</li>
+          </ul>
+        </div>
 
-          <a href="../" class="btn-secondary"> ← Zurück zur Hauptseite </a>
-        </section>
-      </main>
-
-      <script src="./src/js/app.js" defer></script>
-
-      <script>
-        if ("serviceWorker" in navigator) {
-          window.addEventListener("load", () => {
-            navigator.serviceWorker
-              .register("./sw.js")
-              .then((reg) =>
-                console.log("[Workout Tracker] SW aktiv, Scope:", reg.scope),
-              )
-              .catch((err) =>
-                console.error("[Workout Tracker] SW Fehler:", err),
-              );
-          });
-        }
-      </script>
-    </body>
+        <a href="../" class="btn-secondary"> ← Zurück zur Hauptseite </a>
+      </section>
+    </main>
 
     <script src="./src/js/app.js" defer></script>
+
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
             .register("./sw.js")
             .then((reg) =>
-              console.log("Workout Tracker SW aktiv, Scope:", reg.scope),
+              console.log("[Workout Tracker] SW aktiv, Scope:", reg.scope),
             )
-            .catch((err) => console.error("Workout Tracker SW Fehler:", err));
+            .catch((err) => console.error("[Workout Tracker] SW Fehler:", err));
         });
       }
     </script>

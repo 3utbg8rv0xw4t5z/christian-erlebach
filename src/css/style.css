@@ -9300,3 +9300,194 @@ html[data-theme="dark"] .footer-legal-links a {
     margin-bottom: 16px !important; /* Hält die Leiste zuverlässig von der Unterkante fern */
   }
 }
+
+/* ==========================================================================
+   APP PREVIEW SECTION & CARD (PASSEND ZUM GESAMTDESIGN)
+   ========================================================================== */
+.app-preview-section {
+  padding: clamp(3rem, 6vw, 5rem) 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-preview-card {
+  position: relative;
+  background: rgba(18, 24, 38, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+/* Subtiler Glow-Effekt */
+.app-card-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.25) 0%,
+    rgba(99, 102, 241, 0) 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Badge mit pulsierendem Punkt */
+.app-preview-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+  font-size: 0.825rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulseAppDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseAppDot {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* Typografie */
+.app-preview-title {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.app-preview-desc {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: #94a3b8;
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 2.25rem auto;
+}
+
+/* Button-Container */
+.app-preview-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Basis-Button-Style mit stark abgerundeten Ecken */
+.app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 50px; /* Schön weich und komplett abgerundet */
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.app-btn .material-symbols-rounded {
+  font-size: 1.25rem;
+}
+
+/* 1. Primärer Gradient-Button (Wie Fitness-Hub öffnen) */
+.app-btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
+}
+
+.app-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+}
+
+/* 2. Sekundärer Ghost-Button (GitHub) */
+.app-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.app-btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff !important;
+}
+
+/* --- LIGHT MODE ANPASSUNG --- */
+body.light-theme .app-preview-card,
+[data-theme="light"] .app-preview-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .app-preview-title,
+[data-theme="light"] .app-preview-title {
+  color: #0f172a;
+}
+
+body.light-theme .app-preview-desc,
+[data-theme="light"] .app-preview-desc {
+  color: #475569;
+}
+
+body.light-theme .app-btn-secondary,
+[data-theme="light"] .app-btn-secondary {
+  background: #f1f5f9;
+  color: #1e293b !important;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .app-btn-secondary:hover,
+[data-theme="light"] .app-btn-secondary:hover {
+  background: #e2e8f0;
+  color: #0f172a !important;
+}

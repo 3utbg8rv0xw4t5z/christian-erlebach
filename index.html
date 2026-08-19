@@ -1628,8 +1628,51 @@
               onclick="openModal('modal-faq-hub')"
             >
               <span class="material-symbols-rounded btn-icon">psychology</span>
-              <span>Wissens-Hub öffnen</span>
+              <span>Fitness-Hub öffnen</span>
             </button>
+          </div>
+        </section>
+
+        <section class="section app-preview-section" id="tracker-preview">
+          <div class="container">
+            <div class="app-preview-card">
+              <div class="app-card-glow"></div>
+
+              <div class="app-preview-badge">
+                <span class="pulse-dot"></span>
+                <span>In aktiver Entwicklung · Live Preview</span>
+              </div>
+
+              <h2 class="app-preview-title">
+                Der evidenzbasierte Workout Tracker
+              </h2>
+              <p class="app-preview-desc">
+                Optimiere deine Progression, RIR-Tracking und Trainingsvolumen
+                in Echtzeit. Aktuell entsteht die maßgeschneiderte Web-App als
+                digitaler Begleiter für dein Kraft- und Hypertrophietraining.
+              </p>
+
+              <div class="app-preview-actions">
+                <a
+                  href="https://3utbg8rv0xw4t5z.github.io/christian-erlebach/app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="app-btn app-btn-primary"
+                >
+                  <span class="material-symbols-rounded">rocket_launch</span>
+                  <span>Live-Prototyp testen</span>
+                </a>
+                <a
+                  href="https://github.com/3utbg8rv0xw4t5z/christian-erlebach"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="app-btn app-btn-secondary"
+                >
+                  <span class="material-symbols-rounded">code</span>
+                  <span>GitHub Repository</span>
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2820,6 +2863,21 @@
             </p>
 
             <div class="hub-pills-container">
+              <button
+                class="hub-pill"
+                type="button"
+                onclick="
+                  window.open(
+                    'https://3utbg8rv0xw4t5z.github.io/christian-erlebach/app/',
+                    '_blank',
+                  )
+                "
+              >
+                <span class="material-symbols-rounded pill-icon"
+                  >smartphone</span
+                >
+                <span>Workout Tracker (Live-App Beta)</span>
+              </button>
               <button class="hub-pill" type="button" data-calc="all">
                 <span class="material-symbols-rounded pill-icon"
                   >calculate</span
@@ -2937,5 +2995,17 @@
     <script src="src/frameworks/aos/aos.js" defer></script>
     <script src="src/js/knowledge-base.js?v=8" defer></script>
     <script src="src/js/script.js?v=9" defer></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) => console.log("Service Worker aktiv:", reg.scope))
+            .catch((err) =>
+              console.error("Service Worker Registrierungsfehler:", err),
+            );
+        });
+      }
+    </script>
   </body>
 </html>

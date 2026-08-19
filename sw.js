@@ -1,4 +1,4 @@
-const CACHE_NAME = "main-website-v2";
+const CACHE_NAME = "main-website-v3";
 
 // Alle Dateien, die für den Offline-Betrieb gecacht werden sollen
 const ASSETS_TO_CACHE = [
@@ -24,10 +24,7 @@ const ASSETS_TO_CACHE = [
   "./src/js/script.js?v=9",
   "./src/js/knowledge-base.js?v=8",
 
-  // --- Assets & Medien ---
-  // Hier trägst du deine konkreten Dateinamen ein:
-
-  // Fonts (Beispiele - Namen an deine echten Dateien anpassen)
+  // Fonts
   "./src/assets/fonts/Inter-VariableFont_opsz,wght.ttf",
   "./src/assets/fonts/InterTight-VariableFont_wght.ttf",
   "./src/assets/fonts/material-symbols-rounded-latin-standard-normal.woff2",
@@ -35,13 +32,12 @@ const ASSETS_TO_CACHE = [
   // Icons / Favicons / Logo
   "./src/assets/icons/logo-dark.svg",
   "./src/assets/icons/logo-light.svg",
-
   "./src/assets/icons/favicon.svg",
   "./src/assets/icons/favicon-192.png",
   "./src/assets/icons/favicon-512.png",
   "./src/assets/icons/apple-touch-icon.png",
 
-  // Images (Beispiele für feste Grafiken / Logo)
+  // Images
   "./src/assets/images/og-image.jpg",
 ];
 
@@ -79,19 +75,11 @@ self.addEventListener("activate", (event) => {
 
 // 3. Fetch-Strategie: Cache First mit Netzwerk-Fallback
 self.addEventListener("fetch", (event) => {
-  // Wichtig: Anfragen an den Unterordner /app/ ignorieren,
-  // damit der Service Worker der Fitness-App nicht blockiert wird
-  if (event.request.url.includes("/app/")) {
-    return;
-  }
-
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Datei wurde im Cache gefunden -> sofort ausliefern
         return cachedResponse;
       }
-      // Datei nicht im Cache -> über das normale Netzwerk laden
       return fetch(event.request);
     }),
   );

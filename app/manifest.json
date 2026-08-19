@@ -1,7 +1,8 @@
 {
+  "id": "/christian-erlebach/app/",
   "name": "Workout Tracker | Christian Erlebach",
   "short_name": "Workout Tracker",
-  "description": "Dein persönlicher Workout Tracker & Progression Coach by Christian Erlebach. Datengestütztes Satz- und Krafttraining in Gotha.",
+  "description": "Dein persönlicher Workout Tracker & Progression Coach by Christian Erlebach.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

@@ -2999,10 +2999,12 @@
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("./sw.js")
-            .then((reg) => console.log("Service Worker aktiv:", reg.scope))
+            .register("/christian-erlebach/sw.js", {
+              scope: "/christian-erlebach/",
+            })
+            .then((reg) => console.log("[Root SW] Aktiv:", reg.scope))
             .catch((err) =>
-              console.error("Service Worker Registrierungsfehler:", err),
+              console.error("[Root SW] Registrierungsfehler:", err),
             );
         });
       }

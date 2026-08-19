@@ -1,4 +1,4 @@
-const CACHE_NAME = "main-website-v1";
+const CACHE_NAME = "main-website-v2";
 
 // Alle Dateien, die für den Offline-Betrieb gecacht werden sollen
 const ASSETS_TO_CACHE = [

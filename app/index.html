@@ -179,11 +179,11 @@
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("./sw.js")
-            .then((reg) =>
-              console.log("[Workout Tracker] SW aktiv, Scope:", reg.scope),
-            )
-            .catch((err) => console.error("[Workout Tracker] SW Fehler:", err));
+            .register("/christian-erlebach/app/sw.js", {
+              scope: "/christian-erlebach/app/",
+            })
+            .then((reg) => console.log("[App SW] Aktiv:", reg.scope))
+            .catch((err) => console.error("[App SW] Fehler:", err));
         });
       }
     </script>

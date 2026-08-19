@@ -1,8 +1,9 @@
 {
+  "id": "/christian-erlebach/",
   "name": "Christian Erlebach",
   "short_name": "Christian E.",
   "description": "1-zu-1 Personal Coaching & Kraftsport in Gotha",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b0f19",

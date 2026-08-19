@@ -8672,10 +8672,13 @@ html[data-theme="dark"] .footer-legal-links a {
 /* --------------------------------------------------------------------------
    3. INHALTS-STREAM & FEED-LAYOUT
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   3. INHALTS-STREAM & FEED-LAYOUT (MIT MEHR ABSTAND NACH UNTEN)
+   -------------------------------------------------------------------------- */
 .hub-gemini-body {
   flex: 1;
   overflow-y: auto;
-  padding: 1.4rem clamp(1rem, 3vw, 1.8rem) 0.5rem clamp(1rem, 3vw, 1.8rem);
+  padding: 1.4rem clamp(1rem, 3vw, 1.8rem) 1.4rem clamp(1rem, 3vw, 1.8rem) !important;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;

@@ -730,6 +730,7 @@ function executeHubQuery(rawQuery) {
 
   // Knowledge Base Suche
   if (typeof FAQ_KNOWLEDGE_BASE !== "undefined") {
+    // A. Glossar komplett
     if (lower === "glossar" || lower.includes("glossar")) {
       const glossarEntries = FAQ_KNOWLEDGE_BASE.filter((item) =>
         item.q.startsWith("Glossar:"),
@@ -742,6 +743,65 @@ function executeHubQuery(rawQuery) {
       return;
     }
 
+    // B. Kompletter Übungskatalog
+    if (
+      lower === "uebungskatalog" ||
+      lower.includes("übungskatalog") ||
+      lower.includes("uebungskatalog") ||
+      lower === "übungen" ||
+      lower === "uebungen"
+    ) {
+      const uebungEntries = FAQ_KNOWLEDGE_BASE.filter((item) =>
+        item.q.startsWith("Übung:"),
+      );
+      setTimeout(() => {
+        uebungEntries.forEach((m) =>
+          appendBotMsgToFeed(m.q, m.a, "Kompletter Übungskatalog"),
+        );
+      }, 40);
+      return;
+    }
+
+    // C. Alle Formeln & Rechenwege
+    if (
+      lower === "berechnung" ||
+      lower.includes("berechnung") ||
+      lower.includes("formeln") ||
+      lower.includes("rechenwege")
+    ) {
+      const calcFormulaEntries = FAQ_KNOWLEDGE_BASE.filter((item) =>
+        item.q.startsWith("Berechnung:"),
+      );
+      setTimeout(() => {
+        calcFormulaEntries.forEach((m) =>
+          appendBotMsgToFeed(m.q, m.a, "Formeln & Rechenwege"),
+        );
+      }, 40);
+      return;
+    }
+
+    // D. Vollständiges FAQ (Alle 43 Coaching- & Trainingsfragen)
+    if (
+      lower.includes("komplettes faq") ||
+      lower.includes("vollständiges faq") ||
+      lower.includes("alle fragen") ||
+      lower === "faq"
+    ) {
+      const faqEntries = FAQ_KNOWLEDGE_BASE.filter(
+        (item) =>
+          !item.q.startsWith("Glossar:") &&
+          !item.q.startsWith("Übung:") &&
+          !item.q.startsWith("Berechnung:"),
+      );
+      setTimeout(() => {
+        faqEntries.forEach((m) =>
+          appendBotMsgToFeed(m.q, m.a, "Vollständiges FAQ"),
+        );
+      }, 40);
+      return;
+    }
+
+    // E. Standard-Stichwortsuche für Einzelfragen
     const terms = lower.split(/\s+/).filter(Boolean);
     const matches = FAQ_KNOWLEDGE_BASE.filter((item) => {
       const qText = item.q.toLowerCase();

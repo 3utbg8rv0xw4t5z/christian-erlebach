@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     AOS.init({
       duration: 950,
       once: true,
-      offset: 140, // WICHTIG: Wartet, bis Element 140px im Bild ist, bevor es fadet
+      offset: 140, // Wartet, bis Element 140px im Bild ist, bevor es fadet
       easing: "ease-out-cubic",
       disable: false,
     });
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.title = "Personal Trainer, Kraft- & Functional Coach in Gotha";
   }
 
-  // 2. AKKORDEON-FUNKTIONALITÄT (Lizenzen & FAQs ausklappen)
+  // Akkordeon-Funktionalität (Landingpage 6 Kern-FAQs & Lizenzen)
   const accordionHeaders = document.querySelectorAll(".accordion-header");
   accordionHeaders.forEach((header) => {
     header.addEventListener("click", () => {
@@ -61,11 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 3. DYNAMISCHE THEME-COLOR & DARK / LIGHT MODE LOGIK
+  // Dark / Light Mode Logik
   const themeToggleBtn = document.getElementById("theme-toggle");
   const htmlElement = document.documentElement;
 
-  // Helferfunktion zum dynamischen Färben der mobilen Browserleiste
   function updateThemeColor(theme) {
     const color = theme === "dark" ? "#0b0f19" : "#ffffff";
     const metaLight = document.getElementById("meta-theme-light");
@@ -74,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (metaLight) metaLight.setAttribute("content", color);
     if (metaDark) metaDark.setAttribute("content", color);
 
-    // Fallback für generische Selektoren
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
       meta.setAttribute("content", color);
     });
@@ -94,11 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     activeTheme = "light";
   }
 
-  // Initiales Setzen von Attribut & Browser-Leistenfarbe
   htmlElement.setAttribute("data-theme", activeTheme);
   updateThemeColor(activeTheme);
 
-  // Klick-Listener auf den Theme-Toggle Button
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener("click", () => {
       const currentTheme = htmlElement.getAttribute("data-theme");
@@ -114,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Listener für System-Theme Änderungen
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
     "change",
     (e) => {
@@ -127,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: true },
   );
 
-  // 4. AUTOMATISCHES JAHR FÜR COPYRIGHT & DATENSCHUTZ
+  // Automatisches Jahr für Copyright & Datenschutz
   const currentYear = new Date().getFullYear();
   const copyrightElem = document.getElementById("year-copyright");
   if (copyrightElem) copyrightElem.textContent = currentYear;
@@ -135,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const privacyElem = document.getElementById("year-privacy");
   if (privacyElem) privacyElem.textContent = currentYear;
 
-  // 5. ERWEITERTE FORMULAR-VALIDIERUNG, ZEICHENZÄHLER & BUTTON-STATUS
+  // Formular-Validierung, Zeichenzähler & Button-Status
   const form = document.getElementById("contactForm");
   const messageInput = document.getElementById("contact-message");
   const charCounter = document.getElementById("char-counter");
@@ -177,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// 3. SMART AUTO-HIDE NAVBAR LOGIK (GPU- / RAF-OPTIMIERT)
+// 3. SMART AUTO-HIDE NAVBAR LOGIK
 // ==========================================================================
 let lastScrollY = window.scrollY;
 let isScrollingNav = false;
@@ -341,7 +336,6 @@ function handleContactSubmit(event) {
   const submitBtn = document.getElementById("submit-btn");
   const submitBtnText = document.getElementById("submit-btn-text");
 
-  // Moderner Toast statt Standard-Alert
   showToastNotification();
 
   form.reset();
@@ -374,7 +368,7 @@ function handleContactSubmit(event) {
 }
 
 // ==========================================================================
-// 6. DYNAMISCHE INHALTE & BILDER (AUF- & ZUKLAPPEN + SANFTES ZURÜCKSCROLLEN)
+// 6. TESTIMONIALS & BILD-SWITCHER
 // ==========================================================================
 function loadMoreTestimonials() {
   const btn = document.getElementById("loadMoreTestimonialsBtn");
@@ -385,7 +379,6 @@ function loadMoreTestimonials() {
   const isExpanded = btn.getAttribute("data-expanded") === "true";
 
   if (isExpanded) {
-    // 1. Zuklappen: Karten ab Index 3 wieder verstecken
     cards.forEach((card, index) => {
       if (index >= 3) {
         card.classList.remove("show-testimonial");
@@ -396,12 +389,10 @@ function loadMoreTestimonials() {
     btn.setAttribute("data-expanded", "false");
     btn.innerHTML = `<span>Mehr Erfolgsgeschichten laden</span><span class="material-symbols-rounded btn-icon">arrow_forward</span>`;
 
-    // 2. Sanft an den Anfang der Sektion zurückscrollen
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   } else {
-    // 1. Aufklappen: Alle versteckten Karten sofort anzeigen (ohne Verzögerung)
     const hiddenCards = document.querySelectorAll(
       ".card.testimonial-card.hidden-testimonial",
     );
@@ -434,46 +425,8 @@ function swapAboutImg(btn, newUrl) {
   btn.classList.add("active");
 }
 
-function loadMoreFaqs() {
-  const btn = document.getElementById("loadMoreFaqBtn");
-  const faqs = document.querySelectorAll("#faq .accordion-item");
-  const section = document.getElementById("faq");
-  if (!btn) return;
-
-  const isExpanded = btn.getAttribute("data-expanded") === "true";
-
-  if (isExpanded) {
-    // 1. Zuklappen: Zusätzliche FAQs ab Index 4 verstecken & Unter-Inhalte schließen
-    faqs.forEach((faq, index) => {
-      if (index >= 5) {
-        faq.classList.add("hidden-faq");
-        faq.classList.remove("active");
-        const content = faq.querySelector(".accordion-content");
-        if (content) content.style.maxHeight = "0";
-      }
-    });
-
-    btn.setAttribute("data-expanded", "false");
-    btn.innerHTML = `<span>Weitere Fragen laden</span><span class="material-symbols-rounded btn-icon">arrow_forward</span>`;
-
-    // 2. Sanft an den Anfang der Sektion zurückscrollen
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  } else {
-    // 1. Aufklappen: Alle versteckten FAQs sofort einblenden
-    const hiddenFaqs = document.querySelectorAll(".hidden-faq");
-    hiddenFaqs.forEach((faq) => {
-      faq.classList.remove("hidden-faq");
-    });
-
-    btn.setAttribute("data-expanded", "true");
-    btn.innerHTML = `<span>Weniger Fragen laden</span><span class="material-symbols-rounded btn-icon">arrow_forward</span>`;
-  }
-}
-
 // ==========================================================================
-// 7. STATISTIK-COUNTER ANIMATION (PERFORMANCE-OPTIMIERT)
+// 7. STATISTIK-COUNTER ANIMATION
 // ==========================================================================
 function initCounters() {
   const counters = document.querySelectorAll(".counter");
@@ -539,7 +492,6 @@ function initCounters() {
   });
 }
 
-// Initialisierung bei DOMContentLoaded & Fallback für Window Load
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initCounters, { once: true });
 } else {
@@ -547,14 +499,13 @@ if (document.readyState === "loading") {
 }
 
 // ==========================================================================
-// 8. MODAL DEEP-LINKING (Erweitert um alle 8 Fitness-Rechner)
+// 8. MODAL DEEP-LINKING (Bereinigt für das Wissens-Hub)
 // ==========================================================================
 function checkModalHash() {
   const hash = window.location.hash.replace("#", "").toLowerCase().trim();
   if (!hash) return;
 
   const modalMapping = {
-    // Standard-Modals
     impressum: "modal-impressum",
     "modal-impressum": "modal-impressum",
     datenschutz: "modal-datenschutz",
@@ -569,66 +520,47 @@ function checkModalHash() {
     kontakt: "modal-contact",
     contact: "modal-contact",
     "modal-contact": "modal-contact",
-    glossar: "modal-glossar",
-    "modal-glossar": "modal-glossar",
 
-    // Die 8 Fitness-Rechner
-    calories: "modal-calc-calories",
-    kalorien: "modal-calc-calories",
-    tdee: "modal-calc-calories",
-    "calc-calories": "modal-calc-calories",
-    "modal-calc-calories": "modal-calc-calories",
-
-    kfa: "modal-calc-kfa",
-    navy: "modal-calc-kfa",
-    koerperfett: "modal-calc-kfa",
-    "calc-kfa": "modal-calc-kfa",
-    "modal-calc-kfa": "modal-calc-kfa",
-
-    bmi: "modal-calc-bmi",
-    "calc-bmi": "modal-calc-bmi",
-    "modal-calc-bmi": "modal-calc-bmi",
-
-    "1rm": "modal-calc-1rm",
-    onerm: "modal-calc-1rm",
-    maximalkraft: "modal-calc-1rm",
-    "calc-1rm": "modal-calc-1rm",
-    "modal-calc-1rm": "modal-calc-1rm",
-
-    standards: "modal-calc-standards",
-    kraftstandards: "modal-calc-standards",
-    "calc-standards": "modal-calc-standards",
-    "modal-calc-standards": "modal-calc-standards",
-
-    progress: "modal-calc-progress",
-    tracker: "modal-calc-progress",
-    overload: "modal-calc-progress",
-    "calc-progress": "modal-calc-progress",
-    "modal-calc-progress": "modal-calc-progress",
-
-    rpe: "modal-calc-rpe",
-    rir: "modal-calc-rpe",
-    "calc-rpe": "modal-calc-rpe",
-    "modal-calc-rpe": "modal-calc-rpe",
-
-    volume: "modal-calc-volume",
-    volumen: "modal-calc-volume",
-    mev: "modal-calc-volume",
-    mrv: "modal-calc-volume",
-    "calc-volume": "modal-calc-volume",
-    "modal-calc-volume": "modal-calc-volume",
+    // Wissens-Hub & Rechner Hashes leiten direkt ins Hub-Modal
+    hub: "modal-faq-hub",
+    "modal-faq-hub": "modal-faq-hub",
+    faq: "modal-faq-hub",
+    glossar: "modal-faq-hub",
+    calories: "modal-faq-hub",
+    kalorien: "modal-faq-hub",
+    tdee: "modal-faq-hub",
+    kfa: "modal-faq-hub",
+    bmi: "modal-faq-hub",
+    "1rm": "modal-faq-hub",
+    standards: "modal-faq-hub",
+    progress: "modal-faq-hub",
+    rpe: "modal-faq-hub",
+    volume: "modal-faq-hub",
   };
 
   const targetId = modalMapping[hash];
   if (targetId) {
-    // 50ms Puffer, damit das DOM und CSS sicher gerendert sind
     setTimeout(() => {
       openModal(targetId);
+      // Wenn ein Rechner-Direktlink aufgerufen wird, direkt im Chat triggern
+      if (
+        [
+          "calories",
+          "kfa",
+          "bmi",
+          "1rm",
+          "standards",
+          "progress",
+          "rpe",
+          "volume",
+        ].includes(hash)
+      ) {
+        setTimeout(() => triggerInlineCalculator(hash), 200);
+      }
     }, 50);
   }
 }
 
-// Sofort ausführen & bei URL-/Hash-Wechseln
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", checkModalHash);
 } else {
@@ -638,172 +570,409 @@ window.addEventListener("load", checkModalHash);
 window.addEventListener("hashchange", checkModalHash);
 
 // ==========================================================================
-// 9. INTERAKTIVE FITNESS-RECHNER: FORMELN & VALIDIERUNG
+// 9. ALL-IN-ONE FITNESS- & WISSENS-HUB ENGINE
 // ==========================================================================
 
-// Hilfsfunktion: Visuelles Validierungs-Feedback setzen
-function updateValidationStyle(inputEl, isValid) {
-  if (!inputEl) return;
-  if (inputEl.value.trim() === "") {
-    inputEl.classList.remove("is-valid", "is-invalid");
+function escapeHubText(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function scrollHubToBottom() {
+  const stream = document.getElementById("hubChatStream");
+  if (stream) {
+    setTimeout(() => {
+      stream.scrollTo({ top: stream.scrollHeight, behavior: "smooth" });
+    }, 40);
+  }
+}
+
+function appendBotMsgToFeed(title, content, userTag = "") {
+  const stream = document.getElementById("hubChatStream");
+  if (!stream) return;
+
+  const div = document.createElement("div");
+  div.className = "hub-feed-entry";
+
+  const tagHtml = userTag
+    ? `<span class="hub-user-query-tag">Thema: ${escapeHubText(userTag)}</span>`
+    : "";
+
+  div.innerHTML = `
+    ${tagHtml}
+    <h4 class="hub-feed-question">${title}</h4>
+    <div class="hub-feed-answer">${content}</div>
+  `;
+  stream.appendChild(div);
+  scrollHubToBottom();
+}
+
+function triggerInlineCalculator(calcKey, userQuery = "") {
+  if (
+    typeof INLINE_CALCULATORS !== "undefined" &&
+    INLINE_CALCULATORS[calcKey]
+  ) {
+    appendBotMsgToFeed(
+      INLINE_CALCULATORS[calcKey].title,
+      INLINE_CALCULATORS[calcKey].html,
+      userQuery,
+    );
+  }
+}
+
+function executeHubQuery(rawQuery) {
+  const query = (rawQuery || "").trim();
+  const input = document.getElementById("hubSearchInput");
+  const errorMsg = document.getElementById("hubSearchError");
+
+  if (!query) return;
+
+  if (/[<>{}\/\\]/.test(query)) {
+    if (errorMsg) errorMsg.style.display = "block";
+    return;
+  } else {
+    if (errorMsg) errorMsg.style.display = "none";
+  }
+
+  if (input) input.value = "";
+  const lower = query.toLowerCase();
+
+  // Rechner-Routing
+  if (
+    lower.includes("kalor") ||
+    lower.includes("tdee") ||
+    lower.includes("grundumsatz") ||
+    lower.includes("bmr")
+  ) {
+    setTimeout(() => triggerInlineCalculator("calories", query), 40);
     return;
   }
-  if (isValid) {
-    inputEl.classList.remove("is-invalid");
-    inputEl.classList.add("is-valid");
-  } else {
-    inputEl.classList.remove("is-valid");
-    inputEl.classList.add("is-invalid");
+  if (lower.includes("bmi") || lower.includes("ffmi")) {
+    setTimeout(() => triggerInlineCalculator("bmi", query), 40);
+    return;
+  }
+  if (
+    lower.includes("1rm") ||
+    lower.includes("maximalkraft") ||
+    lower.includes("one rep") ||
+    lower.includes("onerm")
+  ) {
+    setTimeout(() => triggerInlineCalculator("1rm", query), 40);
+    return;
+  }
+  if (
+    lower.includes("kfa") ||
+    lower.includes("koerperfett") ||
+    lower.includes("körperfett") ||
+    lower.includes("navy")
+  ) {
+    setTimeout(() => triggerInlineCalculator("kfa", query), 40);
+    return;
+  }
+  if (
+    lower.includes("volumen") ||
+    lower.includes("mev") ||
+    lower.includes("mrv") ||
+    lower.includes("mav") ||
+    lower.includes("satzvolumen")
+  ) {
+    setTimeout(() => triggerInlineCalculator("volume", query), 40);
+    return;
+  }
+  if (
+    lower.includes("standard") ||
+    lower.includes("relativkraft") ||
+    lower.includes("kraftstandard")
+  ) {
+    setTimeout(() => triggerInlineCalculator("standards", query), 40);
+    return;
+  }
+  if (
+    lower.includes("tonnage") ||
+    lower.includes("tracker") ||
+    lower === "progress"
+  ) {
+    setTimeout(() => triggerInlineCalculator("progress", query), 40);
+    return;
+  }
+  if (lower.includes("rpe") || lower.includes("rir")) {
+    setTimeout(() => triggerInlineCalculator("rpe", query), 40);
+    return;
+  }
+  if (
+    lower === "rechner" ||
+    lower.includes("rechner") ||
+    lower.includes("tools")
+  ) {
+    setTimeout(() => {
+      appendBotMsgToFeed(
+        `<span class="material-symbols-rounded">calculate</span> Interaktive Rechner auswählen`,
+        `
+        <p>Wähle einen Rechner aus, um ihn direkt hier im Chat zu öffnen:</p>
+        <div class="hub-pills-container">
+          <button class="hub-pill" type="button" data-calc="calories"><span class="material-symbols-rounded pill-icon">local_fire_department</span><span>Kalorien &amp; TDEE</span></button>
+          <button class="hub-pill" type="button" data-calc="bmi"><span class="material-symbols-rounded pill-icon">scale</span><span>BMI Rechner</span></button>
+          <button class="hub-pill" type="button" data-calc="1rm"><span class="material-symbols-rounded pill-icon">fitness_center</span><span>1RM Maximalkraft</span></button>
+          <button class="hub-pill" type="button" data-calc="kfa"><span class="material-symbols-rounded pill-icon">straighten</span><span>KFA (Navy)</span></button>
+          <button class="hub-pill" type="button" data-calc="volume"><span class="material-symbols-rounded pill-icon">bar_chart</span><span>MEV Satzvolumen</span></button>
+          <button class="hub-pill" type="button" data-calc="standards"><span class="material-symbols-rounded pill-icon">military_tech</span><span>Kraftstandards</span></button>
+          <button class="hub-pill" type="button" data-calc="progress"><span class="material-symbols-rounded pill-icon">trending_up</span><span>Tonnage Tracker</span></button>
+          <button class="hub-pill" type="button" data-calc="rpe"><span class="material-symbols-rounded pill-icon">speed</span><span>RPE &amp; RIR</span></button>
+        </div>`,
+        query,
+      );
+      bindHubPillEvents();
+    }, 40);
+    return;
+  }
+
+  // Knowledge Base Suche
+  if (typeof FAQ_KNOWLEDGE_BASE !== "undefined") {
+    if (lower === "glossar" || lower.includes("glossar")) {
+      const glossarEntries = FAQ_KNOWLEDGE_BASE.filter((item) =>
+        item.q.startsWith("Glossar:"),
+      );
+      setTimeout(() => {
+        glossarEntries.forEach((m) =>
+          appendBotMsgToFeed(m.q, m.a, "Glossar (A–Z)"),
+        );
+      }, 40);
+      return;
+    }
+
+    const terms = lower.split(/\s+/).filter(Boolean);
+    const matches = FAQ_KNOWLEDGE_BASE.filter((item) => {
+      const qText = item.q.toLowerCase();
+      const tagsText = (item.tags || []).join(" ").toLowerCase();
+      const fullText = qText + " " + tagsText;
+
+      return terms.some((term) => fullText.includes(term));
+    });
+
+    setTimeout(() => {
+      if (matches.length > 0) {
+        matches.slice(0, 4).forEach((m) => appendBotMsgToFeed(m.q, m.a, query));
+      } else {
+        appendBotMsgToFeed(
+          "Keine direkte Antwort gefunden",
+          `<p style="margin: 0;">Dazu habe ich keinen passenden Eintrag gefunden. Probiere es mit Begriffen wie <strong>Kreatin</strong>, <strong>Bankdrücken</strong>, <strong>Kniebeugen</strong>, <strong>Protein</strong>, <strong>1RM</strong> oder <strong>Glossar</strong>.</p>`,
+          query,
+        );
+      }
+    }, 60);
   }
 }
 
-// --------------------------------------------------------------------------
-// 1. KALORIEN- & TDEE-RECHNER (Mifflin-St. Jeor Formel)
-// --------------------------------------------------------------------------
-function validateCaloriesForm() {
-  const ageEl = document.getElementById("tdee-age");
-  const weightEl = document.getElementById("tdee-weight");
-  const heightEl = document.getElementById("tdee-height");
-  const btn = document.getElementById("btn-calc-calories");
+function bindHubPillEvents() {
+  // Pills Klick-Event
+  document.querySelectorAll(".hub-pill").forEach((pill) => {
+    if (pill.dataset.bound === "true") return;
+    pill.dataset.bound = "true";
 
-  if (!ageEl || !weightEl || !heightEl) return false;
+    pill.addEventListener("click", () => {
+      const calcKey = pill.getAttribute("data-calc");
+      const searchTerm = pill.getAttribute("data-search");
 
-  const age = parseFloat(ageEl.value);
-  const weight = parseFloat(weightEl.value);
-  const height = parseFloat(heightEl.value);
+      if (calcKey === "all") {
+        executeHubQuery("rechner");
+      } else if (calcKey) {
+        triggerInlineCalculator(calcKey, pill.innerText.trim());
+      } else if (searchTerm) {
+        executeHubQuery(searchTerm);
+      }
+    });
+  });
 
-  const isAgeOk = !isNaN(age) && age >= 14 && age <= 99;
-  const isWeightOk = !isNaN(weight) && weight >= 35 && weight <= 250;
-  const isHeightOk = !isNaN(height) && height >= 120 && height <= 230;
-
-  updateValidationStyle(ageEl, isAgeOk);
-  updateValidationStyle(weightEl, isWeightOk);
-  updateValidationStyle(heightEl, isHeightOk);
-
-  const isValid = isAgeOk && isWeightOk && isHeightOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
+  // Selectbox Auto-Close: Schließt Dropdown nach Klick auf Touch & Desktop
+  const stream = document.getElementById("hubChatStream");
+  if (stream && !stream.dataset.selectBound) {
+    stream.dataset.selectBound = "true";
+    stream.addEventListener("change", (e) => {
+      if (e.target && e.target.tagName === "SELECT") {
+        e.target.blur();
+      }
+    });
+  }
 }
 
-function handleCaloriesCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateCaloriesForm()) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const sendBtn = document.getElementById("hubPromptSendBtn");
+  const searchInput = document.getElementById("hubSearchInput");
+  const resetBtn = document.getElementById("hubResetBtn");
 
-  const gender = document.getElementById("tdee-gender")?.value || "male";
-  const age = parseFloat(document.getElementById("tdee-age").value);
-  const weight = parseFloat(document.getElementById("tdee-weight").value);
-  const height = parseFloat(document.getElementById("tdee-height").value);
-  const pal = parseFloat(document.getElementById("tdee-pal")?.value || "1.375");
-  const goal = document.getElementById("tdee-goal")?.value || "maintain";
+  if (sendBtn && searchInput) {
+    sendBtn.addEventListener("click", () => executeHubQuery(searchInput.value));
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        executeHubQuery(searchInput.value);
+      }
+    });
+  }
 
-  // Mifflin-St. Jeor Formel
-  let bmr = 10 * weight + 6.25 * height - 5 * age;
-  bmr = gender === "male" ? bmr + 5 : bmr - 161;
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      const stream = document.getElementById("hubChatStream");
+      const welcome = document.getElementById("hubWelcomeBlock");
+      if (stream && welcome) {
+        stream.innerHTML = "";
+        stream.appendChild(welcome);
+        bindHubPillEvents();
+      }
+    });
+  }
 
+  bindHubPillEvents();
+});
+
+// ==========================================================================
+// 10. RECHNER-BERECHNUNGEN & VALIDIERUNG (CONTAINER-SCOPED)
+// ==========================================================================
+
+function validateHubInput(el, isOk) {
+  if (!el) return false;
+  if (!isOk) {
+    el.classList.add("is-invalid");
+  } else {
+    el.classList.remove("is-invalid");
+  }
+  return isOk;
+}
+
+function showHubError(resBox, msg) {
+  resBox.style.display = "block";
+  resBox.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 6px; color: #ef4444; font-weight: 600;">
+      <span class="material-symbols-rounded" style="font-size: 1.2rem;">error</span>
+      <span>${msg}</span>
+    </div>`;
+  scrollHubToBottom();
+}
+
+function toggleNavyHipHub(selectEl) {
+  const container = selectEl.closest(".hub-inline-calc");
+  if (!container) return;
+  const hipWrap = container.querySelector(".k-hip-wrap");
+  if (hipWrap) {
+    hipWrap.style.display = selectEl.value === "female" ? "block" : "none";
+  }
+}
+
+// 1. KALORIEN
+function calcHubCalories(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
+
+  const gender = container.querySelector(".c-sex")?.value || "male";
+  const ageEl = container.querySelector(".c-age");
+  const hEl = container.querySelector(".c-h");
+  const wEl = container.querySelector(".c-w");
+  const pal = parseFloat(container.querySelector(".c-act")?.value || "1.375");
+  const goal = container.querySelector(".c-goal")?.value || "maintain";
+  const res = container.querySelector(".res-box");
+
+  const age = parseFloat(ageEl?.value);
+  const h = parseFloat(hEl?.value);
+  const w = parseFloat(wEl?.value);
+
+  const isAgeOk = validateHubInput(
+    ageEl,
+    !isNaN(age) && age >= 14 && age <= 99,
+  );
+  const isHOk = validateHubInput(hEl, !isNaN(h) && h >= 120 && h <= 230);
+  const isWOk = validateHubInput(wEl, !isNaN(w) && w >= 35 && w <= 250);
+
+  if (!isAgeOk || !isHOk || !isWOk) {
+    showHubError(
+      res,
+      "Bitte fülle alle Pflichtfelder mit gültigen Werten aus.",
+    );
+    return;
+  }
+
+  let bmr = 10 * w + 6.25 * h - 5 * age + (gender === "male" ? 5 : -161);
   const tdee = Math.round(bmr * pal);
   let targetCalories = tdee;
   let goalLabel = "Gewicht halten / Recomp";
+  let badgeClass = "badge-blue";
 
   if (goal === "cut-moderate") {
     targetCalories = Math.round(tdee - 400);
     goalLabel = "Fettabbau (Defizit)";
+    badgeClass = "badge-green";
   } else if (goal === "bulk-lean") {
     targetCalories = Math.round(tdee + 300);
     goalLabel = "Muskelaufbau (Lean Bulk)";
+    badgeClass = "badge-purple";
   }
 
-  const proteinGrams = Math.round(weight * 2.0);
-  const fatGrams = Math.round(weight * 0.9);
+  const proteinGrams = Math.round(w * 2.0);
+  const fatGrams = Math.round(w * 0.9);
   const carbCalories = Math.max(
     0,
     targetCalories - proteinGrams * 4 - fatGrams * 9,
   );
   const carbGrams = Math.round(carbCalories / 4);
 
-  const resBox = document.getElementById("result-calc-calories");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Dein täglicher Energiebedarf</h4>
-        <span class="calc-res-badge badge-blue">${goalLabel}</span>
-      </div>
-      <div class="calc-main-val">${targetCalories} <span class="calc-main-unit">kcal / Tag</span></div>
-      <div class="calc-res-grid">
-        <div class="calc-res-item"><span>Grundumsatz (BMR)</span><strong>${Math.round(bmr)} kcal</strong></div>
-        <div class="calc-res-item"><span>Erhaltung (TDEE)</span><strong>${tdee} kcal</strong></div>
-        <div class="calc-res-item"><span>Protein (Ziel)</span><strong>~${proteinGrams} g</strong></div>
-        <div class="calc-res-item"><span>Fett (Ziel)</span><strong>~${fatGrams} g</strong></div>
-        <div class="calc-res-item"><span>Kohlenhydrate</span><strong>~${carbGrams} g</strong></div>
-      </div>
-      <div class="calc-coach-tip">
-        <strong>Coach-Tipp:</strong> Halte dein Protein bei ~2g/kg konstant. Nutze diesen Wert für 2–3 Wochen als Benchmark und passe die Kalorien anhand deiner wöchentlichen Durchschnittswiegevorgänge an.
-      </div>
-    `;
-  }
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Dein täglicher Energiebedarf</h4>
+      <span class="calc-res-badge ${badgeClass}">${goalLabel}</span>
+    </div>
+    <div class="calc-main-val">${targetCalories} <span class="calc-main-unit">kcal / Tag</span></div>
+    <div class="calc-res-grid">
+      <div class="calc-res-item"><span>Grundumsatz (BMR)</span><strong>${Math.round(bmr)} kcal</strong></div>
+      <div class="calc-res-item"><span>Erhaltung (TDEE)</span><strong>${tdee} kcal</strong></div>
+      <div class="calc-res-item"><span>Protein (Ziel)</span><strong>~${proteinGrams} g</strong></div>
+      <div class="calc-res-item"><span>Fett (Ziel)</span><strong>~${fatGrams} g</strong></div>
+      <div class="calc-res-item"><span>Kohlenhydrate</span><strong>~${carbGrams} g</strong></div>
+    </div>
+    <div class="calc-coach-tip">
+      <strong>Coach-Tipp:</strong> Halte dein Protein bei ~2g/kg konstant. Nutze diesen Wert für 2–3 Wochen als Benchmark und passe die Kalorien anhand deiner wöchentlichen Durchschnittswiegevorgänge an.
+    </div>
+  `;
+  scrollHubToBottom();
 }
 
-// --------------------------------------------------------------------------
-// 2. KÖRPERFETTANTEIL (US-Navy Methode)
-// --------------------------------------------------------------------------
-function toggleKfaGenderFields() {
-  const gender = document.getElementById("kfa-gender")?.value;
-  const hipGroup = document.getElementById("kfa-hip-group");
-  const waistLabel = document.getElementById("kfa-waist-label");
+// 2. KFA (US-NAVY)
+function calcHubNavyKFA(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
 
-  if (gender === "female") {
-    if (hipGroup) hipGroup.style.display = "block";
-    if (waistLabel) waistLabel.innerText = "Taillenumfang (cm) *";
-  } else {
-    if (hipGroup) hipGroup.style.display = "none";
-    if (waistLabel) waistLabel.innerText = "Bauchumfang (cm) *";
-  }
-}
+  const gender = container.querySelector(".k-sex")?.value || "male";
+  const hEl = container.querySelector(".k-h");
+  const neckEl = container.querySelector(".k-neck");
+  const waistEl = container.querySelector(".k-waist");
+  const hipEl = container.querySelector(".k-hip");
+  const res = container.querySelector(".res-box");
 
-function validateKfaForm() {
-  const gender = document.getElementById("kfa-gender")?.value || "male";
-  const heightEl = document.getElementById("kfa-height");
-  const neckEl = document.getElementById("kfa-neck");
-  const waistEl = document.getElementById("kfa-waist");
-  const hipEl = document.getElementById("kfa-hip");
-  const btn = document.getElementById("btn-calc-kfa");
-
-  if (!heightEl || !neckEl || !waistEl) return false;
-
-  const height = parseFloat(heightEl.value);
-  const neck = parseFloat(neckEl.value);
-  const waist = parseFloat(waistEl.value);
+  const h = parseFloat(hEl?.value);
+  const neck = parseFloat(neckEl?.value);
+  const waist = parseFloat(waistEl?.value);
   const hip = parseFloat(hipEl?.value || "0");
 
-  const isHeightOk = !isNaN(height) && height >= 120 && height <= 230;
-  const isNeckOk = !isNaN(neck) && neck >= 20 && neck <= 60;
-  const isWaistOk =
-    !isNaN(waist) && waist >= 40 && waist <= 200 && waist > neck;
+  const isHOk = validateHubInput(hEl, !isNaN(h) && h >= 120 && h <= 230);
+  const isNeckOk = validateHubInput(
+    neckEl,
+    !isNaN(neck) && neck >= 20 && neck <= 60,
+  );
+  const isWaistOk = validateHubInput(
+    waistEl,
+    !isNaN(waist) && waist >= 40 && waist <= 200 && waist > neck,
+  );
   let isHipOk = true;
 
-  if (gender === "female" && hipEl) {
-    isHipOk = !isNaN(hip) && hip >= 50 && hip <= 200;
-    updateValidationStyle(hipEl, isHipOk);
+  if (gender === "female") {
+    isHipOk = validateHubInput(hipEl, !isNaN(hip) && hip >= 50 && hip <= 200);
   }
 
-  updateValidationStyle(heightEl, isHeightOk);
-  updateValidationStyle(neckEl, isNeckOk);
-  updateValidationStyle(waistEl, isWaistOk);
-
-  const isValid = isHeightOk && isNeckOk && isWaistOk && isHipOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
-}
-
-function handleKfaCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateKfaForm()) return;
-
-  const gender = document.getElementById("kfa-gender").value;
-  const height = parseFloat(document.getElementById("kfa-height").value);
-  const neck = parseFloat(document.getElementById("kfa-neck").value);
-  const waist = parseFloat(document.getElementById("kfa-waist").value);
-  const hip = parseFloat(document.getElementById("kfa-hip")?.value || "0");
+  if (!isHOk || !isNeckOk || !isWaistOk || !isHipOk) {
+    showHubError(res, "Bitte gib alle Umfänge korrekt in cm an.");
+    return;
+  }
 
   let bfp = 0;
   if (gender === "male") {
@@ -811,14 +980,14 @@ function handleKfaCalc(e) {
       495 /
         (1.0324 -
           0.19077 * Math.log10(waist - neck) +
-          0.15456 * Math.log10(height)) -
+          0.15456 * Math.log10(h)) -
       450;
   } else {
     bfp =
       495 /
         (1.29579 -
           0.35004 * Math.log10(waist + hip - neck) +
-          0.221 * Math.log10(height)) -
+          0.221 * Math.log10(h)) -
       450;
   }
 
@@ -858,54 +1027,44 @@ function handleKfaCalc(e) {
     }
   }
 
-  const resBox = document.getElementById("result-calc-kfa");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Geschätzter Körperfettanteil (KFA)</h4>
-        <span class="calc-res-badge ${badgeClass}">${category}</span>
-      </div>
-      <div class="calc-main-val">${bfpRounded} <span class="calc-main-unit">% KFA</span></div>
-      <div class="calc-coach-tip">
-        <strong>Coaching-Hinweis:</strong> Die US-Navy-Methode ist ideal, um Fortschritte über Monate messbar zu machen. Miss die Umfänge stets morgens nüchtern und unter identischen Bedingungen.
-      </div>
-    `;
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Geschätzter Körperfettanteil (KFA)</h4>
+      <span class="calc-res-badge ${badgeClass}">${category}</span>
+    </div>
+    <div class="calc-main-val">${bfpRounded} <span class="calc-main-unit">% KFA</span></div>
+    <div class="calc-coach-tip">
+      <strong>Coaching-Hinweis:</strong> Die US-Navy-Methode ist ideal, um Fortschritte über Monate messbar zu machen. Miss die Umfänge stets morgens nüchtern und unter identischen Bedingungen.
+    </div>
+  `;
+  scrollHubToBottom();
+}
+
+// 3. BMI
+function calcHubBmi(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
+
+  const hEl = container.querySelector(".b-h");
+  const wEl = container.querySelector(".b-w");
+  const res = container.querySelector(".res-box");
+
+  const h = parseFloat(hEl?.value) / 100;
+  const w = parseFloat(wEl?.value);
+
+  const isHOk = validateHubInput(hEl, !isNaN(h) && h >= 1.2 && h <= 2.3);
+  const isWOk = validateHubInput(wEl, !isNaN(w) && w >= 35 && w <= 250);
+
+  if (!isHOk || !isWOk) {
+    showHubError(
+      res,
+      "Bitte gib eine gültige Größe (120–230 cm) und ein Gewicht (35–250 kg) ein.",
+    );
+    return;
   }
-}
 
-// --------------------------------------------------------------------------
-// 3. BMI-RECHNER
-// --------------------------------------------------------------------------
-function validateBmiForm() {
-  const weightEl = document.getElementById("bmi-weight");
-  const heightEl = document.getElementById("bmi-height");
-  const btn = document.getElementById("btn-calc-bmi");
-
-  if (!weightEl || !heightEl) return false;
-
-  const weight = parseFloat(weightEl.value);
-  const height = parseFloat(heightEl.value);
-
-  const isWeightOk = !isNaN(weight) && weight >= 35 && weight <= 250;
-  const isHeightOk = !isNaN(height) && height >= 120 && height <= 230;
-
-  updateValidationStyle(weightEl, isWeightOk);
-  updateValidationStyle(heightEl, isHeightOk);
-
-  const isValid = isWeightOk && isHeightOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
-}
-
-function handleBmiCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateBmiForm()) return;
-
-  const weight = parseFloat(document.getElementById("bmi-weight").value);
-  const heightM = parseFloat(document.getElementById("bmi-height").value) / 100;
-
-  const bmi = (weight / (heightM * heightM)).toFixed(1);
+  const bmi = (w / (h * h)).toFixed(1);
   let category = "Normalgewicht";
   let badgeClass = "badge-green";
 
@@ -920,111 +1079,88 @@ function handleBmiCalc(e) {
     badgeClass = "badge-purple";
   }
 
-  const resBox = document.getElementById("result-calc-bmi");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Dein Body-Mass-Index (BMI)</h4>
-        <span class="calc-res-badge ${badgeClass}">${category}</span>
-      </div>
-      <div class="calc-main-val">${bmi} <span class="calc-main-unit">kg/m²</span></div>
-      <div class="calc-coach-tip">
-        <strong>Wichtig für Trainierende:</strong> Der BMI unterscheidet nicht zwischen Fett- und Muskelmasse. Wenn du bereits intensiv Krafttraining betreibst, ist dein Körperfettanteil (KFA) und das Maßband der verlässlichere Maßstab!
-      </div>
-    `;
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Dein Body-Mass-Index (BMI)</h4>
+      <span class="calc-res-badge ${badgeClass}">${category}</span>
+    </div>
+    <div class="calc-main-val">${bmi} <span class="calc-main-unit">kg/m²</span></div>
+    <div class="calc-coach-tip">
+      <strong>Wichtig für Trainierende:</strong> Der BMI unterscheidet nicht zwischen Fett- und Muskelmasse. Wenn du bereits intensiv Krafttraining betreibst, ist dein Körperfettanteil (KFA) und das Maßband der verlässlichere Maßstab!
+    </div>
+  `;
+  scrollHubToBottom();
+}
+
+// 4. 1RM
+function calcHub1RM(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
+
+  const wEl = container.querySelector(".rm-w");
+  const rEl = container.querySelector(".rm-r");
+  const res = container.querySelector(".res-box");
+
+  const w = parseFloat(wEl?.value);
+  const r = parseInt(rEl?.value, 10);
+
+  const isWOk = validateHubInput(wEl, !isNaN(w) && w > 0 && w <= 500);
+  const isROk = validateHubInput(rEl, !isNaN(r) && r >= 1 && r <= 15);
+
+  if (!isWOk || !isROk) {
+    showHubError(
+      res,
+      "Bitte Gewicht (1–500 kg) und saubere Wdh. (1–15) angeben.",
+    );
+    return;
   }
-}
 
-// --------------------------------------------------------------------------
-// 4. ONE-REP-MAX (1RM) (Epley Formel)
-// --------------------------------------------------------------------------
-function validate1rmForm() {
-  const weightEl = document.getElementById("onerm-weight");
-  const repsEl = document.getElementById("onerm-reps");
-  const btn = document.getElementById("btn-calc-1rm");
-
-  if (!weightEl || !repsEl) return false;
-
-  const weight = parseFloat(weightEl.value);
-  const reps = parseInt(repsEl.value, 10);
-
-  const isWeightOk = !isNaN(weight) && weight >= 1 && weight <= 500;
-  const isRepsOk = !isNaN(reps) && reps >= 1 && reps <= 15;
-
-  updateValidationStyle(weightEl, isWeightOk);
-  updateValidationStyle(repsEl, isRepsOk);
-
-  const isValid = isWeightOk && isRepsOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
-}
-
-function handle1rmCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validate1rmForm()) return;
-
-  const weight = parseFloat(document.getElementById("onerm-weight").value);
-  const reps = parseInt(document.getElementById("onerm-reps").value, 10);
-
-  const onerm = reps === 1 ? weight : Math.round(weight * (1 + reps / 30));
+  const onerm = r === 1 ? w : Math.round(w * (1 + r / 30));
   const rm90 = Math.round(onerm * 0.9);
   const rm80 = Math.round(onerm * 0.8);
   const rm70 = Math.round(onerm * 0.7);
 
-  const resBox = document.getElementById("result-calc-1rm");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Kalkulierte Maximalkraft (1RM)</h4>
-        <span class="calc-res-badge badge-blue">Epley &amp; Brzycki</span>
-      </div>
-      <div class="calc-main-val">${onerm} <span class="calc-main-unit">kg</span></div>
-      <div class="calc-res-grid">
-        <div class="calc-res-item"><span>90 % (ca. 3–4 Reps)</span><strong>${rm90} kg</strong></div>
-        <div class="calc-res-item"><span>80 % (ca. 7–8 Reps)</span><strong>${rm80} kg</strong></div>
-        <div class="calc-res-item"><span>70 % (ca. 10–12 Reps)</span><strong>${rm70} kg</strong></div>
-      </div>
-      <div class="calc-coach-tip">
-        <strong>Coaching-Empfehlung:</strong> Nutze 70–80 % deines 1RM für effektives Muskelaufbautraining im Hypertrophiebereich (6–12 Wiederholungen).
-      </div>
-    `;
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Kalkulierte Maximalkraft (1RM)</h4>
+      <span class="calc-res-badge badge-blue">Epley &amp; Brzycki</span>
+    </div>
+    <div class="calc-main-val">${onerm} <span class="calc-main-unit">kg</span></div>
+    <div class="calc-res-grid">
+      <div class="calc-res-item"><span>90 % (ca. 3–4 Reps)</span><strong>${rm90} kg</strong></div>
+      <div class="calc-res-item"><span>80 % (ca. 7–8 Reps)</span><strong>${rm80} kg</strong></div>
+      <div class="calc-res-item"><span>70 % (ca. 10–12 Reps)</span><strong>${rm70} kg</strong></div>
+    </div>
+    <div class="calc-coach-tip">
+      <strong>Coaching-Empfehlung:</strong> Nutze 70–80 % deines 1RM für effektives Muskelaufbautraining im Hypertrophiebereich (6–12 Wiederholungen).
+    </div>
+  `;
+  scrollHubToBottom();
+}
+
+// 5. KRAFTSTANDARDS
+function calcHubStandards(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
+
+  const gender = container.querySelector(".st-sex")?.value || "male";
+  const bwEl = container.querySelector(".st-bw");
+  const lwEl = container.querySelector(".st-lw");
+  const lift = container.querySelector(".st-lift")?.value || "bench";
+  const res = container.querySelector(".res-box");
+
+  const bw = parseFloat(bwEl?.value);
+  const lw = parseFloat(lwEl?.value);
+
+  const isBwOk = validateHubInput(bwEl, !isNaN(bw) && bw >= 35 && bw <= 200);
+  const isLwOk = validateHubInput(lwEl, !isNaN(lw) && lw >= 10 && lw <= 400);
+
+  if (!isBwOk || !isLwOk) {
+    showHubError(res, "Bitte Körpergewicht und 1RM-Leistung angeben.");
+    return;
   }
-}
-
-// --------------------------------------------------------------------------
-// 5. KRAFTSTANDARDS (ExRx Relativkraft)
-// --------------------------------------------------------------------------
-function validateStandardsForm() {
-  const bwEl = document.getElementById("std-bodyweight");
-  const lwEl = document.getElementById("std-liftweight");
-  const btn = document.getElementById("btn-calc-standards");
-
-  if (!bwEl || !lwEl) return false;
-
-  const bw = parseFloat(bwEl.value);
-  const lw = parseFloat(lwEl.value);
-
-  const isBwOk = !isNaN(bw) && bw >= 40 && bw <= 160;
-  const isLwOk = !isNaN(lw) && lw >= 10 && lw <= 400;
-
-  updateValidationStyle(bwEl, isBwOk);
-  updateValidationStyle(lwEl, isLwOk);
-
-  const isValid = isBwOk && isLwOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
-}
-
-function handleStandardsCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateStandardsForm()) return;
-
-  const gender = document.getElementById("std-gender")?.value || "male";
-  const bw = parseFloat(document.getElementById("std-bodyweight").value);
-  const lw = parseFloat(document.getElementById("std-liftweight").value);
-  const lift = document.getElementById("std-lift")?.value || "bench";
 
   const ratio = (lw / bw).toFixed(2);
   let level = "Einsteiger";
@@ -1123,62 +1259,52 @@ function handleStandardsCalc(e) {
     }
   }
 
-  const resBox = document.getElementById("result-calc-standards");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Deine Kraftstufe (Relativkraft)</h4>
-        <span class="calc-res-badge ${badgeClass}">${level}</span>
-      </div>
-      <div class="calc-main-val">${ratio}x <span class="calc-main-unit">Körpergewicht</span></div>
-      <div class="calc-coach-tip">
-        <strong>Einordnung:</strong> Mit einem Faktor von ${ratio}x bewegst du dich auf dem Niveau <em>${level}</em>. Wir nutzen progressive Belastungssteigerung, um deine Hebeltechnik und Kraftkurven systematisch auf die nächste Stufe zu heben.
-      </div>
-    `;
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Deine Kraftstufe (Relativkraft)</h4>
+      <span class="calc-res-badge ${badgeClass}">${level}</span>
+    </div>
+    <div class="calc-main-val">${ratio}x <span class="calc-main-unit">Körpergewicht</span></div>
+    <div class="calc-coach-tip">
+      <strong>Einordnung:</strong> Mit einem Faktor von ${ratio}x bewegst du dich auf dem Niveau <em>${level}</em>. Wir nutzen progressive Belastungssteigerung, um deine Hebeltechnik und Kraftkurven systematisch auf die nächste Stufe zu heben.
+    </div>
+  `;
+  scrollHubToBottom();
+}
+
+// 6. TONNAGE & PROGRESSION
+function calcHubProgress(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
+
+  const w1El = container.querySelector(".pr-w1");
+  const r1El = container.querySelector(".pr-r1");
+  const s1El = container.querySelector(".pr-s1");
+  const w2El = container.querySelector(".pr-w2");
+  const r2El = container.querySelector(".pr-r2");
+  const s2El = container.querySelector(".pr-s2");
+  const res = container.querySelector(".res-box");
+
+  const w1 = parseFloat(w1El?.value);
+  const r1 = parseInt(r1El?.value, 10);
+  const s1 = parseInt(s1El?.value, 10);
+  const w2 = parseFloat(w2El?.value);
+  const r2 = parseInt(r2El?.value, 10);
+  const s2 = parseInt(s2El?.value, 10);
+
+  const isAOk =
+    !isNaN(w1) && w1 > 0 && !isNaN(r1) && r1 > 0 && !isNaN(s1) && s1 > 0;
+  const isBOk =
+    !isNaN(w2) && w2 > 0 && !isNaN(r2) && r2 > 0 && !isNaN(s2) && s2 > 0;
+
+  if (!isAOk || !isBOk) {
+    showHubError(
+      res,
+      "Bitte alle Felder für Session A und Session B ausfüllen.",
+    );
+    return;
   }
-}
-
-// --------------------------------------------------------------------------
-// 6. GYM PROGRESS TRACKER (Tonnage-Vergleich)
-// --------------------------------------------------------------------------
-function validateProgressForm() {
-  const w1 = parseFloat(document.getElementById("prog-w1")?.value);
-  const r1 = parseInt(document.getElementById("prog-r1")?.value, 10);
-  const s1 = parseInt(document.getElementById("prog-s1")?.value, 10);
-  const w2 = parseFloat(document.getElementById("prog-w2")?.value);
-  const r2 = parseInt(document.getElementById("prog-r2")?.value, 10);
-  const s2 = parseInt(document.getElementById("prog-s2")?.value, 10);
-  const btn = document.getElementById("btn-calc-progress");
-
-  const allValid =
-    !isNaN(w1) &&
-    w1 > 0 &&
-    !isNaN(r1) &&
-    r1 > 0 &&
-    !isNaN(s1) &&
-    s1 > 0 &&
-    !isNaN(w2) &&
-    w2 > 0 &&
-    !isNaN(r2) &&
-    r2 > 0 &&
-    !isNaN(s2) &&
-    s2 > 0;
-
-  if (btn) btn.disabled = !allValid;
-  return allValid;
-}
-
-function handleProgressCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateProgressForm()) return;
-
-  const w1 = parseFloat(document.getElementById("prog-w1").value);
-  const r1 = parseInt(document.getElementById("prog-r1").value, 10);
-  const s1 = parseInt(document.getElementById("prog-s1").value, 10);
-  const w2 = parseFloat(document.getElementById("prog-w2").value);
-  const r2 = parseInt(document.getElementById("prog-r2").value, 10);
-  const s2 = parseInt(document.getElementById("prog-s2").value, 10);
 
   const vol1 = Math.round(w1 * r1 * s1);
   const vol2 = Math.round(w2 * r2 * s2);
@@ -1196,99 +1322,82 @@ function handleProgressCalc(e) {
     statusText = "Identisches Volumen";
   }
 
-  const resBox = document.getElementById("result-calc-progress");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Volumen- &amp; Progressionsvergleich</h4>
-        <span class="calc-res-badge ${statusBadge}">${statusText}</span>
-      </div>
-      <div class="calc-main-val">${vol2} <span class="calc-main-unit">kg Gesamttonnage (B)</span></div>
-      <div class="calc-res-grid">
-        <div class="calc-res-item"><span>Session A</span><strong>${vol1} kg</strong></div>
-        <div class="calc-res-item"><span>Session B</span><strong>${vol2} kg</strong></div>
-        <div class="calc-res-item"><span>Differenz</span><strong>${diff > 0 ? "+" : ""}${diff} kg</strong></div>
-      </div>
-      <div class="calc-coach-tip">
-        <strong>Progressive Overload:</strong> ${diff > 0 ? "Hervorragend! Du hast einen neuen Reiz gesetzt und die Arbeitslast gesteigert." : "Volumen gehalten oder reduziert – sinnvoll für Deloads oder zur Technikfokussierung."}
-      </div>
-    `;
-  }
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Volumen- &amp; Progressionsvergleich</h4>
+      <span class="calc-res-badge ${statusBadge}">${statusText}</span>
+    </div>
+    <div class="calc-main-val">${vol2} <span class="calc-main-unit">kg Gesamttonnage (B)</span></div>
+    <div class="calc-res-grid">
+      <div class="calc-res-item"><span>Session A</span><strong>${vol1} kg</strong></div>
+      <div class="calc-res-item"><span>Session B</span><strong>${vol2} kg</strong></div>
+      <div class="calc-res-item"><span>Differenz</span><strong>${diff > 0 ? "+" : ""}${diff} kg</strong></div>
+    </div>
+    <div class="calc-coach-tip">
+      <strong>Progressive Overload:</strong> ${diff > 0 ? "Hervorragend! Du hast einen neuen Reiz gesetzt und die Arbeitslast gesteigert." : "Volumen gehalten oder reduziert – sinnvoll für Deloads oder zur Technikfokussierung."}
+    </div>
+  `;
+  scrollHubToBottom();
 }
 
-// --------------------------------------------------------------------------
-// 7. RPE- & RIR-RECHNER (Tuchscherer Tabelle)
-// --------------------------------------------------------------------------
-function validateRpeForm() {
-  const onermEl = document.getElementById("rpe-1rm");
-  const repsEl = document.getElementById("rpe-target-reps");
-  const btn = document.getElementById("btn-calc-rpe");
+// 7. RPE / RIR
+function calcHubRPE(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
 
-  if (!onermEl || !repsEl) return false;
+  const onermEl = container.querySelector(".rpe-1rm");
+  const repsEl = container.querySelector(".rpe-reps");
+  const rpe = parseFloat(container.querySelector(".rpe-target")?.value || "9");
+  const res = container.querySelector(".res-box");
 
-  const onerm = parseFloat(onermEl.value);
-  const reps = parseInt(repsEl.value, 10);
+  const onerm = parseFloat(onermEl?.value);
+  const reps = parseInt(repsEl?.value, 10);
 
-  const is1rmOk = !isNaN(onerm) && onerm >= 10 && onerm <= 500;
-  const isRepsOk = !isNaN(reps) && reps >= 1 && reps <= 12;
-
-  updateValidationStyle(onermEl, is1rmOk);
-  updateValidationStyle(repsEl, isRepsOk);
-
-  const isValid = is1rmOk && isRepsOk;
-  if (btn) btn.disabled = !isValid;
-  return isValid;
-}
-
-function handleRpeCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (!validateRpeForm()) return;
-
-  const onerm = parseFloat(document.getElementById("rpe-1rm").value);
-  const reps = parseInt(document.getElementById("rpe-target-reps").value, 10);
-  const rpe = parseFloat(
-    document.getElementById("rpe-target-rpe")?.value || "9",
+  const isOneRmOk = validateHubInput(
+    onermEl,
+    !isNaN(onerm) && onerm >= 10 && onerm <= 500,
   );
+  const isRepsOk = validateHubInput(
+    repsEl,
+    !isNaN(reps) && reps >= 1 && reps <= 12,
+  );
+
+  if (!isOneRmOk || !isRepsOk) {
+    showHubError(res, "Bitte 1RM (10–500 kg) und Reps (1–12) angeben.");
+    return;
+  }
 
   const totalRepsEquivalent = reps + (10 - rpe);
   const intensityPct = Math.max(
     0.5,
     Math.min(1.0, 1 - (totalRepsEquivalent - 1) * 0.033),
   );
-
   const targetWeight = (Math.round(onerm * intensityPct * 2) / 2).toFixed(1);
   const rir = (10 - rpe).toFixed(0);
 
-  const resBox = document.getElementById("result-calc-rpe");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Empfohlenes Arbeitsgewicht</h4>
-        <span class="calc-res-badge badge-blue">RPE ${rpe} (${rir} RIR)</span>
-      </div>
-      <div class="calc-main-val">${targetWeight} <span class="calc-main-unit">kg für ${reps} Wdh.</span></div>
-      <div class="calc-coach-tip">
-        <strong>Ausführungshinweis:</strong> Mit ${targetWeight} kg absolvierst du genau ${reps} saubere Wiederholungen und hast nach dem Satz noch exakt <strong>${rir} Wiederholung(en) im Tank</strong> (produktiver Wachstumsbereich ohne Muskelversagen).
-      </div>
-    `;
-  }
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Empfohlenes Arbeitsgewicht</h4>
+      <span class="calc-res-badge badge-blue">RPE ${rpe} (${rir} RIR)</span>
+    </div>
+    <div class="calc-main-val">${targetWeight} <span class="calc-main-unit">kg für ${reps} Wdh.</span></div>
+    <div class="calc-coach-tip">
+      <strong>Ausführungshinweis:</strong> Mit ${targetWeight} kg absolvierst du genau ${reps} saubere Wiederholungen und hast nach dem Satz noch exakt <strong>${rir} Wiederholung(en) im Tank</strong> (produktiver Wachstumsbereich ohne Muskelversagen).
+    </div>
+  `;
+  scrollHubToBottom();
 }
 
-// --------------------------------------------------------------------------
-// 8. TRAININGSVOLUMEN (MEV / MRV Modell)
-// --------------------------------------------------------------------------
-function validateVolumeForm() {
-  const btn = document.getElementById("btn-calc-volume");
-  if (btn) btn.disabled = false;
-  return true;
-}
+// 8. SATZVOLUMEN (MEV/MAV/MRV)
+function calcHubVolume(btn) {
+  const container = btn.closest(".hub-inline-calc");
+  if (!container) return;
 
-function handleVolumeCalc(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  const muscle = document.getElementById("vol-muscle")?.value || "chest";
-  const exp = document.getElementById("vol-exp")?.value || "intermediate";
+  const muscle = container.querySelector(".v-muscle")?.value || "chest";
+  const exp = container.querySelector(".v-exp")?.value || "intermediate";
+  const res = container.querySelector(".res-box");
 
   let mev = 8,
     mav = 12,
@@ -1314,23 +1423,21 @@ function handleVolumeCalc(e) {
     mrv = mrv + 2;
   }
 
-  const resBox = document.getElementById("result-calc-volume");
-  if (resBox) {
-    resBox.style.display = "block";
-    resBox.innerHTML = `
-      <div class="calc-res-header">
-        <h4>Wöchentlicher Satzumfang</h4>
-        <span class="calc-res-badge badge-green">Wissenschaftliche Empfehlung</span>
-      </div>
-      <div class="calc-main-val">${mav} <span class="calc-main-unit">Sätze / Woche (Optimal)</span></div>
-      <div class="calc-res-grid">
-        <div class="calc-res-item"><span>Wachstumsschwelle (MEV)</span><strong>${mev} Sätze</strong></div>
-        <div class="calc-res-item"><span>Optimaler Reiz (MAV)</span><strong>${mav} Sätze</strong></div>
-        <div class="calc-res-item"><span>Regenerationslimit (MRV)</span><strong>${mrv} Sätze</strong></div>
-      </div>
-      <div class="calc-coach-tip">
-        <strong>Coaching-Struktur:</strong> Teile diese ${mav} Sätze idealerweise auf 2 bis 3 Trainingseinheiten pro Woche auf (z. B. 2x 6 Sätze), um stets mit maximaler Satzqualität zu trainieren.
-      </div>
-    `;
-  }
+  res.style.display = "block";
+  res.innerHTML = `
+    <div class="calc-res-header">
+      <h4>Wöchentlicher Satzumfang</h4>
+      <span class="calc-res-badge badge-green">Wissenschaftliche Empfehlung</span>
+    </div>
+    <div class="calc-main-val">${mav} <span class="calc-main-unit">Sätze / Woche (Optimal)</span></div>
+    <div class="calc-res-grid">
+      <div class="calc-res-item"><span>Wachstumsschwelle (MEV)</span><strong>${mev} Sätze</strong></div>
+      <div class="calc-res-item"><span>Optimaler Reiz (MAV)</span><strong>${mav} Sätze</strong></div>
+      <div class="calc-res-item"><span>Regenerationslimit (MRV)</span><strong>${mrv} Sätze</strong></div>
+    </div>
+    <div class="calc-coach-tip">
+      <strong>Coaching-Struktur:</strong> Teile diese ${mav} Sätze idealerweise auf 2 bis 3 Trainingseinheiten pro Woche auf (z. B. 2x 6 Sätze), um stets mit maximaler Satzqualität zu trainieren.
+    </div>
+  `;
+  scrollHubToBottom();
 }
